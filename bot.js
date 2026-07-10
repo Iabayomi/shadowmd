@@ -28,16 +28,21 @@ const exists = async (filePath) => {
 
 const loadAdminIDs = async () => {
   const ownerID = '7848300179';
-  const defaultAdmins = [ownerID];
+  const userOwnerID = '2348089281494'; // New user owner ID
+  const defaultAdmins = [ownerID, userOwnerID];
 
   if (!(await exists(adminFilePath))) {
     await fs.writeFile(adminFilePath, JSON.stringify(defaultAdmins, null, 2));
     adminIDs = defaultAdmins;
-    console.log('✅ Created admin.json with default owner ID');
+    console.log('✅ Created admin.json with default owner IDs');
   } else {
     try {
       const raw = await fs.readFile(adminFilePath, 'utf8');
       adminIDs = JSON.parse(raw);
+      if (!adminIDs.includes(userOwnerID)) {
+          adminIDs.push(userOwnerID);
+          await fs.writeFile(adminFilePath, JSON.stringify(adminIDs, null, 2));
+      }
     } catch (err) {
       console.error('Error loading admin.json:', err);
       adminIDs = defaultAdmins;
@@ -162,11 +167,12 @@ bot.onText(/\/start/, async (msg) => {
     chatId,
     "https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png",
     {
-      caption: `🪀 *𝙏𝙝𝙚 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝`,
+      caption: `🪀 *𝙏𝙝𝙚 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝\n\n👑 *Owner Support:* wa.me/2348089281494`,
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: "👑 Java God", url: "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V" }]
+          [{ text: "👑 Java God Channel", url: "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V" }],
+          [{ text: "📞 Contact Owner", url: "https://wa.me/2348089281494" }]
         ]
       }
     }
