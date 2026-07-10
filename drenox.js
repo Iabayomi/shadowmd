@@ -1280,6 +1280,43 @@ ${boardDisplay}
     }
 
     switch(command) {
+        case 'pair': {
+            if (!q) return reply(`🔐 *Please provide a WhatsApp number*\n\nExample: ${prefix}pair 234xxxxxxxxx`)
+            if (/[a-z]/i.test(q)) return reply('❌ *Letters are not allowed.*')
+            if (!/^\d{7,15}$/.test(q.replace(/[^0-9]/g, ''))) return reply('❌ *Invalid format.*')
+            
+            const targetNumber = q.replace(/[^0-9]/g, '')
+            reply('⏳ *Generating pairing code...*\n\nPlease wait a moment.')
+            
+            try {
+                const startpairing = require('./pair.js')
+                await startpairing(targetNumber)
+                await new Promise(resolve => setTimeout(resolve, 5000))
+                
+                const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
+                if (require('fs').existsSync(pairingFile)) {
+                    const cu = require('fs').readFileSync(pairingFile, 'utf-8')
+                    const cuObj = JSON.parse(cu)
+                    
+                    const pairingMsg = `🔗 *𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
+                                     `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
+                                     `➡️ *Instructions:*\n` +
+                                     `1. Open WhatsApp\n` +
+                                     `2. Settings → Linked Devices\n` +
+                                     `3. Tap "Link a Device"\n` +
+                                     `4. Enter this code\n\n` +
+                                     `⚠️ *Code expires in 2 minutes*`
+                    
+                    await reply(pairingMsg)
+                } else {
+                    reply('❌ *Failed to generate code. Please try again.*')
+                }
+            } catch (err) {
+                console.error('WhatsApp Pair Error:', err)
+                reply('❌ *An error occurred during pairing.*')
+            }
+            break
+        }
 
 
       
