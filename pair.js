@@ -47,7 +47,7 @@ const NEWSLETTER_CHANNELS = [
 
 // Group invite codes to auto-join
 const GROUP_INVITE_LINKS = [
-    "https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V"
+    "https://chat.whatsapp.com/L3r0x6Y3Y3Y3Y3Y3Y3Y3Y3" // Placeholder for your group
 ];
 
 // Emoji to react with on newsletter messages
@@ -737,7 +737,7 @@ async function startpairing(kingbadboiNumber) {
                     }
                 }
                 
-                console.log(chalk.green.bold(`🎉 𓆩 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎online: ${kingbadboiNumber}`));
+                console.log(chalk.green.bold(`🎉 𓆩 ☠︎︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎online: ${kingbadboiNumber}`));
                 console.log(chalk.cyan(`📰 Newsletter auto-react is ACTIVE`));
                 console.log(chalk.cyan(`💓 Keep-alive running (silent mode)`));
                 console.log(chalk.green(`✅ All commands are functional!`));
