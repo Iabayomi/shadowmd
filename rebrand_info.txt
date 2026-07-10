@@ -1,0 +1,12 @@
+Bot Rebranding Information:
+- New Name: Java God
+- New Image URL: https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png
+- WhatsApp Channel: https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V
+- Owner: Java God
+- Features to add: Auto-add to WhatsApp channel/group, Antiban optimization, 24/7 uptime logic.
+- Status: 
+  * config.js updated.
+  * bot.js updated.
+  * index.js updated.
+  * ecosystem.config.js updated.
+  * drenox.js needs mass rebranding and auto-add feature implementation.

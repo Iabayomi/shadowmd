@@ -1,0 +1,269 @@
+nohup: ignoring input
+
+> shadow-md@2.0.0 start
+> node index.js
+
+  ____  _   _    _    ____   _____        __
+ / ___|| | | |  / \  |  _ \ / _ \ \      / /
+ \___ \| |_| | / _ \ | | | | | | \ \ /\ / / 
+  ___) |  _  |/ ___ \| |_| | |_| |\ V  V /  
+ |____/|_| |_/_/   \_\____/ \___/  \_/\_/   
+                                            
+
+═══════════════════════════════════════════════
+   𝐒𝐡𝐚𝐝𝐨𝐰 𝐩𝐚𝐢𝐫𝐢𝐧𝐠 𝐬𝐲𝐬𝐭𝐞𝐦       
+═══════════════════════════════════════════════
+
+🔄 Auto-loading all paired users...
+ℹ️  No paired users found.
+(node:2345) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+🚀 Starting 𝐒ＨＡＤＯＷ system...
+
+📱 Loading Telegram pairing system...
+✅𝐒ＨＡＤＯＷ bot loaded successfully!
+💬 Loading WhatsApp commands system...
+✅ WhatsApp commands loaded successfully!
+
+═══════════════════════════════════════════════
+𝐒ＨＡＤＯＷ BOT INITIALIZATION SUMMARY          
+═══════════════════════════════════════════════
+✅𝐒ＨＡＤＯＷ тɛℓɛɢяαм вσт: Active
+✅ WhatsApp Commands: Active
+═══════════════════════════════════════════════
+
+✅ 𝐒ＨＡＤＯＷ system is ready and running!
+
+📊 Bot monitoring active...
+Press Ctrl+C to stop the bot
+
+Uncaught Exception: [Error: EBADF: bad file descriptor, read] {
+  errno: -9,
+  code: 'EBADF',
+  syscall: 'read'
+}
+
+❌ Uncaught Exception:
+Error: EBADF: bad file descriptor, read
+Error: EBADF: bad file descriptor, read
+📥 Loaded Admin IDs: [ '7848300179' ]
+RESTART #1
+🤖 Telegram Bot is running...
+✅ Bot Username: @bot_hosting_v1_bot
+✅ Features: /pair, /unpair, /start
+Error checking membership for @shadowofficial786: ETELEGRAM: 400 Bad Request: member list is inaccessible
+Error checking membership for @shadowbanproof: ETELEGRAM: 400 Bad Request: member list is inaccessible
+Error checking membership for @shadowofficial786: ETELEGRAM: 400 Bad Request: member list is inaccessible
+Error checking membership for @shadowbanproof: ETELEGRAM: 400 Bad Request: member list is inaccessible
+📁 Created directory: ./kingbadboitimewisher/pairing/2348089281494@s.whatsapp.net
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+🔄 Connecting 2348089281494@s.whatsapp.net...
+📱 Pairing code for 2348089281494@s.whatsapp.net: SHAD-OWMD
+✓ Pairing code saved to pairing.json
+🔌 Connection closed for 2348089281494@s.whatsapp.net, reason: 515
+🔄 Restart required for 2348089281494@s.whatsapp.net
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+🔄 Connecting 2348089281494@s.whatsapp.net...
+[32mLoading Chat [null%][39m
+✅ Connected: 2348089281494@s.whatsapp.net
+🚀 Starting auto-actions...
+[32mLoading Chat [null%][39m
+📰 Following newsletters...
+✓ Followed: 120363404160725764@newsletter
+[32mLoading Chat [null%][39m
+[32mLoading Chat [null%][39m
+[32mLoading Chat [null%][39m
+✓ Followed: 120363404160725764@newsletter
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: .menu
+   Prefix: .
+   isCmd: true
+   Command: menu
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[32mLoading Chat [100%][39m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: ╭━━〔 ⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧〕━━┈⊷
+┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%
+
+   Prefix: 
+   isCmd: false
+   Command: ╭━━〔
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[32mLoading Chat [100%][39m
+👥 Joining groups...
+⚠️ Failed to join 0029Vb6iopUDzgTJuzPCk32V: bad-request
+🎉 𓆩 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎online: 2348089281494@s.whatsapp.net
+📰 Newsletter auto-react is ACTIVE
+💓 Keep-alive running (silent mode)
+✅ All commands are functional!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 
+╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
+┃✮╭────────────────
+   Prefix: 
+   isCmd: false
+   Command: ╭━━〔
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: lol
+   Prefix: 
+   isCmd: false
+   Command: lol
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: .allmenu
+   Prefix: .
+   isCmd: true
+   Command: allmenu
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: ╭━━〔 ⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧〕━━┈⊷
+┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%
+
+   Prefix: 
+   isCmd: false
+   Command: ╭━━〔
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 
+╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
+┃✮╭────────────────
+   Prefix: 
+   isCmd: false
+   Command: ╭━━〔
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Polling error: RequestError: Error: socket hang up
+    at new RequestError (/home/ubuntu/shadowmd/node_modules/.pnpm/request-promise-core@1.1.3_request@2.88.2/node_modules/request-promise-core/lib/errors.js:14:15)
+    at plumbing.callback (/home/ubuntu/shadowmd/node_modules/.pnpm/request-promise-core@1.1.3_request@2.88.2/node_modules/request-promise-core/lib/plumbing.js:87:29)
+    at Request.RP$callback [as _callback] (/home/ubuntu/shadowmd/node_modules/.pnpm/request-promise-core@1.1.3_request@2.88.2/node_modules/request-promise-core/lib/plumbing.js:46:31)
+    at self.callback (/home/ubuntu/shadowmd/node_modules/.pnpm/@cypress+request@3.0.10/node_modules/@cypress/request/request.js:183:22)
+    at Request.emit (node:events:524:28)
+    at Request.onRequestError (/home/ubuntu/shadowmd/node_modules/.pnpm/@cypress+request@3.0.10/node_modules/@cypress/request/request.js:869:8)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:104:11)
+    at TLSSocket.socketOnEnd (node:_http_client:542:5)
+    at TLSSocket.emit (node:events:536:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EFATAL'
+}
+🔌 Connection closed for 2348089281494@s.whatsapp.net, reason: 408
+🔄 Reconnecting 2348089281494@s.whatsapp.net...
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+🔄 Connecting 2348089281494@s.whatsapp.net...
+✅ Connected: 2348089281494@s.whatsapp.net
+[32mLoading Chat [null%][39m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: .menu
+   Prefix: .
+   isCmd: true
+   Command: menu
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: ╭━━〔 ⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧〕━━┈⊷
+┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%
+
+   Prefix: 
+   isCmd: false
+   Command: ╭━━〔
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Starting auto-actions...
+📰 Following newsletters...
+✓ Followed: 120363404160725764@newsletter
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 
+╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
+┃✮╭────────────────
+   Prefix: 
+   isCmd: false
+   Command: ╭━━〔
+   From: 275964785365087@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Followed: 120363404160725764@newsletter
+[0;32m/home/ubuntu/shadowmd/setting/config.js [1;32mupdated![0m
+👥 Joining groups...
+⚠️ Failed to join 0029Vb6iopUDzgTJuzPCk32V: bad-request
+🎉 𓆩 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎online: 2348089281494@s.whatsapp.net
+📰 Newsletter auto-react is ACTIVE
+💓 Keep-alive running (silent mode)
+✅ All commands are functional!
+[0;32m/home/ubuntu/shadowmd/drenox.js [1;32mᴜᴘᴅᴀᴛᴇᴅ![0m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: i dont fake lies🙂‍↔️❤️
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[0;32m/home/ubuntu/shadowmd/drenox.js [1;32mᴜᴘᴅᴀᴛᴇᴅ![0m

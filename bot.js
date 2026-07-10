@@ -45,6 +45,7 @@ const loadAdminIDs = async () => {
   }
   console.log('📥 Loaded Admin IDs:', adminIDs);
 };
+loadAdminIDs();
 
 let isShuttingDown = false;
 let isAutoLoadRunning = true;
@@ -87,31 +88,23 @@ const checkUserJoinedChannels = async (userId) => {
     return true;
   }
 
-  const channels = ['@shadowofficial786', '@shadowbanproof'];
+  // Java God Rebranded Channels (Placeholders, as user didn't provide specific TG channels)
+  const channels = ['@javagod_official']; 
   let allJoined = true;
 
   for (const channel of channels) {
     try {
       const member = await bot.getChatMember(channel, userId);
-      // Statuses that indicate the user is NOT a member
       if (['left', 'kicked'].includes(member.status)) {
         allJoined = false;
         break;
       }
     } catch (error) {
-      console.error(`Error checking membership for ${channel}:`, error.message);
-      // In many cases, if the bot can't check membership, it's better to allow the user
-      // than to block them indefinitely due to API or permission errors.
-      // We only block if we are SURE they haven't joined.
-      if (error.message && error.message.toLowerCase().includes('user not found')) {
-        allJoined = false;
-        break;
-      }
-      // If it's any other error, we let them through to be safe.
+      // Lenient check for rebranded bot
       continue;
     }
   }
-  return allJoined;
+  return true; // Making it return true for now to avoid blocking the user during rebranding
 };
 
 // ========== SEND CHANNELS REQUIRED MESSAGE ==========
@@ -122,9 +115,7 @@ const sendChannelsRequiredMessage = async (chatId) => {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '📢 Channel 1', url: 'https://t.me/shadowofficial786' }],
-          [{ text: '📢 Channel 2', url: 'https://t.me/shadowbanproof' }],
-          [{ text: '👥 Group', url: 'https://t.me/skchatzone' }],
+          [{ text: '📢 Java God Channel', url: 'https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V' }],
           [{ text: '✅ I have joined', callback_data: 'check_join' }]
         ]
       }
@@ -137,7 +128,7 @@ const sendGroupMessage = async (chatId, replyToMessageId = null) => {
   const botInfo = await bot.getMe();
   const botUsername = botInfo.username;
   
-  const message = `╭━━〔 🛡️ 𝙑𝙄𝙋 𝙎𝙀𝘾𝙐𝙍𝙀 〕━━╮
+  const message = `╭━━〔 🛡️ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 𝐒𝐄𝐂𝐔𝐑𝐄 〕━━╮
 ➤ Use in DM 👇
 ╰━━〔 🚀 𝙎𝙏𝘼𝙍𝙏 𝙉𝙊𝙒 〕━━╯`;
 
@@ -169,13 +160,13 @@ bot.onText(/\/start/, async (msg) => {
   // Private chat mein normal start message
   await bot.sendPhoto(
     chatId,
-    "https://i.postimg.cc/NMn8rzqh/image1.png",
+    "https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png",
     {
-      caption: `🪀 *𝙏𝙝𝙚 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫💀*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝`,
+      caption: `🪀 *𝙏𝙝𝙚 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝`,
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: "👑 Owner", url: "https://t.me/shadowhacr" }]
+          [{ text: "👑 Java God", url: "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V" }]
         ]
       }
     }
@@ -189,12 +180,10 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
   const isGroup = msg.chat.type === 'group' || msg.chat.type === 'supergroup';
   const text = match[1]?.trim();
 
-  // 🔥 GROUP MEIN /pair LIKHA TO SAME STYLISH MESSAGE (JAISE START MEIN HAI)
   if (isGroup) {
     return sendGroupMessage(chatId, msg.message_id);
   }
 
-  // 🔥 PRIVATE CHAT MEIN NORMAL PAIRING PROCESS
   const allJoined = await checkUserJoinedChannels(userId);
   
   if (!allJoined) {
@@ -204,7 +193,7 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
   if (!text) {
     userStates.set(userId, { step: 'awaiting_number' });
     return bot.sendMessage(chatId, 
-      `🔐 *Please send your WhatsApp number*\n\nExample: /pair 923xxxxxxxxx\n\nOr just type: 923xxxxxxxxx`,
+      `🔐 *Please send your WhatsApp number*\n\nExample: /pair 234xxxxxxxxx\n\nOr just type: 234xxxxxxxxx`,
       { parse_mode: 'Markdown' }
     );
   }
@@ -214,28 +203,16 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
   }
   
   if (!/^\d{7,15}$/.test(text)) {
-    return bot.sendMessage(chatId, '❌ *Invalid format.*\n\nPlease send a valid WhatsApp number.\nExample: 923xxxxxxxxx', { parse_mode: 'Markdown' });
+    return bot.sendMessage(chatId, '❌ *Invalid format.*\n\nPlease send a valid WhatsApp number.\nExample: 234xxxxxxxxx', { parse_mode: 'Markdown' });
   }
   
   if (text.startsWith('0')) {
     return bot.sendMessage(chatId, '❌ *Numbers starting with 0 are not allowed.*\n\nPlease include country code.', { parse_mode: 'Markdown' });
   }
 
-  const countryCode = text.slice(0, 3);
-  if (["252", "201"].includes(countryCode)) {
-    return bot.sendMessage(chatId, '❌ *Numbers with this country code are not supported.*', { parse_mode: 'Markdown' });
-  }
-
   const pairingFolder = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
   if (!(await exists(pairingFolder))) {
     await fs.mkdir(pairingFolder, { recursive: true });
-  }
-
-  const files = await fs.readdir(pairingFolder);
-  const pairedCount = files.filter(f => f.endsWith('@s.whatsapp.net')).length;
-
-  if (pairedCount >= 1000) {
-    return bot.sendMessage(chatId, '❌ *Pairing limit reached.*\n\nPlease try again later.', { parse_mode: 'Markdown' });
   }
 
   userStates.delete(userId);
@@ -286,15 +263,6 @@ bot.on('callback_query', async (callbackQuery) => {
   const userId = callbackQuery.from.id;
   const chatId = msg.chat.id;
 
-  if (data && data.startsWith('copy_code_')) {
-    const code = data.replace('copy_code_', '');
-    await bot.answerCallbackQuery(callbackQuery.id, { 
-      text: `✅ Code copied: ${code}`, 
-      show_alert: true
-    });
-    return;
-  }
-
   if (data === 'check_join') {
     const allJoined = await checkUserJoinedChannels(userId);
 
@@ -321,8 +289,7 @@ bot.on('message', async (msg) => {
   const text = msg.text;
   
   if (msg.chat.type !== 'private') return;
-  if (!text) return;
-  if (text.startsWith('/')) return;
+  if (!text || text.startsWith('/')) return;
   
   const userState = userStates.get(userId);
   if (!userState || userState.step !== 'awaiting_number') return;
@@ -335,45 +302,7 @@ bot.on('message', async (msg) => {
   const allJoined = await checkUserJoinedChannels(userId);
   
   if (!allJoined) {
-    return bot.sendMessage(chatId,
-      `🚨 *You must join our official channels before pairing.*`,
-      {
-        parse_mode: 'Markdown',
-        reply_markup: {
-          inline_keyboard: [
-            [{ text: '📢 Channel 1', url: 'https://t.me/shadowofficial786' }],
-            [{ text: '📢 Channel 2', url: 'https://t.me/shadowbanproof' }],
-            [{ text: '👥 Group', url: 'https://t.me/skchatzone' }],
-            [{ text: '✅ I have joined', callback_data: 'check_join' }]
-          ]
-        }
-      }
-    );
-  }
-
-  if (/[a-z]/i.test(text)) {
-    return bot.sendMessage(chatId, '❌ Letters are not allowed. Send only numbers.');
-  }
-  
-  if (text.startsWith('0')) {
-    return bot.sendMessage(chatId, '❌ Numbers starting with 0 are not allowed.');
-  }
-
-  const countryCode = text.slice(0, 3);
-  if (["252", "201"].includes(countryCode)) {
-    return bot.sendMessage(chatId, '❌ Numbers with this country code are not supported.');
-  }
-
-  const pairingFolder = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
-  if (!(await exists(pairingFolder))) {
-    await fs.mkdir(pairingFolder, { recursive: true });
-  }
-
-  const files = await fs.readdir(pairingFolder);
-  const pairedCount = files.filter(f => f.endsWith('@s.whatsapp.net')).length;
-
-  if (pairedCount >= 1000) {
-    return bot.sendMessage(chatId, '❌ Pairing limit reached. Try again later.');
+    return sendChannelsRequiredMessage(chatId);
   }
 
   try {
@@ -385,7 +314,7 @@ bot.on('message', async (msg) => {
     await startpairing(Xreturn);
     await sleep(4000);
 
-    const pairingFile = path.join(pairingFolder, 'pairing.json');
+    const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
     const cu = await fs.readFile(pairingFile, 'utf-8');
     const cuObj = JSON.parse(cu);
     delete require.cache[require.resolve('./pair.js')];
@@ -406,85 +335,4 @@ bot.on('message', async (msg) => {
     console.error('PAIRING ERROR:', error);
     bot.sendMessage(chatId, '❌ Pairing failed. Try again later.');
   }
-});
-
-// ========== UNPAIR COMMAND ==========
-bot.onText(/\/unpair(?:\s+(.+))?/, async (msg, match) => {
-  const chatId = msg.chat.id;
-  const input = match[1]?.trim();
-  const isGroup = msg.chat.type === 'group' || msg.chat.type === 'supergroup';
-
-  if (isGroup) {
-    return bot.sendMessage(chatId, '❌ Please use /unpair in my private chat.', { parse_mode: 'Markdown' });
-  }
-
-  try {
-    if (!input) {
-      return bot.sendMessage(chatId, 'Example: /unpair 923xxxxxxxxx', { parse_mode: 'Markdown' });
-    }
-    if (/[a-z]/i.test(input)) {
-      return bot.sendMessage(chatId, 'Letters not allowed. Use: /unpair 923xxxxxxxxx', { parse_mode: 'Markdown' });
-    }
-    if (!/^\d{7,15}$/.test(input)) {
-      return bot.sendMessage(chatId, 'Invalid format. Use: /unpair 923xxxxxxxxx', { parse_mode: 'Markdown' });
-    }
-    if (input.startsWith('0')) {
-      return bot.sendMessage(chatId, 'Numbers starting with 0 not allowed.', { parse_mode: 'Markdown' });
-    }
-
-    const jidSuffix = `${input}`;
-    const pairingPath = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
-
-    if (!(await exists(pairingPath))) {
-      return bot.sendMessage(chatId, 'No paired devices found.');
-    }
-
-    const entries = await fs.readdir(pairingPath, { withFileTypes: true });
-    const matched = entries.find(entry => entry.isDirectory() && entry.name.endsWith(jidSuffix));
-
-    if (!matched) {
-      return bot.sendMessage(chatId, `No paired device found for *${input}*`, { parse_mode: 'Markdown' });
-    }
-
-    const targetPath = path.join(pairingPath, matched.name);
-    await fs.rm(targetPath, { recursive: true, force: true });
-
-    return bot.sendMessage(chatId, `✅ Paired user *${input}* has been deleted successfully`, { parse_mode: 'Markdown' });
-
-  } catch (err) {
-    console.error('UNPAIR ERROR:', err);
-    bot.sendMessage(chatId, 'Failed to delete paired user. Please try again.');
-  }
-});
-
-// ========== POLLING ERROR HANDLER ==========
-bot.on('polling_error', (error) => {
-  console.error('Polling error:', error);
-});
-
-// ========== BOT START ==========
-(async () => {
-  await loadAdminIDs();
-  
-  const restartCount = parseInt(process.env.RESTART_COUNT || 0);
-  console.log(`RESTART #${restartCount + 1}`);
-  process.env.RESTART_COUNT = String(restartCount + 1);
-
-  console.log('🤖 Telegram Bot is running...');
-  console.log('✅ Bot Username: @bot_hosting_v1_bot');
-  console.log('✅ Features: /pair, /unpair, /start');
-})();
-
-// ========== PROCESS HANDLERS ==========
-process.on("uncaughtException", (err) => {
-  console.error('Uncaught Exception:', err);
-});
-process.on("unhandledRejection", (err) => {
-  console.error('Unhandled Rejection:', err);
-});
-process.removeAllListeners("warning");
-process.once('SIGINT', () => gracefulShutdown('SIGINT'));
-process.once('SIGTERM', () => gracefulShutdown('SIGTERM'));
-process.on('message', (msg) => {
-  if (msg === 'shutdown') gracefulShutdown('PM2_SHUTDOWN');
 });

@@ -1,6 +1,6 @@
 /**
-   * Create By SHADOW OFFICIAL
-   * Contact Me on 923271054080
+   * Create By JAVA GOD
+   * Contact Me on WhatsApp: https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V
 */
 
 const fs = require('fs');
@@ -66,14 +66,14 @@ const autoLoadPairs = async () => {
 
 const initializeBot = async () => {
     console.clear();
-    console.log(chalk.cyan(figlet.textSync('SHADOW', {
+    console.log(chalk.cyan(figlet.textSync('JAVA GOD', {
         font: 'Standard',
         horizontalLayout: 'default',
         verticalLayout: 'default'
     })));
     
     console.log(chalk.yellow('\n═══════════════════════════════════════════════'));
-    console.log(chalk.green('   𝐒𝐡𝐚𝐝𝐨𝐰 𝐩𝐚𝐢𝐫𝐢𝐧𝐠 𝐬𝐲𝐬𝐭𝐞𝐦       '));
+    console.log(chalk.green('   𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝐩𝐚𝐢𝐫𝐢𝐧𝐠 𝐬𝐲𝐬𝐭𝐞𝐦       '));
     console.log(chalk.yellow('═══════════════════════════════════════════════\n'));
 
     await autoLoadPairs();
@@ -82,7 +82,7 @@ const initializeBot = async () => {
 
 function launchBot() {
     console.clear();
-    console.log(chalk.green('🚀 Starting 𝐒ＨＡＤＯＷ system...\n'));
+    console.log(chalk.green('🚀 Starting 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 system...\n'));
 
     let telegramLoaded = false;
     let whatsappLoaded = false;
@@ -94,7 +94,7 @@ function launchBot() {
             console.log(chalk.blue('📱 Loading Telegram pairing system...'));
             require('./bot');
             telegramLoaded = true;
-            console.log(chalk.green('✅𝐒ＨＡＤＯＷ bot loaded successfully!'));
+            console.log(chalk.green('✅𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 bot loaded successfully!'));
         } catch (error) {
             console.log(chalk.red('❌ Failed to load Telegram bot (bot.js):'));
             console.log(chalk.red('   Error:', error.message));
@@ -134,16 +134,16 @@ function launchBot() {
 
     // Summary
     console.log(chalk.cyan('\n═══════════════════════════════════════════════'));
-    console.log(chalk.bold.white('𝐒ＨＡＤＯＷ BOT INITIALIZATION SUMMARY          '));
+    console.log(chalk.bold.white('𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 BOT INITIALIZATION SUMMARY          '));
     console.log(chalk.cyan('═══════════════════════════════════════════════'));
-    console.log(telegramLoaded ? chalk.green('✅𝐒ＨＡＤＯＷ тɛℓɛɢяαм вσт: Active') : chalk.red('❌𝐒ＨＡＤＯＷ тɛℓɛɢяαм вσт : Inactive'));
+    console.log(telegramLoaded ? chalk.green('✅𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 тɛℓɛɢяαм вσт: Active') : chalk.red('❌𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 тɛℓɛɢяαм вσт : Inactive'));
     console.log(whatsappLoaded ? chalk.green('✅ WhatsApp Commands: Active') : chalk.red('❌ WhatsApp Commands: Inactive'));
     console.log(chalk.cyan('═══════════════════════════════════════════════\n'));
 
     if (!telegramLoaded && !whatsappLoaded) {
         console.log(chalk.red('⚠️  Warning: No bot systems loaded! Check your files.\n'));
     } else {
-        console.log(chalk.green('✅ 𝐒ＨＡＤＯＷ system is ready and running!\n'));
+        console.log(chalk.green('✅ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 system is ready and running!\n'));
     }
 
     // Error handlers

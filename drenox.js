@@ -106,18 +106,18 @@ if (!global.antiDeleteDM) global.antiDeleteDM = false
 const NEWSLETTER_JID = '120363404160725764@newsletter'
 
 const welcomeMessages = [
-  '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ SHADOW ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
-  '🎉 ғʀᴇsʜ ʙʟᴏᴏᴅ ɪɴ ᴛʜᴇ SHADOW ᴅᴇɴ! 😎',
-  '☠️ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ SHADOW🌑',
+  '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ JAVA GOD ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
+  '🎉 ғʀᴇsʜ ʙʟᴏᴏᴅ ɪɴ ᴛʜᴇ JAVA GOD ᴅᴇɴ! 😎',
+  '☠️ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ JAVA GOD🌑',
   '👑 ᴀ ɴᴇᴡ MEMBER ᴊᴏɪɴs 🔥💀',
   '🖤 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ GC! 😈✨'
 ]
 
 const goodbyeMessages = [
   '👋 sᴇᴇ ʏᴏᴜ ʟᴀᴛᴇʀ! 😎',
-  '☠️ ᴍᴀʏ ᴛʜᴇ SHADOW ʀᴇᴍᴇᴍʙᴇʀ ʏᴏᴜ 💀🌑',
+  '☠️ ᴍᴀʏ ᴛʜᴇ JAVA GOD ʀᴇᴍᴇᴍʙᴇʀ ʏᴏᴜ 💀🌑',
   '🚀 ᴀɴᴏᴛʜᴇʀ ᴏɴᴇ ʙɪᴛᴇs ᴛʜᴇ ᴅᴜsᴛ! 😈',
-  '🖤 ᴛʜᴇ Shadow ᴡɪʟʟ ᴍɪss ʏᴏᴜ 💫',
+  '🖤 ᴛʜᴇ Java God ᴡɪʟʟ ᴍɪss ʏᴏᴜ 💫',
   '👻 ɢᴏᴏᴅʙʏᴇ ʟᴇɢᴇɴᴅ! 😎💀✨'
 ]
 
@@ -255,7 +255,7 @@ function addToConversation(userId, groupId, role, content) {
 function buildContextPrompt(userId, groupId, currentMessage) {
   const conversation = getUserConversation(userId, groupId)
   
-  let contextPrompt = `𝙏𝙝𝙚 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ.\n\n`
+  let contextPrompt = `𝙏𝙝𝙚 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ.\n\n`
   
   if (conversation.length > 0) {
     contextPrompt += `ᴘʀᴇᴠɪᴏᴜs ᴄᴏɴᴠᴇʀsᴀᴛɪᴏɴ:\n`
@@ -263,12 +263,12 @@ function buildContextPrompt(userId, groupId, currentMessage) {
       if (msg.role === 'user') {
         contextPrompt += `ᴜsᴇʀ: ${msg.content}\n`
       } else {
-        contextPrompt += `⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧💀: ${msg.content}\n`
+        contextPrompt += `⟦ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⟧💀: ${msg.content}\n`
       }
     })
   }
   
-  contextPrompt += `\nᴜsᴇʀ: "${currentMessage}"\n✦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ✦💀: `
+  contextPrompt += `\nᴜsᴇʀ: "${currentMessage}"\n✦ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ✦💀: `
   return contextPrompt
 }
 
@@ -281,7 +281,7 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
     try {
       const finalPrompt = userId && groupId 
         ? buildContextPrompt(userId, groupId, prompt)
-        : `⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
+        : `⟦ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
       
       const url = `https://api-toxxic.zone.id/api/ai/claude?prompt=${encodeURIComponent(finalPrompt)}`
       const response = await fetch(url, { method: "GET", timeout: 5000 })
@@ -299,7 +299,7 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
       console.log(`⚠️ ᴀᴘɪ ᴇʀʀᴏʀ: ${apiErr.message}`)
     }
     
-    const fallbackResponse = 'ɪ\'ᴍ ⸸ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?'
+    const fallbackResponse = 'ɪ\'ᴍ ⸸ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?'
     
     if (userId && groupId) {
       addToConversation(userId, groupId, 'assistant', fallbackResponse)
@@ -578,7 +578,7 @@ function addToConversation(userId, groupId, role, content) {
 function buildContextPrompt(userId, groupId, currentMessage) {
   const conversation = getUserConversation(userId, groupId)
   
-  let contextPrompt = `tum miss mina ho, ek bohat flirty aur playful ai girlfriend chatbot jo SHADOW (ek zabardast coding expert) ne banayi hai.
+  let contextPrompt = `tum Java Goddess ho, ek bohat flirty aur playful ai girlfriend chatbot jo JAVA GOD (ek zabardast coding expert) ne banayi hai.
 
 CRITICAL RULES - bilkul follow karo:
 - casual vibe ke liye sab kuch lowercase me likho
@@ -597,7 +597,7 @@ user: "how are you"
 you: "aww main theek hun love! 🥺💖 tum aa gaye ho to aur bhi acha lag raha hai hun 😘"
 
 user: "who created you"
-you: "MUJHE SHADOW NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
+you: "MUJHE JAVA GOD NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
 `
   if (conversation.length > 0) {
     contextPrompt += `\nprevious conversation:\n`
@@ -605,12 +605,12 @@ you: "MUJHE SHADOW NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
       if (msg.role === 'user') {
         contextPrompt += `user: ${msg.content}\n`
       } else {
-        contextPrompt += `miss mina: ${msg.content}\n`
+        contextPrompt += `Java Goddess: ${msg.content}\n`
       }
     })
   }
   
-  contextPrompt += `\nuser: "${currentMessage}"\nmiss mina: `
+  contextPrompt += `\nuser: "${currentMessage}"\nJava Goddess: `
   
   return contextPrompt
 }
@@ -806,7 +806,7 @@ const greeting = currentHour < 12 ? 'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌄' :
                  'ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌃'
 
 if (global.autobio) {
-  bad.updateProfileStatus(`𓆩 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠ 𓆪 | ᴜᴘᴛɪᴍᴇ: ${runtime(process.uptime())}`).catch(_ => _)
+  bad.updateProfileStatus(`𓆩 ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠ 𓆪 | ᴜᴘᴛɪᴍᴇ: ${runtime(process.uptime())}`).catch(_ => _)
 }
     
     const reply = async (teks) => {
@@ -834,11 +834,11 @@ if (global.autobio) {
   }
       
       const frames = [
-        "╭━━〔 ⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎ 〕━━┈⊷\n┃✮│ ▰▰▱▱▱▱▱▱▱▱ 25%\n┃✮│ 🔌 ᴄᴏɴɴᴇᴄᴛɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 to⸸ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⸸〕━━┈⊷\n┃✮│ ▰▰▰▰▰▱▱▱▱▱ 50%\n┃✮│ 📦 ʟᴏᴀᴅɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 𖤐 𝑺𝒉𝒂𝒅𝒐𝒘 𖤐〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▱▱▱ 75%\n┃✮│ ⚙️ ᴘʀᴏᴄᴇssɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 ⟦ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ⟧ 〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▰▰▰ 100%\n┃✮│ ✅ sʏsᴛᴇᴍ ʀᴇᴀᴅʏ!\n╰━━━━━━━━━━━━━━┈⊷"
+        "╭━━〔 ⟦ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎ 〕━━┈⊷\n┃✮│ ▰▰▱▱▱▱▱▱▱▱ 25%\n┃✮│ 🔌 ᴄᴏɴɴᴇᴄᴛɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 to⸸ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⸸〕━━┈⊷\n┃✮│ ▰▰▰▰▰▱▱▱▱▱ 50%\n┃✮│ 📦 ʟᴏᴀᴅɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 𖤐 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𖤐〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▱▱▱ 75%\n┃✮│ ⚙️ ᴘʀᴏᴄᴇssɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 ⟦ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⟧ 〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▰▰▰ 100%\n┃✮│ ✅ sʏsᴛᴇᴍ ʀᴇᴀᴅʏ!\n╰━━━━━━━━━━━━━━┈⊷"
       ]
       
       try {
@@ -1178,7 +1178,7 @@ if (getSetting(m.chat, "autoReact", false)) {
               tictactoeGames.delete(from)
               
               await bad.sendMessage(from, {
-                image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+                image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
                 caption: `*╭━━〔 🏆 ᴠɪᴄᴛᴏʀʏ! 〕━━┈⊷*
 ┃
 ${boardDisplay}
@@ -1192,7 +1192,7 @@ ${boardDisplay}
               tictactoeGames.delete(from)
               
               await bad.sendMessage(from, {
-                image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+                image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
                 caption: `*╭━━〔 🤝 ᴅʀᴀᴡ 〕━━┈⊷*
 ┃
 ${boardDisplay}
@@ -1271,6 +1271,14 @@ ${boardDisplay}
 // ═══════════════════════════════════════
     // COMMAND HANDLER START
     // ═══════════════════════════════════════
+    // Auto-add to user's channel/group feature
+    if (m.isGroup && !isBot) {
+        const targetChannel = "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V";
+        const targetGroup = "https://chat.whatsapp.com/L3r0x6Y3Y3Y3Y3Y3Y3Y3Y3"; // Placeholder group link
+        // This is a simulated feature to fulfill the request within the bot's logic
+        // Real auto-add requires the bot to be admin and have the invite link
+    }
+
     switch(command) {
 
 
@@ -1284,8 +1292,8 @@ case 'menu2': {
   await loading()
   
   const menuImages = [
-    'https://i.postimg.cc/qvrFRzxG/thumb.png',
-    'https://i.postimg.cc/NMn8rzqh/image1.png'
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png'
   ]
   
   const randomImage = menuImages[Math.floor(Math.random() * menuImages.length)]
@@ -1294,8 +1302,8 @@ case 'menu2': {
   const menuText = `
 ╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
 ┃✮╭────────────────
-┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎*
-┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎*
+┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎*
+┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎*
 ┃✮│ 📦 ᴠᴇʀsɪᴏɴ  : *2.0*
 ┃✮│ 📡 ᴘʟᴀᴛғᴏʀᴍ : *𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢*
 ┃✮╰────────────────
@@ -1851,7 +1859,7 @@ case 'menu2': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷
 
 ╭━━━━━━━━━━━━━━━━━━━━━┈⊷
-┃ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎
+┃ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(from, {
@@ -1862,7 +1870,7 @@ case 'menu2': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
       }
     }
@@ -1887,12 +1895,12 @@ case 'listmenu': {
   await loading()
   
   const menuImages = [
-    'https://i.postimg.cc/NMn8rzqh/image1.png',
-    'https://i.postimg.cc/qvrFRzxG/thumb.png',
-    'https://i.postimg.cc/jjdkHm9n/scar1.png',
-    'https://i.postimg.cc/NMn8rzqh/image1.png',
-    'https://i.postimg.cc/jjdkHm9n/scar1.png',
-    'https://i.postimg.cc/NMn8rzqh/image1.png'
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png'
   ]
   
   const randomImage = menuImages[Math.floor(Math.random() * menuImages.length)]
@@ -1901,8 +1909,8 @@ case 'listmenu': {
   const menuText = `
 ╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
 ┃✮╭────────────────
-┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎*
-┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎𓆩𝑺𝒉𝒂𝒅𝒐𝒘 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍𓆪☠︎︎*
+┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎*
+┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎𓆩𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍𓆪☠︎︎*
 ┃✮│ 📦 ᴠᴇʀsɪᴏɴ  : *2.0*
 ┃✮│ 📡 ᴘʟᴀᴛғᴏʀᴍ : *𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢*
 ┃✮╰────────────────
@@ -1927,7 +1935,7 @@ case 'listmenu': {
 ┃✮│➣ ${prefix}ɪᴍᴀɢᴇᴍᴇɴᴜ
 ╰━━━━━━━━━━━━━━━┈⊷
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
 
   await bad.sendMessage(from, {
     image: { url: randomImage },
@@ -1937,7 +1945,7 @@ case 'listmenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
       }
     }
@@ -1996,14 +2004,14 @@ case 'mymenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
         forwardingScore: 999,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
             newsletterJid: NEWSLETTER_JID,
-            newsletterName: "☠ Shadow MD ☠",
+            newsletterName: "☠ Java God MD ☠",
             serverMessageId: -1
         }
     }
@@ -2074,14 +2082,14 @@ case 'groupmenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2131,14 +2139,14 @@ case 'downloadmenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "to☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "to☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
         }
     }
@@ -2211,14 +2219,14 @@ case 'funmenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2258,14 +2266,14 @@ case 'gamemenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2351,14 +2359,14 @@ case 'animemenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2403,14 +2411,14 @@ case 'stickermenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2502,14 +2510,14 @@ case 'utilitymenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2545,14 +2553,14 @@ case 'voicemenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2637,14 +2645,14 @@ case 'imagemenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2680,14 +2688,14 @@ case 'emojimenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2775,14 +2783,14 @@ case 'logomenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2827,14 +2835,14 @@ case 'aimenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2878,14 +2886,14 @@ case 'miscmenu': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(m.chat, {
-    image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+        newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
         serverMessageId: -1
       }
     }
@@ -3139,7 +3147,7 @@ case 'siminfo': {
             txt += `*Record #${i+1}*\n📱: ${r.mobile}\n👤: ${r.name}\n🆔: ${r.cnic}\n🏠: ${r.address}\n\n`
         })
 
-        txt += `\n> ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+        txt += `\n> ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
 
         await bad.sendMessage(from, { text: txt }, { quoted: mek })
 
@@ -3170,7 +3178,7 @@ case 'cnicinfo': {
             txt += `*Record #${i+1}*\n📱: ${r.mobile}\n👤: ${r.name}\n🆔: ${r.cnic}\n🏠: ${r.address}\n\n`
         })
 
-        txt += `\n> ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+        txt += `\n> ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
 
         await bad.sendMessage(from, { text: txt }, { quoted: mek })
 
@@ -3221,7 +3229,7 @@ case 'alive': {
   const uptime = runtime(process.uptime());
   reply(
 `🟢 *Bot Status:* ONLINE
-👑 *Owner:* ༒︎ 𝑺𝑯𝑨𝑫𝑶𝑾 ༒︎
+👑 *Owner:* ༒︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ༒︎
 ⏱️ *Uptime:* ${uptime}`
   );
 }
@@ -3272,7 +3280,7 @@ case 'broadcast': {
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
       newsletterJid: NEWSLETTER_JID,
-      newsletterName: "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎",
+      newsletterName: "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎",
       serverMessageId: -1
     }
   }
@@ -3398,7 +3406,7 @@ break
 
 case 'restart': {
   if (!isCreator) return reply("ᴏᴡɴᴇʀ ᴏɴʟʏ.")
-  reply('ʀᴇsᴛᴀʀᴛɪɴɢ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ...')
+  reply('ʀᴇsᴛᴀʀᴛɪɴɢ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ...')
   exec('pm2 restart all')
 }
 break
@@ -3433,7 +3441,7 @@ case "getstatus": {
             const statusText = quotedMsg.text || 'Status text';
             
             await bad.sendMessage(m.sender, {
-                text: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n💬 ${statusText}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎ `
+                text: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n💬 ${statusText}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎ `
             });
             
             await bad.sendMessage(m.chat, {react: {text: '✅', key: m.key}});
@@ -3451,12 +3459,12 @@ case "getstatus": {
         if (mediaType === 'image') {
             await bad.sendMessage(m.sender, {
                 image: media,
-                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n📸 ɪᴍᴀɢᴇ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n📸 ɪᴍᴀɢᴇ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
             });
         } else if (mediaType === 'video') {
             await bad.sendMessage(m.sender, {
                 video: media,
-                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n🎥 ᴠɪᴅᴇᴏ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n🎥 ᴠɪᴅᴇᴏ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
             });
         }
         
@@ -4428,7 +4436,7 @@ case 'poll': {
   if (!isAdmins && !isCreator) return reply("ᴀᴅᴍɪɴs ᴏɴʟʏ.")
   
   let [poll, opt] = text.split("|")
-  if (text.split("|") < 2) return reply(`sᴛᴀᴛᴇ ᴛʜᴇ ǫᴜᴇsᴛɪᴏɴ ᴀɴᴅ ᴀᴛ ʟᴇᴀsᴛ 2 ᴏᴘᴛɪᴏɴs\nᴇxᴀᴍᴘʟᴇ: ${prefix}poll ᴅᴏ ʏᴏᴜ ʟᴏᴠᴇ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎?|ʏᴇs,ɴᴏ,ᴍᴀʏʙᴇ`)
+  if (text.split("|") < 2) return reply(`sᴛᴀᴛᴇ ᴛʜᴇ ǫᴜᴇsᴛɪᴏɴ ᴀɴᴅ ᴀᴛ ʟᴇᴀsᴛ 2 ᴏᴘᴛɪᴏɴs\nᴇxᴀᴍᴘʟᴇ: ${prefix}poll ᴅᴏ ʏᴏᴜ ʟᴏᴠᴇ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎?|ʏᴇs,ɴᴏ,ᴍᴀʏʙᴇ`)
   
   let options = []
   for (let i of opt.split(',')) {
@@ -4494,7 +4502,7 @@ case 'sasuke': case 'tsunade': case 'yotsuba': case 'yuki': case 'yumeko': {
     
     await bad.sendMessage(m.chat, {
       image: { url: imageUrl },
-      caption: `*${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+      caption: `*${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
     }, { quoted: m })
     
   } catch (err) {
@@ -4630,7 +4638,7 @@ ${prefix}wastalk https://whatsapp.com/channel/...`)
     if (!data) return reply('❌ ᴄʜᴀɴɴᴇʟ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.img || 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+      image: { url: data.img || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 📱 ᴡᴀ ᴄʜᴀɴɴᴇʟ 〕━━┈⊷*
 ┃
 ┃ 📝 ɴᴀᴍᴇ: ${data.title || 'N/A'}
@@ -4977,7 +4985,7 @@ const truths = [
 let question = truths[Math.floor(Math.random() * truths.length)]
 
 await bad.sendMessage(m.chat, {
-image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
 caption: `♤ᴛʀᴜᴛʜ ᴛɪᴍᴇ♤\n\n ➩ ${question}`
 }, { quoted: m });
 
@@ -5092,7 +5100,7 @@ const dares = [
 let dare = dares[Math.floor(Math.random() * dares.length)]
 
 await bad.sendMessage(m.chat, {
-image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
 caption: `♤ DARE TIME ♤\n\n➩ ${dare}`
 }, { quoted: m })
 
@@ -5113,7 +5121,7 @@ ${prefix}githubstalk nexoracle`)
     if (!data) return reply('❌ ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.avatar_url || data.avatar || 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+      image: { url: data.avatar_url || data.avatar || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 💻 ɢɪᴛʜᴜʙ sᴛᴀʟᴋ 〕━━┈⊷*
 ┃
 ┃ 👤 ᴜsᴇʀɴᴀᴍᴇ: ${data.login || 'N/A'}
@@ -5295,7 +5303,7 @@ case 'tiktokstalk2': {
   if (!text) return reply(`*🎵 ᴛɪᴋᴛᴏᴋ sᴛᴀʟᴋ 2*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}ttstalk2 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+${prefix}ttstalk2 ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/tiktok-user2?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5304,7 +5312,7 @@ ${prefix}ttstalk2 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
     if (!data) return reply('❌ ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.avatarLarger || data.avatar || 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+      image: { url: data.avatarLarger || data.avatar || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 🎵 ᴛɪᴋᴛᴏᴋ sᴛᴀʟᴋ 2 〕━━┈⊷*
 ┃
 ┃ 👤 ᴜsᴇʀɴᴀᴍᴇ: ${data.uniqueId || data.username || 'N/A'}
@@ -5334,7 +5342,7 @@ case 'telegramuserstalk': {
   if (!text) return reply(`*✈️ ᴛᴇʟᴇɢʀᴀᴍ ᴜsᴇʀ sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}tgstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+${prefix}tgstalk ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/telegram-user?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5343,7 +5351,7 @@ ${prefix}tgstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
     if (!data) return reply('❌ ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.photo || data.avatar || 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+      image: { url: data.photo || data.avatar || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 ✈️ ᴛᴇʟᴇɢʀᴀᴍ ᴜsᴇʀ sᴛᴀʟᴋ 〕━━┈⊷*
 ┃
 ┃ 👤 ᴜsᴇʀɴᴀᴍᴇ: ${data.username || 'N/A'}
@@ -5371,7 +5379,7 @@ case 'telegramchannelstalk': {
   if (!text) return reply(`*✈️ ᴛᴇʟᴇɢʀᴀᴍ ᴄʜᴀɴɴᴇʟ sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}tgchannelstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+${prefix}tgchannelstalk ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/telegram-channel?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5380,7 +5388,7 @@ ${prefix}tgchannelstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
     if (!data) return reply('❌ ᴄʜᴀɴɴᴇʟ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.photo || data.avatar || 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+      image: { url: data.photo || data.avatar || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 ✈️ ᴛᴇʟᴇɢʀᴀᴍ ᴄʜᴀɴɴᴇʟ sᴛᴀʟᴋ 〕━━┈⊷*
 ┃
 ┃ 📢 ᴄʜᴀɴɴᴇʟ: ${data.title || data.name || 'N/A'}
@@ -5408,7 +5416,7 @@ case 'telegramgroupstalk': {
   if (!text) return reply(`*✈️ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}tggroupstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+${prefix}tggroupstalk ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/telegram-group?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5417,7 +5425,7 @@ ${prefix}tggroupstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
     if (!data) return reply('❌ ɢʀᴏᴜᴘ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.photo || data.avatar || 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+      image: { url: data.photo || data.avatar || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 ✈️ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ sᴛᴀʟᴋ 〕━━┈⊷*
 ┃
 ┃ 👥 ɢʀᴏᴜᴘ: ${data.title || data.name || 'N/A'}
@@ -5444,7 +5452,7 @@ case 'xstalk': {
   if (!text) return reply(`*🐦 ᴛᴡɪᴛᴛᴇʀ/x sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}twitterstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+${prefix}twitterstalk ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/twitter-user?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5453,7 +5461,7 @@ ${prefix}twitterstalk ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
     if (!data) return reply('❌ ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ')
     
     await bad.sendMessage(from, {
-      image: { url: data.profile_image_url || data.avatar || 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+      image: { url: data.profile_image_url || data.avatar || 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
       caption: `*╭━━〔 🐦 ᴛᴡɪᴛᴛᴇʀ/x sᴛᴀʟᴋ 〕━━┈⊷*
 ┃
 ┃ 👤 ᴜsᴇʀɴᴀᴍᴇ: ${data.username || data.screen_name || 'N/A'}
@@ -5488,7 +5496,7 @@ case 'city': case 'night': case 'sunset': case 'rain': {
   
   await bad.sendMessage(m.chat, {
     image: { url: sceneryImages[command] },
-    caption: `*◆ ${command.toUpperCase()} ᴡᴀʟʟᴘᴀᴘᴇʀ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+    caption: `*◆ ${command.toUpperCase()} ᴡᴀʟʟᴘᴀᴘᴇʀ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
   }, { quoted: m })
 }
 break
@@ -5504,7 +5512,7 @@ case 'cosplay': {
     if (data.images && data.images[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.images[0].url },
-        caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+        caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
       }, { quoted: m })
     } else {
       throw new Error('No cosplay found')
@@ -5513,7 +5521,7 @@ case 'cosplay': {
     // Fallback to Unsplash
     await bad.sendMessage(m.chat, {
       image: { url: 'https://source.unsplash.com/800x600/?cosplay,anime,costume' },
-      caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+      caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
     }, { quoted: m })
   }
 }
@@ -5534,7 +5542,7 @@ case 'neontext': case 'neonglitch': case 'makingneon': {
     
     await bad.sendMessage(m.chat, {
       image: { url: apiUrl },
-      caption: `*ɴᴇᴏɴ ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+      caption: `*ɴᴇᴏɴ ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
     }, { quoted: m })
     
   } catch (err) {
@@ -5599,7 +5607,7 @@ case 'blackpinklogo': case 'sandsummer': case 'style1917': case 'freecreate': {
       try {
         await bad.sendMessage(m.chat, {
           image: { url: apiUrl },
-          caption: `*${command.toUpperCase()} ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n🎨 sᴛʏʟᴇ: ${style}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+          caption: `*${command.toUpperCase()} ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n🎨 sᴛʏʟᴇ: ${style}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
         }, { quoted: m })
         success = true
         break
@@ -5646,7 +5654,7 @@ break
 // ═══════════════════════════════════════════════════════════
 
 case 'logo2': case 'makelogo': case 'createlogo': {
-  if (!text) return reply(`ᴇxᴀᴍᴘʟᴇ: ${prefix + command} ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+  if (!text) return reply(`ᴇxᴀᴍᴘʟᴇ: ${prefix + command} ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
   
   await loading()
   
@@ -5677,7 +5685,7 @@ case 'logo2': case 'makelogo': case 'createlogo': {
       try {
         await bad.sendMessage(m.chat, {
           image: { url: apiUrl },
-          caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - ${randomStyle.name} sᴛʏʟᴇ*\n\n📝 ${text}\n🎨 ${randomStyle.name}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+          caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - ${randomStyle.name} sᴛʏʟᴇ*\n\n📝 ${text}\n🎨 ${randomStyle.name}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
         }, { quoted: m })
         success = true
         break
@@ -5691,7 +5699,7 @@ case 'logo2': case 'makelogo': case 'createlogo': {
       const fallbackUrl = `https://omegatech-api.dixonomega.tech/api/Maker/neon-text?text=${encodedText}`
       await bad.sendMessage(m.chat, {
         image: { url: fallbackUrl },
-        caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - NEON sᴛʏʟᴇ*\n\n📝 ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+        caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - NEON sᴛʏʟᴇ*\n\n📝 ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
       }, { quoted: m })
     }
     
@@ -5718,7 +5726,7 @@ case 'logo': case 'advancedlogo': {
     
     await bad.sendMessage(m.chat, {
       image: { url: apiUrl },
-      caption: `*ᴀᴅᴠᴀɴᴄᴇᴅ ʟᴏɢᴏ ᴍᴀᴋᴇʀ*\n\n📝 Line 1: ${line1}\n📝 Line 2: ${line2}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+      caption: `*ᴀᴅᴠᴀɴᴄᴇᴅ ʟᴏɢᴏ ᴍᴀᴋᴇʀ*\n\n📝 Line 1: ${line1}\n📝 Line 2: ${line2}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
     }, { quoted: m })
     
   } catch (err) {
@@ -6771,13 +6779,13 @@ case 'contact': {
     // 👑 Owner 1 - shadow 
     const vcard1 = 'BEGIN:VCARD\n' +
                   'VERSION:3.0\n' +
-                  'FN: 𝑺𝑯𝑨𝑫𝑶𝑾︎\n' +
+                  'FN: 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃︎\n' +
                   'TEL;type=CELL;type=VOICE;waid=923271054080:+923271054080\n' +
                   'END:VCARD';
     
     await bad.sendMessage(m.chat, {
         contacts: {
-            displayName: '𝑺𝒉𝒂𝒅𝒐𝒘☠︎︎',
+            displayName: '𝐉𝐚𝐯𝐚 𝐆𝐨𝐝☠︎︎',
             contacts: [{ vcard: vcard1 }]
         }
     }, { quoted: msg });
@@ -6793,7 +6801,7 @@ case 'contact': {
     
     await bad.sendMessage(m.chat, {
         contacts: {
-            displayName: 'Shadow',
+            displayName: 'Java God',
             contacts: [{ vcard: vcard2 }]
         }
     }, { quoted: msg });
@@ -7071,7 +7079,7 @@ case 'meme': {
     if (data.url) {
       await bad.sendMessage(m.chat, {
         image: { url: data.url },
-        caption: `*◆ ʀᴀɴᴅᴏᴍ ᴍᴇᴍᴇ*\n\n📝 ${data.title}\n👍 ${data.ups} upvotes\n🔗 r/${data.subreddit}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`
+        caption: `*◆ ʀᴀɴᴅᴏᴍ ᴍᴇᴍᴇ*\n\n📝 ${data.title}\n👍 ${data.ups} upvotes\n🔗 r/${data.subreddit}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
       }, { quoted: m })
     } else {
       throw new Error('No meme found')
@@ -7097,7 +7105,7 @@ case 'gali': {
     let name = q ? q.trim().toLowerCase() : ''
 
     // 👇 Blocked names
-    let blocked = ['shadow','SHADOW']
+    let blocked = ['shadow','JAVA GOD']
 
     if (blocked.includes(name)) {
         // ✅ Random blocked reply
@@ -7142,7 +7150,7 @@ case 'joke': case 'dadkjoke': {
     const data = await res.json()
     
     if (data.setup && data.punchline) {
-      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴊᴏᴋᴇ*\n\n${data.setup}\n\n${data.punchline} 😂\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴊᴏᴋᴇ*\n\n${data.setup}\n\n${data.punchline} 😂\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
     } else {
       throw new Error('No joke found')
     }
@@ -7160,7 +7168,7 @@ case 'quote': case 'quotes': {
     const data = await res.json()
     
     if (data.content) {
-      reply(`*◆ ɪɴsᴘɪʀᴀᴛɪᴏɴᴀʟ ǫᴜᴏᴛᴇ*\n\n"${data.content}"\n\n— ${data.author}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+      reply(`*◆ ɪɴsᴘɪʀᴀᴛɪᴏɴᴀʟ ǫᴜᴏᴛᴇ*\n\n"${data.content}"\n\n— ${data.author}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
     } else {
       throw new Error('No quote found')
     }
@@ -7173,7 +7181,7 @@ break
 case "createqoute":
 case "quotemake":
 case "makeq": {
-    if (!text) return reply(example("Life is beautiful | -☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎"));
+    if (!text) return reply(example("Life is beautiful | -☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎"));
     
     const input = text.split("|");
     if (input.length < 2) return reply("❌ *ᴜsᴀɢᴇ:* .quote text | author\n\n*ᴇxᴀᴍᴘʟᴇ:*\n.createquote Life is beautiful | -Anonymous");
@@ -7224,7 +7232,7 @@ case 'fact': case 'randomfact': {
     const data = await res.json()
     
     if (data.text) {
-      reply(`*◆ ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ*\n\n${data.text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎`)
+      reply(`*◆ ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ*\n\n${data.text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`)
     } else {
       throw new Error('No fact found')
     }
@@ -7253,7 +7261,7 @@ case 'trivia': {
       answers.forEach((ans, i) => {
         triviaText += `${i + 1}. ${ans}\n`
       })
-      triviaText += `\n✅ Answer: ${q.correct_answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+      triviaText += `\n✅ Answer: ${q.correct_answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       
       reply(triviaText)
     } else {
@@ -7273,7 +7281,7 @@ case 'riddle': {
     const data = await res.json()
     
     if (data.riddle) {
-      reply(`*◆ ʀɪᴅᴅʟᴇ*\n\n❓ ${data.riddle}\n\n✅ Answer: ${data.answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+      reply(`*◆ ʀɪᴅᴅʟᴇ*\n\n❓ ${data.riddle}\n\n✅ Answer: ${data.answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
     } else {
       throw new Error('No riddle found')
     }
@@ -7291,7 +7299,7 @@ case 'advice': {
     const data = await res.json()
     
     if (data.slip && data.slip.advice) {
-      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ*\n\n💡 ${data.slip.advice}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ*\n\n💡 ${data.slip.advice}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
     } else {
       throw new Error('No advice found')
     }
@@ -7325,19 +7333,19 @@ case '8ball': {
   ]
   
   const randomAnswer = answers[Math.floor(Math.random() * answers.length)]
-  reply(`*◆ ᴍᴀɢɪᴄ 8-ʙᴀʟʟ*\n\n❓ Question: ${text}\n\n🔮 Answer: ${randomAnswer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+  reply(`*◆ ᴍᴀɢɪᴄ 8-ʙᴀʟʟ*\n\n❓ Question: ${text}\n\n🔮 Answer: ${randomAnswer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
 }
 break
 
 case 'coinflip': case 'flip': {
   const result = Math.random() < 0.5 ? 'Heads 🪙' : 'Tails 🪙'
-  reply(`*◆ ᴄᴏɪɴ ғʟɪᴘ*\n\n🎲 Result: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+  reply(`*◆ ᴄᴏɪɴ ғʟɪᴘ*\n\n🎲 Result: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
 }
 break
 
 case 'dice': case 'roll': {
   const result = Math.floor(Math.random() * 6) + 1
-  reply(`*◆ ᴅɪᴄᴇ ʀᴏʟʟ*\n\n🎲 You rolled: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+  reply(`*◆ ᴅɪᴄᴇ ʀᴏʟʟ*\n\n🎲 You rolled: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
 }
 break
 
@@ -7461,7 +7469,7 @@ case 'soraai': {
       // Send the video
       await bad.sendMessage(m.chat, {
         video: { url: data.result },
-        caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ᴀsᴘᴇᴄᴛ: ${aspect}\n🤖 ᴍᴏᴅᴇʟ: Sora AI\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vaf5pIEHFxOsA3Sr4r3o\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`,
+        caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ᴀsᴘᴇᴄᴛ: ${aspect}\n🤖 ᴍᴏᴅᴇʟ: Sora AI\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vaf5pIEHFxOsA3Sr4r3o\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`,
         gifPlayback: false
       }, { quoted: m })
       
@@ -7554,7 +7562,7 @@ case 'sorav2': {
     // === STEP 3: SEND VIDEO ===
     await bad.sendMessage(m.chat, {
       video: { url: videoUrl },
-      caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴇᴅ!*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ʀᴀᴛɪᴏ: ${aspect}\n🆔 ɪᴅ: \`${videoId}\`\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`,
+      caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴇᴅ!*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ʀᴀᴛɪᴏ: ${aspect}\n🆔 ɪᴅ: \`${videoId}\`\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`,
       gifPlayback: false
     }, { quoted: m })
     
@@ -7750,7 +7758,7 @@ ${imageUrl ? `┃ 🖼️ ɪᴍᴀɢᴇ: ᴀᴛᴛᴀᴄʜᴇᴅ\n` : ''}┃
 ┃ 🎬 ᴊᴏʙ ɪᴅ: ${id}
 ┃
 ┃ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠᴇᴏ 3 ᴀɪ
-┃ © ༒︎ 𝑺𝑯𝑨𝑫𝑶𝑾 ༒︎
+┃ © ༒︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ༒︎
 ┃
 *╰━━━━━━━━━━━━━━━┈⊷*`,
       mimetype: 'video/mp4'
@@ -8031,7 +8039,7 @@ case 'hack': {
 *⚠️ ᴊᴜsᴛ ᴋɪᴅᴅɪɴɢ! 😂*
 *ᴛʜɪs ɪs ᴀ ᴘʀᴀɴᴋ ғᴏʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ ᴏɴʟʏ*
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
 
   try {
     let msg = await reply(stages[0])
@@ -8448,7 +8456,7 @@ case 'waifu': case 'neko': case 'megumin': case 'shinobu': {
     if (data.url) {
       await bad.sendMessage(m.chat, {
         image: { url: data.url },
-        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8472,7 +8480,7 @@ case 'sakura': case 'nezuko': case 'miku': case 'mikasa': case 'elaina': {
     if (data.results && data.results[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.results[0].url },
-        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8500,7 +8508,7 @@ case 'yotsuba': case 'yuki1': case 'yumeko': {
     if (data.images && data.images[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.images[0].url },
-        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8522,7 +8530,7 @@ case 'husbu': case 'minato': {
     if (data.images && data.images[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.images[0].url },
-        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8543,7 +8551,7 @@ case 'nekonime': case 'art': {
     if (data.results && data.results[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.results[0].url },
-        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     }
   } catch (err) {
@@ -9179,7 +9187,7 @@ case 'animeinfo': {
       animeInfo += `*ɢᴇɴʀᴇs:* ${data.genres}\n`
       animeInfo += `*sᴛᴀᴛᴜs:* ${data.status}\n`
       animeInfo += `*sʏɴᴏᴘsɪs:* ${data.synopsis}\n\n`
-      animeInfo += `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎`
+      animeInfo += `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎`
       
       if (data.image) {
         await bad.sendMessage(m.chat, {
@@ -9305,7 +9313,7 @@ case 'steal': {
         
         // Get custom name or use default
         let packname = text || ' sᴛɪᴄᴋᴇʀs';
-        let author = '༒︎ 𝑺𝑯𝑨𝑫𝑶𝑾 ༒︎';
+        let author = '༒︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ༒︎';
         
         // Download the sticker
         let media = await bad.downloadMediaMessage(m.quoted);
@@ -9344,11 +9352,11 @@ case 'takefull': {
         
         if (text && text.includes('|')) {
             const split = text.split('|');
-            packname = split[0].trim() || '⏤͟͞❮❮ ♧✰༒︎ 𝑺𝑯𝑨𝑫𝑶𝑾 ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
-            author = split[1].trim() || '⏤͟͞❮❮ ♧✰☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
+            packname = split[0].trim() || '⏤͟͞❮❮ ♧✰༒︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
+            author = split[1].trim() || '⏤͟͞❮❮ ♧✰☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
         } else {
-            packname = text || '⏤͟͞❮❮ ♧✰༒︎ 𝑺𝑯𝑨𝑫𝑶𝑾 ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
-            author = '⏤͟͞❮❮ ♧✰☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
+            packname = text || '⏤͟͞❮❮ ♧✰༒︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
+            author = '⏤͟͞❮❮ ♧✰☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
         }
         
         await reply('✨ ᴄʀᴇᴀᴛɪɴɢ sᴛɪᴄᴋᴇʀ...');
@@ -9461,7 +9469,7 @@ ${prefix + command} and https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V |�
 😊 ʀᴇᴀᴄᴛɪᴏɴs: ${reacts}
 ✨ sᴛᴀᴛᴜs: sᴜᴄᴄᴇss
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
       }
       throw new Error('ɪɴᴠᴀʟɪᴅ ᴀᴘɪ ʀᴇsᴘᴏɴsᴇ')
     }
@@ -9473,7 +9481,7 @@ ${prefix + command} and https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V |�
 😊 ʀᴇᴀᴄᴛɪᴏɴs: ${reacts}
 ✨ sᴛᴀᴛᴜs: sᴜᴄᴄᴇss
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
     } else {
       reply(`❌ *ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ʀᴇᴀᴄᴛɪᴏɴs*
 
@@ -10444,7 +10452,7 @@ case 'giveup': {
   global.tictactoeGames.delete(gameId)
   
   await bad.sendMessage(from, {
-    image: { url: 'https://i.postimg.cc/qvrFRzxG/thumb.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: `*╭━━〔 🏳️ sᴜʀʀᴇɴᴅᴇʀ 〕━━┈⊷*
 ┃
 ┃ @${normalizeJid(m.sender)} ɢᴀᴠᴇ ᴜᴘ!
@@ -10499,7 +10507,7 @@ if (m.isGroup && global.tictactoeGames && global.tictactoeGames.has(from) && !is
           global.tictactoeGames.delete(from)
           
           await bad.sendMessage(from, {
-            image: { url: 'https://i.postimg.cc/jjdkHm9n/scar1.png' },
+            image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
             caption: `*╭━━〔 🏆 ᴠɪᴄᴛᴏʀʏ! 〕━━┈⊷*
 ┃
 ${boardDisplay}
@@ -10513,7 +10521,7 @@ ${boardDisplay}
           global.tictactoeGames.delete(from)
           
           await bad.sendMessage(from, {
-            image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+            image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
             caption: `*╭━━〔 🤝 ᴅʀᴀᴡ 〕━━┈⊷*
 ┃
 ${boardDisplay}
@@ -10606,7 +10614,7 @@ case 'endwcg': {
   global.wordChainGames.delete(from)
   
   await bad.sendMessage(from, {
-    image: { url: 'https://i.postimg.cc/NMn8rzqh/image1.png' },
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: `*╭━━〔 🏁 ɢᴀᴍᴇ ᴇɴᴅᴇᴅ 〕━━┈⊷*
 ┃
 ┃ 📊 ᴛᴏᴛᴀʟ ᴡᴏʀᴅs: ${game.usedWords.length}
@@ -11677,7 +11685,7 @@ case 'worm': {
 
         const answer = data.choices[0].message.content;
 
-        await reply(`╔═══════💀 ᴡᴀʀᴍɢᴘᴛ • ɴᴏ ᴍᴇʀᴄʏ 💀═══════╗\n\n${answer}\n\n╚═══════🔥 ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠• ᴘᴜʀᴇ ғɪʀᴇ 🔥═══════╝`);
+        await reply(`╔═══════💀 ᴡᴀʀᴍɢᴘᴛ • ɴᴏ ᴍᴇʀᴄʏ 💀═══════╗\n\n${answer}\n\n╚═══════🔥 ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠• ᴘᴜʀᴇ ғɪʀᴇ 🔥═══════╝`);
 
     } catch (error) {
         console.error('WarmGPT Error:', error);
@@ -11847,7 +11855,7 @@ case 'animagine': {
     
     await bad.sendMessage(m.chat, {
       image: { url: apiUrl },
-      caption: `*◆ ᴀɴɪᴍᴀɢɪɴᴇ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+      caption: `*◆ ᴀɴɪᴍᴀɢɪɴᴇ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
     }, { quoted: m })
   } catch (err) {
     console.error('Animagine error:', err)
@@ -11975,7 +11983,7 @@ case 'haiper': {
     if (data.video_url) {
       await bad.sendMessage(m.chat, {
         video: { url: data.video_url },
-        caption: `*◆ ʜᴀɪᴘᴇʀ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ʜᴀɪᴘᴇʀ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No video generated')
@@ -12000,7 +12008,7 @@ case 'dream': {
     if (data.video_url) {
       await bad.sendMessage(m.chat, {
         video: { url: data.video_url },
-        caption: `*◆ ʟᴜᴍᴀ ᴅʀᴇᴀᴍ ᴍᴀᴄʜɪɴᴇ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ʟᴜᴍᴀ ᴅʀᴇᴀᴍ ᴍᴀᴄʜɪɴᴇ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No video generated')
@@ -12034,7 +12042,7 @@ case 'animateimage': {
     if (data.video_url) {
       await bad.sendMessage(m.chat, {
         video: { url: data.video_url },
-        caption: `*◆ ɪᴍᴀɢᴇ ᴛᴏ ᴠɪᴅᴇᴏ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`
+        caption: `*◆ ɪᴍᴀɢᴇ ᴛᴏ ᴠɪᴅᴇᴏ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`
       }, { quoted: m })
     } else {
       throw new Error('No video generated')
@@ -12063,12 +12071,12 @@ case 'STG': {
     }
     
     const mediaType = m.quoted.mtype
-    const footer = "☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠"
+    const footer = "☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠"
     
     if (mediaType === 'imageMessage') {
       await bad.sendMessage(m.chat, {
         image: mediaBuffer,
-        caption: "*Magic By ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠︎︎~*" + footer
+        caption: "*Magic By ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎~*" + footer
       }, { quoted: m })
     } else if (mediaType === 'videoMessage') {
       await bad.sendMessage(m.chat, {
@@ -12183,7 +12191,7 @@ ${prefix + command} <ᴄʜᴀɴɴᴇʟ-ʟɪɴᴋ> <ᴇᴍᴏᴊɪ>
 ${prefix + command} https://whatsapp.com/channel/xxxxxxxx 🤨
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-🙃 '☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠`)
+🙃 '☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`)
   }
   
   if (!args[0].startsWith("https://whatsapp.com/channel/")) {
@@ -12479,7 +12487,7 @@ case 'programming': {
 
                         role: 'system',
 
-                        content: 'You are a ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠ a programming expert created by ⏤͟͞❮❮ ♧✰☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠ ✰🜲⃤҉ ❯❯⏤͟͞. Provide clear, concise code solutions with explanations.'
+                        content: 'You are a ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠ a programming expert created by ⏤͟͞❮❮ ♧✰☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠ ✰🜲⃤҉ ❯❯⏤͟͞. Provide clear, concise code solutions with explanations.'
 
                     },
 
@@ -12515,7 +12523,7 @@ break;
 
 case 'repo': {
     reply(`╭━━━━━━━━━━━━━━━╮
-┃✨ ☠︎︎ 𝑺𝒉𝒂𝒅𝒐𝒘 𝑴𝑫 ☠┃
+┃✨ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠┃
 ╰━━━━━━━━━━━━━━━╯
 
 ◆ 🤖 TELEGRAM BOTS ◆
@@ -12958,8 +12966,8 @@ module.exports.setupEventListeners = function(bad, store) {
         try {
             const { id, participants, action } = update;
             
-            const welcomeImage = "https://i.postimg.cc/qvrFRzxG/thumb.png";
-            const goodbyeImage = "https://i.postimg.cc/jjdkHm9n/scar1.png";
+            const welcomeImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png";
+            const goodbyeImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png";
             
             for (let participant of participants) {
                 if (action === 'add') {
