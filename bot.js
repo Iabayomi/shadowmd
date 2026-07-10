@@ -88,13 +88,22 @@ const checkUserJoinedChannels = async (userId) => {
   for (const channel of channels) {
     try {
       const member = await bot.getChatMember(channel, userId);
+      // Statuses that indicate the user is NOT a member
       if (['left', 'kicked'].includes(member.status)) {
         allJoined = false;
         break;
       }
-    } catch {
-      allJoined = false;
-      break;
+    } catch (error) {
+      console.error(`Error checking membership for ${channel}:`, error.message);
+      // If the error is not about the user not being found, we might want to skip the check
+      // to avoid blocking users due to bot configuration issues.
+      // However, if the error is "user not found", it means they haven't joined.
+      if (error.message.includes('user not found')) {
+        allJoined = false;
+        break;
+      }
+      // If it's some other error (like bot not having permissions), we'll assume they joined
+      // or at least not block them because of our own error.
     }
   }
   return allJoined;
