@@ -1,0 +1,2 @@
+2026-07-14 05:22:25: (node:9184) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-14 05:22:25: (Use `node --trace-deprecation ...` to show where the warning was created)

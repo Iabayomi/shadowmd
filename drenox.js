@@ -1318,6 +1318,16 @@ ${boardDisplay}
             break
         }
 
+        case 'restart':
+        case 'wakeup': {
+            if (!isCreator) return reply(mess.owner)
+            reply(`*⚡ JAVA GOD SYSTEM WAKE-UP*\n\nRestarting the bot to ensure 24/7 stability...\nPlease wait 5-10 seconds for reconnection.`)
+            setTimeout(() => {
+                process.exit()
+            }, 2000)
+        }
+        break
+
 
       
 // ═══════════════════════════════════════════════════════════
