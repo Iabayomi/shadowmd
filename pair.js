@@ -248,14 +248,15 @@ async function startpairing(kingbadboiNumber) {
             console.log(`\x1b[32mLoading Chat [${msg.progress}%]\x1b[39m`);
             return !!msg.syncType;
         },
-        connectTimeoutMs: 60000,
-        defaultQueryTimeoutMs: 60000,
-        keepAliveIntervalMs: 30000,
+        connectTimeoutMs: 90000, // Increased timeout
+        defaultQueryTimeoutMs: 90000,
+        keepAliveIntervalMs: 15000, // More frequent keep-alive
         emitOwnEvents: true,
         fireInitQueries: true,
         generateHighQualityLinkPreview: true,
-        syncFullHistory: true,
+        syncFullHistory: false, // Reduced sync to prevent hang-ups
         markOnlineOnConnect: true,
+        retryRequestDelayMs: 2000,
     })
     
     tracker.connection = bad;
@@ -688,7 +689,7 @@ async function startpairing(kingbadboiNumber) {
                 } catch (err) {
                     // Silently fail - keep-alive errors are non-critical
                 }
-            }, 45000); // Every 45 seconds
+            }, 20000); // Every 20 seconds for ultra-stability
             
             // Wait before performing auto-actions
             await sleep(10000);

@@ -16,7 +16,7 @@
 🔄 Auto-loading all paired users...
 ✅ Found 1 paired users. Starting connections...
 ⏳ Waiting 4 seconds before starting connections...
-(node:3944) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(node:7305) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 🔄 Connecting user 1/1: 2348089281494@s.whatsapp.net
 [32mLoading Chat [undefined%][39m
@@ -30,6 +30,7 @@
 ✅ All paired users processed.
 ⏳ Waiting 4 seconds before continuing...
 🔄 Connecting 2348089281494@s.whatsapp.net...
+✅ Connected: 2348089281494@s.whatsapp.net
 🚀 Starting 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 system...
 
 📱 Loading Telegram pairing system...
@@ -50,8 +51,6 @@
 Press Ctrl+C to stop the bot
 
 📥 Loaded Admin IDs: [ '7848300179', '2348089281494' ]
-[32mLoading Chat [null%][39m
-✅ Connected: 2348089281494@s.whatsapp.net
 🚀 Starting auto-actions...
 📰 Following newsletters...
 ✓ Followed: 120363404160725764@newsletter
@@ -62,4 +61,2098 @@ Press Ctrl+C to stop the bot
 📰 Newsletter auto-react is ACTIVE
 💓 Keep-alive running (silent mode)
 ✅ All commands are functional!
-[0;32m/home/ubuntu/shadowmd/drenox.js [1;32mᴜᴘᴅᴀᴛᴇᴅ![0m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Good morning
+   Prefix: 
+   isCmd: false
+   Command: good
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: For house
+   Prefix: 
+   isCmd: false
+   Command: for
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I just dey imagine it na
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: U never wash
+   Prefix: 
+   isCmd: false
+   Command: u
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Yes
+   Prefix: 
+   isCmd: false
+   Command: yes
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No be only u
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: But nepa don bring light make I used washing machi
+   Prefix: 
+   isCmd: false
+   Command: but
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Oooooooooh okay
+   Prefix: 
+   isCmd: false
+   Command: oooooooooh
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I for talk say make u con used washing machine
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: ehn fine girl……osim ask Jesus😒
+   Prefix: 
+   isCmd: false
+   Command: ehn
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Make I con help you
+   Prefix: 
+   isCmd: false
+   Command: make
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: U think I am joking
+   Prefix: 
+   isCmd: false
+   Command: u
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Happy birthday boss
+   Prefix: 
+   isCmd: false
+   Command: happy
+   From: 244349648527586@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  Unhandled Promise Rejection:
+Reason: AxiosError: getaddrinfo ENOTFOUND api.waifu.pics
+    at AxiosError.from (/home/ubuntu/shadowmd/node_modules/.pnpm/axios@1.18.1/node_modules/axios/dist/node/axios.cjs:1355:24)
+    at RedirectableRequest.handleRequestError (/home/ubuntu/shadowmd/node_modules/.pnpm/axios@1.18.1/node_modules/axios/dist/node/axios.cjs:4082:25)
+    at RedirectableRequest.emit (node:events:524:28)
+    at eventHandlers.<computed> (/home/ubuntu/shadowmd/node_modules/.pnpm/follow-redirects@1.16.0_debug@4.3.7/node_modules/follow-redirects/index.js:56:24)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:104:11)
+    at TLSSocket.socketErrorListener (node:_http_client:518:5)
+    at TLSSocket.emit (node:events:536:35)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  isAxiosError: true,
+  code: 'ENOTFOUND',
+  config: [Object: null prototype] {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false,
+      legacyInterceptorReqResOrdering: true,
+      advertiseZstdAcceptEncoding: false,
+      validateStatusUndefinedResolves: true
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': undefined,
+      'User-Agent': 'axios/1.18.1',
+      'Accept-Encoding': 'gzip, compress, deflate, br'
+    },
+    method: 'get',
+    url: 'https://api.waifu.pics/sfw/happy',
+    allowAbsoluteUrls: true,
+    data: undefined
+  },
+  request: <ref *1> Writable {
+    _events: {
+      close: undefined,
+      error: [Function: handleRequestError],
+      prefinish: undefined,
+      finish: undefined,
+      drain: undefined,
+      response: [Function: handleResponse],
+      socket: [Array],
+      abort: undefined
+    },
+    _writableState: WritableState {
+      highWaterMark: 65536,
+      length: 0,
+      corked: 0,
+      onwrite: [Function: bound onwrite],
+      writelen: 0,
+      bufferedIndex: 0,
+      pendingcb: 0,
+      [Symbol(kState)]: 17581054,
+      [Symbol(kBufferedValue)]: null,
+      [Symbol(kErroredValue)]: [Error]
+    },
+    _maxListeners: undefined,
+    _options: {
+      maxRedirects: 21,
+      maxBodyLength: Infinity,
+      protocol: 'https:',
+      path: '/sfw/happy',
+      method: 'GET',
+      headers: [Object: null prototype],
+      agents: [Object],
+      auth: undefined,
+      family: undefined,
+      beforeRedirect: [Function: dispatchBeforeRedirect],
+      beforeRedirects: [Object: null prototype],
+      http2Options: undefined,
+      hostname: 'api.waifu.pics',
+      port: '',
+      agent: undefined,
+      sensitiveHeaders: [],
+      insecureHTTPParser: false,
+      nativeProtocols: [Object],
+      pathname: '/sfw/happy'
+    },
+    _ended: true,
+    _ending: true,
+    _redirectCount: 0,
+    _redirects: [],
+    _requestBodyLength: 0,
+    _requestBodyBuffers: [],
+    _eventsCount: 3,
+    _onNativeResponse: [Function (anonymous)],
+    _headerFilter: /^(?:Authorization|Proxy-Authorization|Cookie)$/i,
+    _currentRequest: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: true,
+      _last: true,
+      chunkedEncoding: false,
+      shouldKeepAlive: true,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: false,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 0,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'GET /sfw/happy HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'User-Agent: axios/1.18.1\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: api.waifu.pics\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'GET',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: false,
+      joinDuplicateHeaders: undefined,
+      path: '/sfw/happy',
+      _ended: false,
+      res: null,
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'api.waifu.pics',
+      protocol: 'https:',
+      _redirectable: [Circular *1],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [TLSSocket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 65536,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null,
+      [Symbol(kError)]: [Error]
+    },
+    _currentUrl: 'https://api.waifu.pics/sfw/happy',
+    _timeout: null,
+    [Symbol(shapeMode)]: true,
+    [Symbol(kCapture)]: false
+  },
+  [cause]: Error: getaddrinfo ENOTFOUND api.waifu.pics
+      at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+      at GetAddrInfoReqWrap.callbackTrampoline (node:internal/async_hooks:130:17) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'api.waifu.pics'
+  }
+}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 🫦
+   Prefix: 
+   isCmd: false
+   Command: 🫦
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: AOG⚔️
+   Prefix: 
+   isCmd: false
+   Command: aog⚔️
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 😂😁
+   Prefix: 
+   isCmd: false
+   Command: 😂😁
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Okay
+   Prefix: 
+   isCmd: false
+   Command: okay
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Thanks boss
+   Prefix: 
+   isCmd: false
+   Command: thanks
+   From: 244349648527586@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I really need money ejoor🤲🙏😭
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Aaree 😂
+   Prefix: 
+   isCmd: false
+   Command: aaree
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Good morning
+   Prefix: 
+   isCmd: false
+   Command: good
+   From: 53056452427860@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: lectures for me wey just wake up..🥲
+   Prefix: 
+   isCmd: false
+   Command: lectures
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Which time una dey close self
+   Prefix: 
+   isCmd: false
+   Command: which
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: How are you
+   Prefix: 
+   isCmd: false
+   Command: how
+   From: 53056452427860@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: AOG⚔️
+   Prefix: 
+   isCmd: false
+   Command: aog⚔️
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Oya na
+   Prefix: 
+   isCmd: false
+   Command: oya
+   From: 244349648527586@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I don't know
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Yes
+   Prefix: 
+   isCmd: false
+   Command: yes
+   From: 45669125501122@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Did u give Hola my number
+   Prefix: 
+   isCmd: false
+   Command: did
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: yes ….and thats why i act obsessed about her but i
+   Prefix: 
+   isCmd: false
+   Command: yes
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: i wan start yahoo abeg 😑
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Mmmmmmm
+   Prefix: 
+   isCmd: false
+   Command: mmmmmmm
+   From: 45669125501122@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Ok 😣
+   Prefix: 
+   isCmd: false
+   Command: ok
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I run na she don find me
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 🙂
+   Prefix: 
+   isCmd: false
+   Command: 🙂
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: https://youtube.com/@celinadguitarist?si=nx-5KCud6
+   Prefix: 
+   isCmd: false
+   Command: https://youtube.com/@celinadguitarist?si=nx-5kcud68xx2sbs
+
+don't
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Kk
+   Prefix: 
+   isCmd: false
+   Command: kk
+   From: 191925479059497@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Happiest birthday sis Nife.More good life momma in
+   Prefix: 
+   isCmd: false
+   Command: happiest
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Interesting
+   Prefix: 
+   isCmd: false
+   Command: interesting
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Like I don't want 2 girl on my head rn
+   Prefix: 
+   isCmd: false
+   Command: like
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Are you still dating beauty
+   Prefix: 
+   isCmd: false
+   Command: are
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Who is the two girls
+   Prefix: 
+   isCmd: false
+   Command: who
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I am breaking up cause I am forcing my slef on her
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Serves you right
+   Prefix: 
+   isCmd: false
+   Command: serves
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Okay
+   Prefix: 
+   isCmd: false
+   Command: okay
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Let me even tell u what up she didn't accept it wa
+   Prefix: 
+   isCmd: false
+   Command: let
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Omo see I no dey force myself again
+   Prefix: 
+   isCmd: false
+   Command: omo
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Nice 🙂
+   Prefix: 
+   isCmd: false
+   Command: nice
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Serves you right
+   Prefix: 
+   isCmd: false
+   Command: serves
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Why 😂 are you now telling me this now
+   Prefix: 
+   isCmd: false
+   Command: why
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No be u find girl for me ni
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Me
+   Prefix: 
+   isCmd: false
+   Command: me
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: If I look at you
+   Prefix: 
+   isCmd: false
+   Command: if
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Na me give you beauty
+   Prefix: 
+   isCmd: false
+   Command: na
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No go find better babe now wey you guide so that y
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 🥲
+   Prefix: 
+   isCmd: false
+   Command: 🥲
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I get u na
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Fr oooooooooh
+   Prefix: 
+   isCmd: false
+   Command: fr
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Me no fit date you
+   Prefix: 
+   isCmd: false
+   Command: me
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I no see you as my future boyfriend or anything th
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Hey ??
+   Prefix: 
+   isCmd: false
+   Command: hey
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I guess
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I am speech less
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Me know say you and beauty no go last
+   Prefix: 
+   isCmd: false
+   Command: me
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: But I no won dey forward na y I dey observe
+   Prefix: 
+   isCmd: false
+   Command: but
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Cuz na here you go come tell me
+   Prefix: 
+   isCmd: false
+   Command: cuz
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 😅😔
+   Prefix: 
+   isCmd: false
+   Command: 😅😔
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: _Gm_☘️
+   Prefix: 
+   isCmd: false
+   Command: _gm_☘️
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Say something oooooooooh
+   Prefix: 
+   isCmd: false
+   Command: say
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Command execution error: ReferenceError: qtext is not defined
+    at handleMessage (/home/ubuntu/shadowmd/drenox.js:10293:3)
+    at EventEmitter.<anonymous> (/home/ubuntu/shadowmd/pair.js:462:13)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Are you busy
+   Prefix: 
+   isCmd: false
+   Command: are
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Talk na
+   Prefix: 
+   isCmd: false
+   Command: talk
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Ajeh you need serious babe not that one you and be
+   Prefix: 
+   isCmd: false
+   Command: ajeh
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: They do goodie boy
+Say you no won hurt omoolomo fe
+   Prefix: 
+   isCmd: false
+   Command: they
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Me self they don hurt my feelings and am not into 
+   Prefix: 
+   isCmd: false
+   Command: me
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: True
+   Prefix: 
+   isCmd: false
+   Command: true
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Omo, I no reply fast because I really no know weti
+   Prefix: 
+   isCmd: false
+   Command: omo,
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Is it beauty
+   Prefix: 
+   isCmd: false
+   Command: is
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Have you guys seen your self
+   Prefix: 
+   isCmd: false
+   Command: have
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Which kind portion she give you self
+   Prefix: 
+   isCmd: false
+   Command: which
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Mmmm she no really give me chance I
+   Prefix: 
+   isCmd: false
+   Command: mmmm
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Unna never see before Unna dey do lovey dovey for 
+   Prefix: 
+   isCmd: false
+   Command: unna
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Not really
+   Prefix: 
+   isCmd: false
+   Command: not
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Children of nowadays eeehn
+   Prefix: 
+   isCmd: false
+   Command: children
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Omoooor James don clear my eyes
+   Prefix: 
+   isCmd: false
+   Command: omoooor
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: So how far
+   Prefix: 
+   isCmd: false
+   Command: so
+   From: 86019974127659@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: James
+   Prefix: 
+   isCmd: false
+   Command: james
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: My ex ni na
+   Prefix: 
+   isCmd: false
+   Command: my
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Ooo
+   Prefix: 
+   isCmd: false
+   Command: ooo
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: The thing is that secondary school like 2 year I n
+   Prefix: 
+   isCmd: false
+   Command: the
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Awwwwwwwwwwwwwn
+   Prefix: 
+   isCmd: false
+   Command: awwwwwwwwwwwwwn
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Forget about that
+   Prefix: 
+   isCmd: false
+   Command: forget
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: That one na past tense
+   Prefix: 
+   isCmd: false
+   Command: that
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: You gat me
+   Prefix: 
+   isCmd: false
+   Command: you
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Me I will be here to hear you and console you or p
+   Prefix: 
+   isCmd: false
+   Command: me
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: True sha
+   Prefix: 
+   isCmd: false
+   Command: true
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: So forget about that girl and move on
+   Prefix: 
+   isCmd: false
+   Command: so
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Find better person not like beauty
+   Prefix: 
+   isCmd: false
+   Command: find
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Who is that
+   Prefix: 
+   isCmd: false
+   Command: who
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I hate to dey remember the past sha all his well s
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: My old friend he is now in unilag
+   Prefix: 
+   isCmd: false
+   Command: my
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Negative
+   Prefix: 
+   isCmd: false
+   Command: negative
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Okay
+   Prefix: 
+   isCmd: false
+   Command: okay
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Chaiiiii
+   Prefix: 
+   isCmd: false
+   Command: chaiiiii
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I met yesterday when he dey come from school
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Me keh
+No think negative about me abeg
+Wetin I do 
+   Prefix: 
+   isCmd: false
+   Command: me
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Oya no break up again
+   Prefix: 
+   isCmd: false
+   Command: oya
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I free Unna and give you my happiness
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Ooo u no under not bad negative things
+   Prefix: 
+   isCmd: false
+   Command: ooo
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Okay
+   Prefix: 
+   isCmd: false
+   Command: okay
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Negative like what
+   Prefix: 
+   isCmd: false
+   Command: negative
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: My stupid pleasure
+   Prefix: 
+   isCmd: false
+   Command: my
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Omo I don forgot beauty
+   Prefix: 
+   isCmd: false
+   Command: omo
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: What pleasure
+   Prefix: 
+   isCmd: false
+   Command: what
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: We never do anything bad
+   Prefix: 
+   isCmd: false
+   Command: we
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I know but I feel like doing it
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Make I no lie if I fill up my heart desire I will 
+   Prefix: 
+   isCmd: false
+   Command: make
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: How far
+   Prefix: 
+   isCmd: false
+   Command: how
+   From: 198827407573099@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Good morning
+   Prefix: 
+   isCmd: false
+   Command: good
+   From: 101146899308558@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: What type of bad thing
+   Prefix: 
+   isCmd: false
+   Command: what
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I don't need to explain reason am your self
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Okay I get your point
+   Prefix: 
+   isCmd: false
+   Command: okay
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I just dey whine you
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: But everywhere good sha
+Feel free to ask me anythi
+   Prefix: 
+   isCmd: false
+   Command: but
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Thanks 😣😭
+   Prefix: 
+   isCmd: false
+   Command: thanks
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 😃😃 
+Patronize
+   Prefix: 
+   isCmd: false
+   Command: 😃😃
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Mmmm I got a stupid question why are u doing all t
+   Prefix: 
+   isCmd: false
+   Command: mmmm
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 😍
+   Prefix: 
+   isCmd: false
+   Command: 😍
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I don't understand
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: That gojo enemies
+   Prefix: 
+   isCmd: false
+   Command: that
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: My handiwork 
+But someone finished it for me
+   Prefix: 
+   isCmd: false
+   Command: my
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Like u are ready to do anything for me I am always
+   Prefix: 
+   isCmd: false
+   Command: like
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I dey
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 198827407573099@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Hi
+   Prefix: 
+   isCmd: false
+   Command: hi
+   From: 120363419034788357@g...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 🥺🥺🥺
+   Prefix: 
+   isCmd: false
+   Command: 🥺🥺🥺
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Guyyy
+Omo school na prison
+   Prefix: 
+   isCmd: false
+   Command: guyyy
+omo
+   From: 86019974127659@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: True
+   Prefix: 
+   isCmd: false
+   Command: true
+   From: 86019974127659@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: You can block me
+   Prefix: 
+   isCmd: false
+   Command: you
+   From: 86019974127659@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: 😅😂
+   Prefix: 
+   isCmd: false
+   Command: 😅😂
+   From: 86019974127659@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: You fit block me
+   Prefix: 
+   isCmd: false
+   Command: you
+   From: 86019974127659@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: No
+   Prefix: 
+   isCmd: false
+   Command: no
+   From: 86019974127659@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Hey
+   Prefix: 
+   isCmd: false
+   Command: hey
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: True
+   Prefix: 
+   isCmd: false
+   Command: true
+   From: 26543619309682@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Hello
+   Prefix: 
+   isCmd: false
+   Command: hello
+   From: 120363419034788357@g...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Log in to claim free Gold, and invite friends to s
+   Prefix: 
+   isCmd: false
+   Command: log
+   From: 120363420900908114@g...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I will if I can't do 
+There are some things I didn
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Cuz I don't fancy stuff like that sha
+   Prefix: 
+   isCmd: false
+   Command: cuz
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Was eating that y
+   Prefix: 
+   isCmd: false
+   Command: was
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Enjoyment
+   Prefix: 
+   isCmd: false
+   Command: enjoyment
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Normal 😅 cause I have cross the line be that
+   Prefix: 
+   isCmd: false
+   Command: normal
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Oya na
+   Prefix: 
+   isCmd: false
+   Command: oya
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Grandma is coming to olufowobi street now
+   Prefix: 
+   isCmd: false
+   Command: grandma
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Mmmm like what can I not asked say it
+   Prefix: 
+   isCmd: false
+   Command: mmmm
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Only legends will understand
+   Prefix: 
+   isCmd: false
+   Command: only
+   From: status@broadcast...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Yea
+   Prefix: 
+   isCmd: false
+   Command: yea
+   From: 26543619309682@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: How are you
+   Prefix: 
+   isCmd: false
+   Command: how
+   From: 26543619309682@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Am fine and you
+   Prefix: 
+   isCmd: false
+   Command: am
+   From: 26543619309682@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Nice 🙂
+   Prefix: 
+   isCmd: false
+   Command: nice
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Good ooo how is your body
+   Prefix: 
+   isCmd: false
+   Command: good
+   From: 26543619309682@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I don't know cuz I don't have anything in mind
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Make I follow her or make I stay for House
+   Prefix: 
+   isCmd: false
+   Command: make
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Just talk
+   Prefix: 
+   isCmd: false
+   Command: just
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: But when you ask I won't do it answer
+   Prefix: 
+   isCmd: false
+   Command: but
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I don't know
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: false
+   IsCreator: false
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Hun ok
+   Prefix: 
+   isCmd: false
+   Command: hun
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: I don't understand
+   Prefix: 
+   isCmd: false
+   Command: i
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Can I speak with Gideon
+   Prefix: 
+   isCmd: false
+   Command: can
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📩 Message Details:
+   Body: Maybe something nudity Abi or other
+   Prefix: 
+   isCmd: false
+   Command: maybe
+   From: 10510472859766@lid...
+   IsBot: true
+   IsCreator: true
+   Public Mode: true
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔌 Connection closed for 2348089281494@s.whatsapp.net, reason: 401
+❌ 2348089281494@s.whatsapp.net logged out
+🗑️ Force cleaned: 2348089281494@s.whatsapp.net
+📁 Created directory: ./kingbadboitimewisher/pairing/2348089281494@s.whatsapp.net
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+🔄 Connecting 2348089281494@s.whatsapp.net...
+📱 Pairing code for 2348089281494@s.whatsapp.net: SHAD-OWMD
+✓ Pairing code saved to pairing.json
+🔌 Connection closed for 2348089281494@s.whatsapp.net, reason: 428
+🔄 Reconnecting 2348089281494@s.whatsapp.net...
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+[32mLoading Chat [undefined%][39m
+🔄 Connecting 2348089281494@s.whatsapp.net...
+📱 Pairing code for 2348089281494@s.whatsapp.net: SHAD-OWMD
+✓ Pairing code saved to pairing.json
+🔌 Connection closed for 2348089281494@s.whatsapp.net, reason: 401
+❌ 2348089281494@s.whatsapp.net logged out
+🗑️ Force cleaned: 2348089281494@s.whatsapp.net
+error: [polling_error] {"code":"EFATAL","message":"EFATAL: Error: socket hang up"}
