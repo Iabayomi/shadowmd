@@ -120,7 +120,7 @@ const sendChannelsRequiredMessage = async (chatId) => {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '📢 Java God Channel', url: 'https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V' }],
+          [{ text: '📢 Java God Channel', url: 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q' }],
           [{ text: '✅ I have joined', callback_data: 'check_join' }]
         ]
       }
@@ -171,7 +171,7 @@ bot.onText(/\/start/, async (msg) => {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: "👑 Java God Channel", url: "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V" }],
+          [{ text: "👑 Java God Channel", url: "https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q" }],
           [{ text: "📞 Contact Owner", url: "https://wa.me/2348089281494" }]
         ]
       }
