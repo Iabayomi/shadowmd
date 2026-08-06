@@ -1,6 +1,6 @@
 /**
    * Create By JAVA GOD
-   * Contact Me on WhatsApp: https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V
+   * Contact Me on WhatsApp: https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q
 */
 
 const fs = require('fs');
