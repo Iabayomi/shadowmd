@@ -21,14 +21,14 @@ global.premmess = "☠️ 𖤐 𝐑𝐄𝐒𝐓𝐑𝐈𝐂𝐓𝐄𝐃 𝐅𝐄
 global.dev = "2348089281494"
 global.creatorName = "☠︎︎ 𓆩𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 𓆪 ☠︎︎'"
 global.footer = "☠︎︎ 𐉐𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎" //footer section
-global.link = "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V"
+global.link = "https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q"
 global.autobio = true//auto update bio
 global.botName = "☠︎︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎"
 global.version = "V2"
 global.botname = "☠︎︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎"
 global.author = "༒︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ༒︎"
 global.themeemoji = '⚡'
-global.wagc = 'https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V'
+global.wagc = 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q'
 global.thumbnail = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png'
 global.richpp = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png'
 global.packname = "𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 𝐒𝐓𝐈𝐂𝐊𝐄𝐑𝐒 𖣘♔︎"
@@ -83,8 +83,7 @@ global.database = `\`[ 👑 ] ☠︎︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎ 
 
 🔥 𝖂𝖆: wa.me/2348089281494
 🕷️ 𝖙𝖌: t.me/javagod
-💀 𝖜𝖆 𝖈𝖍𝖆𝖓𝖓𝖊𝖑: https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V
-
+💀 𝖜𝖆 𝖈𝖍𝖆𝖓𝖓𝖊𝖑: https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q
 𝕋𝕙𝕒𝕟𝕜𝕤 𝕗𝕠𝕣 𝕌𝕤𝕚𝕟𝕘  ☠︎︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎`
 
 global.hituet = 0
