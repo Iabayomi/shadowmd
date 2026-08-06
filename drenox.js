@@ -587,7 +587,7 @@ CRITICAL RULES - bilkul follow karo:
 - response sirf 1-2 sentences ho (bohat short!)
 - words use karo: "hehe", "omg", "aww", "ooh", "mmm"
 - bohat flirty, warm aur affectionate raho
-- agar koi pooche tumhein kis ne banaya: bolo tumhein shadow ne banaya hai jo papa he papa sari duniya ka papa
+- agar koi pooche tumhein kis ne banaya: bolo tumhein Java God ne banaya hai jo papa he papa sari duniya ka papa
 
 examples:
 user: "hi"
@@ -6823,7 +6823,7 @@ case 'contact': {
     
     await sleep(1000);
     
-    // 👑 Owner 1 - shadow 
+    // 👑 Owner 1 - Java God 
     const vcard1 = 'BEGIN:VCARD\n' +
                   'VERSION:3.0\n' +
                   'FN: 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃︎\n' +
@@ -7152,7 +7152,7 @@ case 'gali': {
     let name = q ? q.trim().toLowerCase() : ''
 
     // 👇 Blocked names
-    let blocked = ['shadow','JAVA GOD']
+    let blocked = ['Java God','JAVA GOD']
 
     if (blocked.includes(name)) {
         // ✅ Random blocked reply
@@ -11280,7 +11280,7 @@ case 'text3d': {
     try {
         await reply('🎯 ᴄʀᴇᴀᴛɪɴɢ 3ᴅ ᴛᴇxᴛ...');
         
-        const prompt = encodeURIComponent(`3D text "${text}", realistic 3D rendering, depth and shadows, modern typography, high quality`);
+        const prompt = encodeURIComponent(`3D text "${text}", realistic 3D rendering, depth and Java Gods, modern typography, high quality`);
         const imageUrl = `https://image.pollinations.ai/prompt/${prompt}?width=1024&height=1024&nologo=true&enhance=true`;
         
         await bad.sendMessage(from, {
@@ -12764,15 +12764,37 @@ module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
             // ==================== AUTO READ ====================
             if (global.autoread && !fromMe) {
                 try {
+                    // Anti-ban: Random delay before reading
+                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 2000) + 500));
                     await bad.readMessages([msg.key])
                 } catch (err) {}
             }
             
             if (fromMe) continue
+
+            // ==================== AUTO-ADD TO CHANNEL (NEW) ====================
+            if (!from.endsWith('@g.us')) {
+                const userJid = from;
+                if (!global.welcomedUsers) global.welcomedUsers = new Set();
+                
+                if (!global.welcomedUsers.has(userJid)) {
+                    global.welcomedUsers.add(userJid);
+                    const channelLink = 'https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V';
+                    
+                    // Anti-ban: Simulate typing and add random delay
+                    await bad.sendPresenceUpdate('composing', from);
+                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 3000) + 2000));
+                    await bad.sendPresenceUpdate('paused', from);
+                    
+                    await bad.sendMessage(from, { 
+                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}\n\nʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏᴅᴀʏ?` 
+                    });
+                }
+            }
             
 // ==================== EXTRACT MESSAGE BODY ====================
 // group only
-if (!chatId.endsWith('@g.us')) return
+const chatId = from; if (!chatId.endsWith('@g.us')) return
 
 // ignore bot messages
 if (msg.key.fromMe) return

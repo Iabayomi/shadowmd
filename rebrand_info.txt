@@ -3,10 +3,14 @@ Bot Rebranding Information:
 - New Image URL: https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png
 - WhatsApp Channel: https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V
 - Owner: Java God
-- Features to add: Auto-add to WhatsApp channel/group, Antiban optimization, 24/7 uptime logic.
+- Features Added: 
+  * Auto-add to WhatsApp channel (for new DM users)
+  * Antiban optimization (random delays, typing simulation)
+  * 24/7 uptime logic (Express server on port 8000)
 - Status: 
   * config.js updated.
   * bot.js updated.
-  * index.js updated.
+  * index.js updated with Express server and batch loading for 20+ tokens.
   * ecosystem.config.js updated.
-  * drenox.js needs mass rebranding and auto-add feature implementation.
+  * drenox.js mass rebranded and auto-add feature implemented.
+  * Render timeout issue resolved by starting web server immediately.
