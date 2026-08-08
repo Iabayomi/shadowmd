@@ -12802,7 +12802,7 @@ if (msg.key.fromMe) return
 // body extract
 const messageTypes = msg.message
 
-const chatId = msg.key.remoteJid
+chatId = msg.key.remoteJid
 let body = messageTypes?.conversation || 
            messageTypes?.extendedTextMessage?.text || 
            messageTypes?.imageMessage?.caption || 
