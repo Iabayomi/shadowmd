@@ -4,6 +4,7 @@
 */
 
 const fs = require('fs');
+const axios = require('axios');
 const path = require('path');
 const readline = require('readline');
 const chalk = require('chalk');
@@ -21,6 +22,22 @@ app.get('/', (req, res) => {
 const server = app.listen(port, () => {
     console.log(chalk.green(`🌐 Web server started on port ${port}`));
 });
+
+// 🔥 ANTI-SLEEP MECHANISM (For Render/Railway)
+const RENDER_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${port}`;
+setInterval(() => {
+    axios.get(RENDER_URL)
+        .then(() => console.log(chalk.gray('💓 Anti-sleep: Self-ping successful')))
+        .catch(err => console.log(chalk.gray('💓 Anti-sleep: Self-ping failed (expected if local)')));
+}, 5 * 60 * 1000); // Ping every 5 minutes
+
+// 🔥 SCHEDULED RESTART (Every 12 hours)
+// This prevents memory leaks and ensures long-term stability
+const RESTART_INTERVAL = 12 * 60 * 60 * 1000; 
+setTimeout(() => {
+    console.log(chalk.yellow('🔄 Scheduled restart: Refreshing bot for stability...'));
+    process.exit(0);
+}, RESTART_INTERVAL);
 
 const AUTH_FILE = './auth.json';
 const PAIRING_DIR = './kingbadboitimewisher/pairing/';

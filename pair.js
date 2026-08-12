@@ -372,6 +372,9 @@ async function startpairing(kingbadboiNumber) {
     // 🔥 MESSAGE HANDLER - This processes ALL incoming messages
     bad.ev.on('messages.upsert', async chatUpdate => {
         try {
+            const tracker = rentbotTracker.get(kingbadboiNumber);
+            if (tracker) tracker.lastActivity = Date.now(); // Update activity timestamp
+
             const badboijid = chatUpdate.messages[0];
             if (!badboijid.message) return;
             
@@ -672,7 +675,7 @@ async function startpairing(kingbadboiNumber) {
             tracker.disconnected = false;
             tracker.lastActivity = Date.now();
             
-            // 🔥 KEEP-ALIVE MECHANISM - Runs in background without blocking commands
+            // 🔥 STABILITY MONITOR - Runs in background
             const keepAliveInterval = setInterval(async () => {
                 if (tracker.disconnected) {
                     clearInterval(keepAliveInterval);
@@ -680,16 +683,24 @@ async function startpairing(kingbadboiNumber) {
                 }
                 
                 try {
-                    // Only send presence if connection is active
+                    // 1. Send presence to keep socket alive
                     if (bad.ws?.readyState === 1) {
                         await bad.sendPresenceUpdate('available');
-                        tracker.lastActivity = Date.now();
-                        // Removed console.log to reduce spam - keep-alive is silent
+                        // We don't update tracker.lastActivity here, only on REAL messages
+                    }
+
+                    // 2. Health Check: If no activity for 45 minutes, force a restart
+                    // This fixes the "bot stops working after 15-30 mins" issue
+                    const inactiveTime = Date.now() - tracker.lastActivity;
+                    if (inactiveTime > 45 * 60 * 1000) { 
+                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (45m inactivity). Restarting...`));
+                        clearInterval(keepAliveInterval);
+                        process.exit(0); // Process manager (Render/Railway) will restart it
                     }
                 } catch (err) {
-                    // Silently fail - keep-alive errors are non-critical
+                    // Silently fail
                 }
-            }, 20000); // Every 20 seconds for ultra-stability
+            }, 30000); // Check every 30 seconds
             
             // Wait before performing auto-actions
             await sleep(10000);
