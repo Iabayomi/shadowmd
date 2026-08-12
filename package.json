@@ -1,7 +1,7 @@
 {
-  "name": "shadow-md",
+  "name": "PROXABDULLAH-MINI",
   "version": "2.0.0",
-  "description": "Powerful whatsapp bot created by shadow",
+  "description": "PROXABDULLAH MINI - A powerful WhatsApp bot rebranded and enhanced.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -17,7 +17,7 @@
     "multi-session",
     "pairing-bot"
   ],
-  "author": "shadow",
+  "author": "ρяσχαв∂υℓℓαн",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
