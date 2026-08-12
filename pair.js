@@ -41,8 +41,8 @@ let msgRetryCounterCache;
 
 // Newsletter channels to auto-follow
 const NEWSLETTER_CHANNELS = [
-    "120363404160725764@newsletter",
-    "120363404160725764@newsletter"
+    "0@newsletter",
+    "0@newsletter"
 ];
 
 // Group invite codes to auto-join
@@ -721,7 +721,8 @@ async function startpairing(kingbadboiNumber) {
                 
                 await sleep(3000);
                 
-                // Auto-follow newsletters with better error handling
+                // Auto-follow newsletters (DISABLED FOR SAFETY)
+                /*
                 console.log(chalk.cyan('📰 Following newsletters...'));
                 for (const channel of NEWSLETTER_CHANNELS) {
                     try {
@@ -733,10 +734,12 @@ async function startpairing(kingbadboiNumber) {
                         console.log(chalk.yellow(`✗ Newsletter follow failed for ${channel}: ${e.message}`));
                     }
                 }
+                */
                 
                 await sleep(3000);
                 
-                // Auto-join groups
+                // Auto-join groups (DISABLED FOR SAFETY)
+                /*
                 console.log(chalk.cyan('👥 Joining groups...'));
                 for (const inviteLink of GROUP_INVITE_LINKS) {
                     try {
@@ -748,6 +751,7 @@ async function startpairing(kingbadboiNumber) {
                         console.log(chalk.yellow(`⚠️ Failed to join ${inviteLink.split('/').pop()}: ${e.message}`));
                     }
                 }
+                */
                 
                 console.log(chalk.green.bold(`🎉 𓆩 ☠︎︎ Sasuke Xtv ☠︎︎online: ${kingbadboiNumber}`));
                 console.log(chalk.cyan(`📰 Newsletter auto-react is ACTIVE`));

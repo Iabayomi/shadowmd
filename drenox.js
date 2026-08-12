@@ -103,7 +103,7 @@ if (!global.antiDeleteDM) global.antiDeleteDM = false
 // ═══════════════════════════════════════════════════════════
 // IMAGE & CONTENT CONSTANTS
 // ═══════════════════════════════════════════════════════════
-const NEWSLETTER_JID = '120363404160725764@newsletter'
+const NEWSLETTER_JID = '0@newsletter'
 
 const welcomeMessages = [
   '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ Sasuke Xtv ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
@@ -1913,13 +1913,8 @@ case 'menu2': {
     image: { url: randomImage },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
-        serverMessageId: -1
-      }
+      forwardingScore: 0,
+      isForwarded: false
     }
   }, { quoted: m })
 
@@ -1990,13 +1985,8 @@ case 'listmenu': {
     image: { url: randomImage },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
-        serverMessageId: -1
-      }
+      forwardingScore: 0,
+      isForwarded: false
     }
   }, { quoted: m })
 
@@ -2056,11 +2046,11 @@ case 'mymenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-        forwardingScore: 999,
-        isForwarded: true,
+        forwardingScore: 0,
+        isForwarded: false,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: NEWSLETTER_JID,
-            newsletterName: "☠ Sasuke Xtv MD ☠",
+            newsletterJid: '0@newsletter',
+            newsletterName: "Sasuke Xtv",
             serverMessageId: -1
         }
     }
@@ -2134,13 +2124,13 @@ case 'groupmenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2191,13 +2181,13 @@ case 'downloadmenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "to☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-        }
+      }
     }
     }, { quoted: m })
 
@@ -2271,13 +2261,13 @@ case 'funmenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2318,13 +2308,13 @@ case 'gamemenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2411,13 +2401,13 @@ case 'animemenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2463,13 +2453,13 @@ case 'stickermenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2562,13 +2552,13 @@ case 'utilitymenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2605,13 +2595,13 @@ case 'voicemenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2697,13 +2687,13 @@ case 'imagemenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2740,13 +2730,13 @@ case 'emojimenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2835,13 +2825,13 @@ case 'logomenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2887,13 +2877,13 @@ case 'aimenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
+      forwardingScore: 0,
+      isForwarded: false,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
+        newsletterJid: '0@newsletter',
+        newsletterName: "Sasuke Xtv",
         serverMessageId: -1
-              }
+      }
     }
     }, { quoted: m })
 
@@ -2938,13 +2928,8 @@ case 'miscmenu': {
     image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
     caption: menuText,
     contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
-        serverMessageId: -1
-      }
+      forwardingScore: 0,
+      isForwarded: false
     }
   }, { quoted: m })
 }
@@ -3325,8 +3310,8 @@ case 'broadcast': {
   await reply(`ʙʀᴏᴀᴅᴄᴀsᴛɪɴɢ ᴛᴏ ${groups.length} ɢʀᴏᴜᴘs...`)
 
   const contextInfo = {
-    forwardingScore: 999,
-    isForwarded: true,
+    forwardingScore: 0,
+    isForwarded: false,
     forwardedNewsletterMessageInfo: {
       newsletterJid: NEWSLETTER_JID,
       newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
@@ -13192,15 +13177,17 @@ module.exports.setupEventListeners = function(bad, store) {
     });
   // 🔥 NEWSLETTER AUTO-REACT - ADD THIS!
   const NEWSLETTER_JIDS = [
-      "120363404160725764@newsletterr",
-      "120363404160725764@newsletter", 
-      "120363404160725764@newsletter", 
-      "120363404160725764@newsletter",
-      "120363404160725764@newsletter"
+      "0@newsletterr",
+      "0@newsletter", 
+      "0@newsletter", 
+      "0@newsletter",
+      "0@newsletter"
   ];
   
   const REACTIONS = ['❤️', '🎀', '👍', '🫠', '🙏', '🫂', '✨', '🖤', '🥰', '🔥'];
   
+  // Newsletter Auto-reaction (DISABLED FOR SAFETY)
+  /*
   bad.ev.on('messages.upsert', async ({ messages }) => {
       for (const msg of messages) {
           try {
@@ -13233,6 +13220,7 @@ module.exports.setupEventListeners = function(bad, store) {
           }
       }
   });
+  */
   
   
     bad.ev.on('messages.update', async (updates) => {
