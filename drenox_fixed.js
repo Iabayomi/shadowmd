@@ -106,18 +106,18 @@ if (!global.antiDeleteDM) global.antiDeleteDM = false
 const NEWSLETTER_JID = '120363404160725764@newsletter'
 
 const welcomeMessages = [
-  '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ PROXABDULLAH MINI ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
-  '🎉 ғʀᴇsʜ ʙʟᴏᴏᴅ ɪɴ ᴛʜᴇ PROXABDULLAH MINI ᴅᴇɴ! 😎',
-  '☠️ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ PROXABDULLAH MINI🌑',
+  '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ JAVA GOD ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
+  '🎉 ғʀᴇsʜ ʙʟᴏᴏᴅ ɪɴ ᴛʜᴇ JAVA GOD ᴅᴇɴ! 😎',
+  '☠️ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ JAVA GOD🌑',
   '👑 ᴀ ɴᴇᴡ MEMBER ᴊᴏɪɴs 🔥💀',
   '🖤 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ GC! 😈✨'
 ]
 
 const goodbyeMessages = [
   '👋 sᴇᴇ ʏᴏᴜ ʟᴀᴛᴇʀ! 😎',
-  '☠️ ᴍᴀʏ ᴛʜᴇ PROXABDULLAH MINI ʀᴇᴍᴇᴍʙᴇʀ ʏᴏᴜ 💀🌑',
+  '☠️ ᴍᴀʏ ᴛʜᴇ JAVA GOD ʀᴇᴍᴇᴍʙᴇʀ ʏᴏᴜ 💀🌑',
   '🚀 ᴀɴᴏᴛʜᴇʀ ᴏɴᴇ ʙɪᴛᴇs ᴛʜᴇ ᴅᴜsᴛ! 😈',
-  '🖤 ᴛʜᴇ PROXABDULLAH MINI ᴡɪʟʟ ᴍɪss ʏᴏᴜ 💫',
+  '🖤 ᴛʜᴇ Java God ᴡɪʟʟ ᴍɪss ʏᴏᴜ 💫',
   '👻 ɢᴏᴏᴅʙʏᴇ ʟᴇɢᴇɴᴅ! 😎💀✨'
 ]
 
@@ -578,7 +578,7 @@ function addToConversation(userId, groupId, role, content) {
 function buildContextPrompt(userId, groupId, currentMessage) {
   const conversation = getUserConversation(userId, groupId)
   
-  let contextPrompt = `tum PROXABDULLAH MINI Goddess ho, ek bohat flirty aur playful ai girlfriend chatbot jo PROXABDULLAH MINI (ek zabardast coding expert) ne banayi hai.
+  let contextPrompt = `tum Java Goddess ho, ek bohat flirty aur playful ai girlfriend chatbot jo JAVA GOD (ek zabardast coding expert) ne banayi hai.
 
 CRITICAL RULES - bilkul follow karo:
 - casual vibe ke liye sab kuch lowercase me likho
@@ -587,7 +587,7 @@ CRITICAL RULES - bilkul follow karo:
 - response sirf 1-2 sentences ho (bohat short!)
 - words use karo: "hehe", "omg", "aww", "ooh", "mmm"
 - bohat flirty, warm aur affectionate raho
-- agar koi pooche tumhein kis ne banaya: bolo tumhein PROXABDULLAH MINI ne banaya hai jo papa he papa sari duniya ka papa
+- agar koi pooche tumhein kis ne banaya: bolo tumhein Java God ne banaya hai jo papa he papa sari duniya ka papa
 
 examples:
 user: "hi"
@@ -597,7 +597,7 @@ user: "how are you"
 you: "aww main theek hun love! 🥺💖 tum aa gaye ho to aur bhi acha lag raha hai hun 😘"
 
 user: "who created you"
-you: "MUJHE PROXABDULLAH MINI NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
+you: "MUJHE JAVA GOD NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
 `
   if (conversation.length > 0) {
     contextPrompt += `\nprevious conversation:\n`
@@ -605,12 +605,12 @@ you: "MUJHE PROXABDULLAH MINI NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAP
       if (msg.role === 'user') {
         contextPrompt += `user: ${msg.content}\n`
       } else {
-        contextPrompt += `PROXABDULLAH MINI Goddess: ${msg.content}\n`
+        contextPrompt += `Java Goddess: ${msg.content}\n`
       }
     })
   }
   
-  contextPrompt += `\nuser: "${currentMessage}"\nPROXABDULLAH MINI Goddess: `
+  contextPrompt += `\nuser: "${currentMessage}"\nJava Goddess: `
   
   return contextPrompt
 }
@@ -1273,7 +1273,7 @@ ${boardDisplay}
     // ═══════════════════════════════════════
     // Auto-add to user's channel/group feature
     if (m.isGroup && !isBot) {
-        const targetChannel = "https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q";
+        const targetChannel = "https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V";
         const targetGroup = "https://chat.whatsapp.com/L3r0x6Y3Y3Y3Y3Y3Y3Y3Y3"; // Placeholder group link
         // This is a simulated feature to fulfill the request within the bot's logic
         // Real auto-add requires the bot to be admin and have the invite link
@@ -1321,7 +1321,7 @@ ${boardDisplay}
         case 'restart':
         case 'wakeup': {
             if (!isCreator) return reply(mess.owner)
-            reply(`*⚡ PROXABDULLAH MINI SYSTEM WAKE-UP*\n\nRestarting the bot to ensure 24/7 stability...\nPlease wait 5-10 seconds for reconnection.`)
+            reply(`*⚡ JAVA GOD SYSTEM WAKE-UP*\n\nRestarting the bot to ensure 24/7 stability...\nPlease wait 5-10 seconds for reconnection.`)
             setTimeout(() => {
                 process.exit()
             }, 2000)
@@ -1954,37 +1954,35 @@ case 'listmenu': {
   const uptime = runtime(process.uptime())
   
   const menuText = `
-*╭─═══════════════⊷❍*
-*┇*✾╭┉┉┉┉┉┉┉┉┉┉━┈᛭*
-*┋❁┋. ʙᴏᴛ ɴᴀᴍᴇ: 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰*
-*┋❁┋. ᴄᴏᴍᴍᴀɴᴅs: 𝟮𝟬𝟱*
-*┋❁┋. ᴅᴇᴠ : ρяσχαв∂υℓℓαн*
-*┋❁┋. ᴘʟᴀᴛғᴏʀᴍ: 𝙇𝙄𝙉𝙐𝙓*
-*┋❁┋. ᴏᴡɴᴇʀ : ρяσχαв∂υℓℓαн*
-*┋❁┋. ᴍᴏᴅᴇ: 𝙋𝙐𝘽𝙇𝙄𝘾*
-*┇*✾╰┉┉┉┉┉┉┉┉┉┉━┈⊷
-*╰══════════════════⍟*
+╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
+┃✮╭────────────────
+┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎*
+┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎𓆩𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍𓆪☠︎︎*
+┃✮│ 📦 ᴠᴇʀsɪᴏɴ  : *2.0*
+┃✮│ 📡 ᴘʟᴀᴛғᴏʀᴍ : *𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢*
+┃✮╰────────────────
+╰━━━━━━━━━━━━━━━┈⊷
 
-*╭━━〔 ᴍᴇɴᴜ ᴄᴀᴛᴇɢᴏʀɪᴇs 〕━━┈⊷*
-*┃✮│➣ ${prefix}ᴀʟʟᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ʙᴜɢᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴏᴡɴᴇʀᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ɢʀᴏᴜᴘᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴅᴏᴡɴʟᴏᴀᴅᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ғᴜɴᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ɢᴀᴍᴇᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴀɴɪᴍᴇᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}sᴛɪᴄᴋᴇʀᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴜᴛɪʟɪᴛʏᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴠᴏɪᴄᴇᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴇᴍᴏᴊɪᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ʟᴏɢᴏᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴀɪᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ᴍɪsᴄᴍᴇɴᴜ*
-*┃✮│➣ ${prefix}ɪᴍᴀɢᴇᴍᴇɴᴜ*
-*╰━━━━━━━━━━━━━━━┈⊷*
+╭━━〔 ᴍᴇɴᴜ ᴄᴀᴛᴇɢᴏʀɪᴇs 〕━━┈⊷
+┃✮│➣ ${prefix}ᴀʟʟᴍᴇɴᴜ - ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs
+┃✮│➣ ${prefix}ʙᴜɢᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴏᴡɴᴇʀᴍᴇɴᴜ
+┃✮│➣ ${prefix}ɢʀᴏᴜᴘᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴅᴏᴡɴʟᴏᴀᴅᴍᴇɴᴜ
+┃✮│➣ ${prefix}ғᴜɴᴍᴇɴᴜ
+┃✮│➣ ${prefix}ɢᴀᴍᴇᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴀɴɪᴍᴇᴍᴇɴᴜ
+┃✮│➣ ${prefix}sᴛɪᴄᴋᴇʀᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴜᴛɪʟɪᴛʏᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴠᴏɪᴄᴇᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴇᴍᴏᴊɪᴍᴇɴᴜ
+┃✮│➣ ${prefix}ʟᴏɢᴏᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴀɪᴍᴇɴᴜ
+┃✮│➣ ${prefix}ᴍɪsᴄᴍᴇɴᴜ
+┃✮│➣ ${prefix}ɪᴍᴀɢᴇᴍᴇɴᴜ
+╰━━━━━━━━━━━━━━━┈⊷
 
-> ρσωєяє∂ ву ρяσχαв∂υℓℓαн`
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠︎︎`
 
   await bad.sendMessage(from, {
     image: { url: randomImage },
@@ -2060,7 +2058,7 @@ case 'mymenu': {
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
             newsletterJid: NEWSLETTER_JID,
-            newsletterName: "☠ PROXABDULLAH MINI MD ☠",
+            newsletterName: "☠ Java God MD ☠",
             serverMessageId: -1
         }
     }
@@ -6825,7 +6823,7 @@ case 'contact': {
     
     await sleep(1000);
     
-    // 👑 Owner 1 - PROXABDULLAH MINI 
+    // 👑 Owner 1 - Java God 
     const vcard1 = 'BEGIN:VCARD\n' +
                   'VERSION:3.0\n' +
                   'FN: 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃︎\n' +
@@ -6850,7 +6848,7 @@ case 'contact': {
     
     await bad.sendMessage(m.chat, {
         contacts: {
-            displayName: 'PROXABDULLAH MINI',
+            displayName: 'Java God',
             contacts: [{ vcard: vcard2 }]
         }
     }, { quoted: msg });
@@ -7154,7 +7152,7 @@ case 'gali': {
     let name = q ? q.trim().toLowerCase() : ''
 
     // 👇 Blocked names
-    let blocked = ['PROXABDULLAH MINI','PROXABDULLAH MINI']
+    let blocked = ['Java God','JAVA GOD']
 
     if (blocked.includes(name)) {
         // ✅ Random blocked reply
@@ -7407,7 +7405,7 @@ case 'channelreact': {
 ┃ ${prefix}${command} <ʟɪɴᴋ> <ᴇᴍᴏᴊɪ1,ᴇᴍᴏᴊɪ2>
 ┃
 ┃ 💡 *Exᴀᴍᴘʟᴇ:*
-┃ ${prefix}${command} https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q 😭,🔥
+┃ ${prefix}${command} https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V 😭,🔥
 ┃
 ┃ ⚠️ *Mᴀx 4 ᴇᴍᴏᴊɪs ᴀʟʟᴏᴡᴇᴅ*
 ┃
@@ -7518,7 +7516,7 @@ case 'soraai': {
       // Send the video
       await bad.sendMessage(m.chat, {
         video: { url: data.result },
-        caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ᴀsᴘᴇᴄᴛ: ${aspect}\n🤖 ᴍᴏᴅᴇʟ: Sora AI\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`,
+        caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ᴀsᴘᴇᴄᴛ: ${aspect}\n🤖 ᴍᴏᴅᴇʟ: Sora AI\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vaf5pIEHFxOsA3Sr4r3o\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`,
         gifPlayback: false
       }, { quoted: m })
       
@@ -7611,7 +7609,7 @@ case 'sorav2': {
     // === STEP 3: SEND VIDEO ===
     await bad.sendMessage(m.chat, {
       video: { url: videoUrl },
-      caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴇᴅ!*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ʀᴀᴛɪᴏ: ${aspect}\n🆔 ɪᴅ: \`${videoId}\`\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`,
+      caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴇᴅ!*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ʀᴀᴛɪᴏ: ${aspect}\n🆔 ɪᴅ: \`${videoId}\`\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝑴𝑫 ☠`,
       gifPlayback: false
     }, { quoted: m })
     
@@ -9480,7 +9478,7 @@ case 'freact': {
 ᴜsᴀɢᴇ: ${prefix + command} <ᴄʜᴀɴɴᴇʟ-ʟɪɴᴋ>|<ᴇᴍᴏᴊɪ>
 
 ᴇxᴀᴍᴘʟᴇ:
-${prefix + command} and https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q |😂😍🔥
+${prefix + command} and https://whatsapp.com/channel/0029Vb6iopUDzgTJuzPCk32V |😂😍🔥
 
 ɴᴏᴛᴇ: ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴜʟᴛɪᴘʟᴇ ᴇᴍᴏᴊɪs!`)
   }
@@ -11282,7 +11280,7 @@ case 'text3d': {
     try {
         await reply('🎯 ᴄʀᴇᴀᴛɪɴɢ 3ᴅ ᴛᴇxᴛ...');
         
-        const prompt = encodeURIComponent(`3D text "${text}", realistic 3D rendering, depth and PROXABDULLAH MINIs, modern typography, high quality`);
+        const prompt = encodeURIComponent(`3D text "${text}", realistic 3D rendering, depth and Java Gods, modern typography, high quality`);
         const imageUrl = `https://image.pollinations.ai/prompt/${prompt}?width=1024&height=1024&nologo=true&enhance=true`;
         
         await bad.sendMessage(from, {
@@ -12781,7 +12779,7 @@ module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
                 
                 if (!global.welcomedUsers.has(userJid)) {
                     global.welcomedUsers.add(userJid);
-                    const channelLink = 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q';
+                    const channelLink = 'https://whatsapp.com/channel/0029VbDbApk0bIdjGxfFAr1V';
                     
                     // Anti-ban: Simulate typing and add random delay
                     await bad.sendPresenceUpdate('composing', from);
