@@ -1,7 +1,7 @@
 {
-  "name": "PROXABDULLAH-MINI",
+  "name": "Sasuke-Xtv",
   "version": "2.0.0",
-  "description": "PROXABDULLAH MINI - A powerful WhatsApp bot rebranded and enhanced.",
+  "description": "Sasuke Xtv - A powerful WhatsApp bot rebranded and enhanced.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -17,7 +17,7 @@
     "multi-session",
     "pairing-bot"
   ],
-  "author": "ρяσχαв∂υℓℓαн",
+  "author": "Sasuke Xtv",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"

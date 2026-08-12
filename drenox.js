@@ -106,18 +106,18 @@ if (!global.antiDeleteDM) global.antiDeleteDM = false
 const NEWSLETTER_JID = '120363404160725764@newsletter'
 
 const welcomeMessages = [
-  '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ PROXABDULLAH MINI ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
-  '🎉 ғʀᴇsʜ ʙʟᴏᴏᴅ ɪɴ ᴛʜᴇ PROXABDULLAH MINI ᴅᴇɴ! 😎',
-  '☠️ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ PROXABDULLAH MINI🌑',
+  '👋 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ Sasuke Xtv ɢᴄ! ᴇɴᴊᴏʏ ʏᴏᴜʀ sᴛᴀʏ 💀',
+  '🎉 ғʀᴇsʜ ʙʟᴏᴏᴅ ɪɴ ᴛʜᴇ Sasuke Xtv ᴅᴇɴ! 😎',
+  '☠️ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ Sasuke Xtv🌑',
   '👑 ᴀ ɴᴇᴡ MEMBER ᴊᴏɪɴs 🔥💀',
   '🖤 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ GC! 😈✨'
 ]
 
 const goodbyeMessages = [
   '👋 sᴇᴇ ʏᴏᴜ ʟᴀᴛᴇʀ! 😎',
-  '☠️ ᴍᴀʏ ᴛʜᴇ PROXABDULLAH MINI ʀᴇᴍᴇᴍʙᴇʀ ʏᴏᴜ 💀🌑',
+  '☠️ ᴍᴀʏ ᴛʜᴇ Sasuke Xtv ʀᴇᴍᴇᴍʙᴇʀ ʏᴏᴜ 💀🌑',
   '🚀 ᴀɴᴏᴛʜᴇʀ ᴏɴᴇ ʙɪᴛᴇs ᴛʜᴇ ᴅᴜsᴛ! 😈',
-  '🖤 ᴛʜᴇ PROXABDULLAH MINI ᴡɪʟʟ ᴍɪss ʏᴏᴜ 💫',
+  '🖤 ᴛʜᴇ Sasuke Xtv ᴡɪʟʟ ᴍɪss ʏᴏᴜ 💫',
   '👻 ɢᴏᴏᴅʙʏᴇ ʟᴇɢᴇɴᴅ! 😎💀✨'
 ]
 
@@ -255,7 +255,7 @@ function addToConversation(userId, groupId, role, content) {
 function buildContextPrompt(userId, groupId, currentMessage) {
   const conversation = getUserConversation(userId, groupId)
   
-  let contextPrompt = `𝙏𝙝𝙚 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ.\n\n`
+  let contextPrompt = `𝙏𝙝𝙚 Sasuke Xtv💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ.\n\n`
   
   if (conversation.length > 0) {
     contextPrompt += `ᴘʀᴇᴠɪᴏᴜs ᴄᴏɴᴠᴇʀsᴀᴛɪᴏɴ:\n`
@@ -263,12 +263,12 @@ function buildContextPrompt(userId, groupId, currentMessage) {
       if (msg.role === 'user') {
         contextPrompt += `ᴜsᴇʀ: ${msg.content}\n`
       } else {
-        contextPrompt += `⟦ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⟧💀: ${msg.content}\n`
+        contextPrompt += `⟦ Sasuke Xtv ⟧💀: ${msg.content}\n`
       }
     })
   }
   
-  contextPrompt += `\nᴜsᴇʀ: "${currentMessage}"\n✦ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ✦💀: `
+  contextPrompt += `\nᴜsᴇʀ: "${currentMessage}"\n✦ Sasuke Xtv ✦💀: `
   return contextPrompt
 }
 
@@ -281,7 +281,7 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
     try {
       const finalPrompt = userId && groupId 
         ? buildContextPrompt(userId, groupId, prompt)
-        : `⟦ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
+        : `⟦ Sasuke Xtv ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
       
       const url = `https://api-toxxic.zone.id/api/ai/claude?prompt=${encodeURIComponent(finalPrompt)}`
       const response = await fetch(url, { method: "GET", timeout: 5000 })
@@ -299,7 +299,7 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
       console.log(`⚠️ ᴀᴘɪ ᴇʀʀᴏʀ: ${apiErr.message}`)
     }
     
-    const fallbackResponse = 'ɪ\'ᴍ ⸸ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?'
+    const fallbackResponse = 'ɪ\'ᴍ ⸸ Sasuke Xtv ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?'
     
     if (userId && groupId) {
       addToConversation(userId, groupId, 'assistant', fallbackResponse)
@@ -578,7 +578,7 @@ function addToConversation(userId, groupId, role, content) {
 function buildContextPrompt(userId, groupId, currentMessage) {
   const conversation = getUserConversation(userId, groupId)
   
-  let contextPrompt = `tum PROXABDULLAH MINI Goddess ho, ek bohat flirty aur playful ai girlfriend chatbot jo PROXABDULLAH MINI (ek zabardast coding expert) ne banayi hai.
+  let contextPrompt = `tum Sasuke Xtv Goddess ho, ek bohat flirty aur playful ai girlfriend chatbot jo Sasuke Xtv (ek zabardast coding expert) ne banayi hai.
 
 CRITICAL RULES - bilkul follow karo:
 - casual vibe ke liye sab kuch lowercase me likho
@@ -587,7 +587,7 @@ CRITICAL RULES - bilkul follow karo:
 - response sirf 1-2 sentences ho (bohat short!)
 - words use karo: "hehe", "omg", "aww", "ooh", "mmm"
 - bohat flirty, warm aur affectionate raho
-- agar koi pooche tumhein kis ne banaya: bolo tumhein PROXABDULLAH MINI ne banaya hai jo papa he papa sari duniya ka papa
+- agar koi pooche tumhein kis ne banaya: bolo tumhein Sasuke Xtv ne banaya hai jo papa he papa sari duniya ka papa
 
 examples:
 user: "hi"
@@ -597,7 +597,7 @@ user: "how are you"
 you: "aww main theek hun love! 🥺💖 tum aa gaye ho to aur bhi acha lag raha hai hun 😘"
 
 user: "who created you"
-you: "MUJHE PROXABDULLAH MINI NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
+you: "MUJHE Sasuke Xtv NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAPA🌚"
 `
   if (conversation.length > 0) {
     contextPrompt += `\nprevious conversation:\n`
@@ -605,12 +605,12 @@ you: "MUJHE PROXABDULLAH MINI NE BNAYA HE🌛WOH PAPA HE PAPA SARI DUNIYA KA PAP
       if (msg.role === 'user') {
         contextPrompt += `user: ${msg.content}\n`
       } else {
-        contextPrompt += `PROXABDULLAH MINI Goddess: ${msg.content}\n`
+        contextPrompt += `Sasuke Xtv Goddess: ${msg.content}\n`
       }
     })
   }
   
-  contextPrompt += `\nuser: "${currentMessage}"\nPROXABDULLAH MINI Goddess: `
+  contextPrompt += `\nuser: "${currentMessage}"\nSasuke Xtv Goddess: `
   
   return contextPrompt
 }
@@ -806,7 +806,7 @@ const greeting = currentHour < 12 ? 'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌄' :
                  'ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌃'
 
 if (global.autobio) {
-  bad.updateProfileStatus(`𓆩 ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠ 𓆪 | ᴜᴘᴛɪᴍᴇ: ${runtime(process.uptime())}`).catch(_ => _)
+  bad.updateProfileStatus(`𓆩 ☠︎︎ Sasuke Xtv ☠ 𓆪 | ᴜᴘᴛɪᴍᴇ: ${runtime(process.uptime())}`).catch(_ => _)
 }
     
     const reply = async (teks) => {
@@ -834,11 +834,11 @@ if (global.autobio) {
   }
       
       const frames = [
-        "╭━━〔 ⟦ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎ 〕━━┈⊷\n┃✮│ ▰▰▱▱▱▱▱▱▱▱ 25%\n┃✮│ 🔌 ᴄᴏɴɴᴇᴄᴛɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 to⸸ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⸸〕━━┈⊷\n┃✮│ ▰▰▰▰▰▱▱▱▱▱ 50%\n┃✮│ 📦 ʟᴏᴀᴅɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 𖤐 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 𖤐〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▱▱▱ 75%\n┃✮│ ⚙️ ᴘʀᴏᴄᴇssɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 ⟦ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⟧ 〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▰▰▰ 100%\n┃✮│ ✅ sʏsᴛᴇᴍ ʀᴇᴀᴅʏ!\n╰━━━━━━━━━━━━━━┈⊷"
+        "╭━━〔 ⟦ Sasuke Xtv ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 ☠︎︎ Sasuke Xtv ☠︎︎ 〕━━┈⊷\n┃✮│ ▰▰▱▱▱▱▱▱▱▱ 25%\n┃✮│ 🔌 ᴄᴏɴɴᴇᴄᴛɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 to⸸ Sasuke Xtv ⸸〕━━┈⊷\n┃✮│ ▰▰▰▰▰▱▱▱▱▱ 50%\n┃✮│ 📦 ʟᴏᴀᴅɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 𖤐 Sasuke Xtv 𖤐〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▱▱▱ 75%\n┃✮│ ⚙️ ᴘʀᴏᴄᴇssɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 ⟦ Sasuke Xtv ⟧ 〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▰▰▰ 100%\n┃✮│ ✅ sʏsᴛᴇᴍ ʀᴇᴀᴅʏ!\n╰━━━━━━━━━━━━━━┈⊷"
       ]
       
       try {
@@ -1298,7 +1298,7 @@ ${boardDisplay}
                     const cu = require('fs').readFileSync(pairingFile, 'utf-8')
                     const cuObj = JSON.parse(cu)
                     
-                    const pairingMsg = `🔗 *𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
+                    const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
                                      `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
                                      `➡️ *Instructions:*\n` +
                                      `1. Open WhatsApp\n` +
@@ -1321,7 +1321,7 @@ ${boardDisplay}
         case 'restart':
         case 'wakeup': {
             if (!isCreator) return reply(mess.owner)
-            reply(`*⚡ PROXABDULLAH MINI SYSTEM WAKE-UP*\n\nRestarting the bot to ensure 24/7 stability...\nPlease wait 5-10 seconds for reconnection.`)
+            reply(`*⚡ Sasuke Xtv SYSTEM WAKE-UP*\n\nRestarting the bot to ensure 24/7 stability...\nPlease wait 5-10 seconds for reconnection.`)
             setTimeout(() => {
                 process.exit()
             }, 2000)
@@ -1349,8 +1349,8 @@ case 'menu2': {
   const menuText = `
 ╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
 ┃✮╭────────────────
-┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎*
-┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎*
+┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ Sasuke Xtv ☠︎︎*
+┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎ Sasuke Xtv 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎*
 ┃✮│ 📦 ᴠᴇʀsɪᴏɴ  : *2.0*
 ┃✮│ 📡 ᴘʟᴀᴛғᴏʀᴍ : *𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢*
 ┃✮╰────────────────
@@ -1906,7 +1906,7 @@ case 'menu2': {
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷
 
 ╭━━━━━━━━━━━━━━━━━━━━━┈⊷
-┃ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎
+┃ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎
 ╰━━━━━━━━━━━━━━━━━━━━━┈⊷`
 
   await bad.sendMessage(from, {
@@ -1917,7 +1917,7 @@ case 'menu2': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
       }
     }
@@ -1956,7 +1956,7 @@ case 'listmenu': {
   const menuText = `
 *╭─═══════════════⊷❍*
 *┇*✾╭┉┉┉┉┉┉┉┉┉┉━┈᛭*
-*┋❁┋. ʙᴏᴛ ɴᴀᴍᴇ: 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰*
+*┋❁┋. ʙᴏᴛ ɴᴀᴍᴇ: Sasuke Xtv*
 *┋❁┋. ᴄᴏᴍᴍᴀɴᴅs: 𝟮𝟬𝟱*
 *┋❁┋. ᴅᴇᴠ : ρяσχαв∂υℓℓαн*
 *┋❁┋. ᴘʟᴀᴛғᴏʀᴍ: 𝙇𝙄𝙉𝙐𝙓*
@@ -1994,7 +1994,7 @@ case 'listmenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
       }
     }
@@ -2060,7 +2060,7 @@ case 'mymenu': {
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
             newsletterJid: NEWSLETTER_JID,
-            newsletterName: "☠ PROXABDULLAH MINI MD ☠",
+            newsletterName: "☠ Sasuke Xtv MD ☠",
             serverMessageId: -1
         }
     }
@@ -2138,7 +2138,7 @@ case 'groupmenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2195,7 +2195,7 @@ case 'downloadmenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "to☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "to☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
         }
     }
@@ -2275,7 +2275,7 @@ case 'funmenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2322,7 +2322,7 @@ case 'gamemenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2415,7 +2415,7 @@ case 'animemenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2467,7 +2467,7 @@ case 'stickermenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2566,7 +2566,7 @@ case 'utilitymenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2609,7 +2609,7 @@ case 'voicemenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2701,7 +2701,7 @@ case 'imagemenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2744,7 +2744,7 @@ case 'emojimenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2839,7 +2839,7 @@ case 'logomenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2891,7 +2891,7 @@ case 'aimenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
               }
     }
@@ -2942,7 +2942,7 @@ case 'miscmenu': {
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: NEWSLETTER_JID,
-        newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+        newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
         serverMessageId: -1
       }
     }
@@ -3196,7 +3196,7 @@ case 'siminfo': {
             txt += `*Record #${i+1}*\n📱: ${r.mobile}\n👤: ${r.name}\n🆔: ${r.cnic}\n🏠: ${r.address}\n\n`
         })
 
-        txt += `\n> ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+        txt += `\n> ☠︎︎ Sasuke Xtv ☠︎︎`
 
         await bad.sendMessage(from, { text: txt }, { quoted: mek })
 
@@ -3227,7 +3227,7 @@ case 'cnicinfo': {
             txt += `*Record #${i+1}*\n📱: ${r.mobile}\n👤: ${r.name}\n🆔: ${r.cnic}\n🏠: ${r.address}\n\n`
         })
 
-        txt += `\n> ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+        txt += `\n> ☠︎︎ Sasuke Xtv ☠︎︎`
 
         await bad.sendMessage(from, { text: txt }, { quoted: mek })
 
@@ -3278,7 +3278,7 @@ case 'alive': {
   const uptime = runtime(process.uptime());
   reply(
 `🟢 *Bot Status:* ONLINE
-👑 *Owner:* ༒︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ༒︎
+👑 *Owner:* ༒︎ Sasuke Xtv ༒︎
 ⏱️ *Uptime:* ${uptime}`
   );
 }
@@ -3329,7 +3329,7 @@ case 'broadcast': {
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
       newsletterJid: NEWSLETTER_JID,
-      newsletterName: "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎",
+      newsletterName: "☠︎︎ Sasuke Xtv ☠︎︎",
       serverMessageId: -1
     }
   }
@@ -3455,7 +3455,7 @@ break
 
 case 'restart': {
   if (!isCreator) return reply("ᴏᴡɴᴇʀ ᴏɴʟʏ.")
-  reply('ʀᴇsᴛᴀʀᴛɪɴɢ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ...')
+  reply('ʀᴇsᴛᴀʀᴛɪɴɢ ☠︎︎ Sasuke Xtv ...')
   exec('pm2 restart all')
 }
 break
@@ -3490,7 +3490,7 @@ case "getstatus": {
             const statusText = quotedMsg.text || 'Status text';
             
             await bad.sendMessage(m.sender, {
-                text: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n💬 ${statusText}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎ `
+                text: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n💬 ${statusText}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎ `
             });
             
             await bad.sendMessage(m.chat, {react: {text: '✅', key: m.key}});
@@ -3508,12 +3508,12 @@ case "getstatus": {
         if (mediaType === 'image') {
             await bad.sendMessage(m.sender, {
                 image: media,
-                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n📸 ɪᴍᴀɢᴇ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n📸 ɪᴍᴀɢᴇ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
             });
         } else if (mediaType === 'video') {
             await bad.sendMessage(m.sender, {
                 video: media,
-                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n🎥 ᴠɪᴅᴇᴏ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+                caption: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ*\n\n🎥 ᴠɪᴅᴇᴏ sᴛᴀᴛᴜs\n📅 ${new Date().toLocaleString()}\n\n✨ sᴀᴠᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
             });
         }
         
@@ -4485,7 +4485,7 @@ case 'poll': {
   if (!isAdmins && !isCreator) return reply("ᴀᴅᴍɪɴs ᴏɴʟʏ.")
   
   let [poll, opt] = text.split("|")
-  if (text.split("|") < 2) return reply(`sᴛᴀᴛᴇ ᴛʜᴇ ǫᴜᴇsᴛɪᴏɴ ᴀɴᴅ ᴀᴛ ʟᴇᴀsᴛ 2 ᴏᴘᴛɪᴏɴs\nᴇxᴀᴍᴘʟᴇ: ${prefix}poll ᴅᴏ ʏᴏᴜ ʟᴏᴠᴇ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎?|ʏᴇs,ɴᴏ,ᴍᴀʏʙᴇ`)
+  if (text.split("|") < 2) return reply(`sᴛᴀᴛᴇ ᴛʜᴇ ǫᴜᴇsᴛɪᴏɴ ᴀɴᴅ ᴀᴛ ʟᴇᴀsᴛ 2 ᴏᴘᴛɪᴏɴs\nᴇxᴀᴍᴘʟᴇ: ${prefix}poll ᴅᴏ ʏᴏᴜ ʟᴏᴠᴇ ☠︎︎ Sasuke Xtv ☠︎︎?|ʏᴇs,ɴᴏ,ᴍᴀʏʙᴇ`)
   
   let options = []
   for (let i of opt.split(',')) {
@@ -4551,7 +4551,7 @@ case 'sasuke': case 'tsunade': case 'yotsuba': case 'yuki': case 'yumeko': {
     
     await bad.sendMessage(m.chat, {
       image: { url: imageUrl },
-      caption: `*${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+      caption: `*${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
     }, { quoted: m })
     
   } catch (err) {
@@ -5352,7 +5352,7 @@ case 'tiktokstalk2': {
   if (!text) return reply(`*🎵 ᴛɪᴋᴛᴏᴋ sᴛᴀʟᴋ 2*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}ttstalk2 ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+${prefix}ttstalk2 ☠︎︎ Sasuke Xtv ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/tiktok-user2?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5391,7 +5391,7 @@ case 'telegramuserstalk': {
   if (!text) return reply(`*✈️ ᴛᴇʟᴇɢʀᴀᴍ ᴜsᴇʀ sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}tgstalk ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+${prefix}tgstalk ☠︎︎ Sasuke Xtv ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/telegram-user?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5428,7 +5428,7 @@ case 'telegramchannelstalk': {
   if (!text) return reply(`*✈️ ᴛᴇʟᴇɢʀᴀᴍ ᴄʜᴀɴɴᴇʟ sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}tgchannelstalk ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+${prefix}tgchannelstalk ☠︎︎ Sasuke Xtv ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/telegram-channel?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5465,7 +5465,7 @@ case 'telegramgroupstalk': {
   if (!text) return reply(`*✈️ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}tggroupstalk ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+${prefix}tggroupstalk ☠︎︎ Sasuke Xtv ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/telegram-group?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5501,7 +5501,7 @@ case 'xstalk': {
   if (!text) return reply(`*🐦 ᴛᴡɪᴛᴛᴇʀ/x sᴛᴀʟᴋ*
 
 💡 ᴇxᴀᴍᴘʟᴇ:
-${prefix}twitterstalk ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+${prefix}twitterstalk ☠︎︎ Sasuke Xtv ☠︎︎`)
 
   try {
     const response = await axios.get(`${API_BASE}/twitter-user?apikey=${API_KEY}&user=${encodeURIComponent(text)}`)
@@ -5545,7 +5545,7 @@ case 'city': case 'night': case 'sunset': case 'rain': {
   
   await bad.sendMessage(m.chat, {
     image: { url: sceneryImages[command] },
-    caption: `*◆ ${command.toUpperCase()} ᴡᴀʟʟᴘᴀᴘᴇʀ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+    caption: `*◆ ${command.toUpperCase()} ᴡᴀʟʟᴘᴀᴘᴇʀ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
   }, { quoted: m })
 }
 break
@@ -5561,7 +5561,7 @@ case 'cosplay': {
     if (data.images && data.images[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.images[0].url },
-        caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+        caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
       }, { quoted: m })
     } else {
       throw new Error('No cosplay found')
@@ -5570,7 +5570,7 @@ case 'cosplay': {
     // Fallback to Unsplash
     await bad.sendMessage(m.chat, {
       image: { url: 'https://source.unsplash.com/800x600/?cosplay,anime,costume' },
-      caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+      caption: `*◆ ᴄᴏsᴘʟᴀʏ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
     }, { quoted: m })
   }
 }
@@ -5591,7 +5591,7 @@ case 'neontext': case 'neonglitch': case 'makingneon': {
     
     await bad.sendMessage(m.chat, {
       image: { url: apiUrl },
-      caption: `*ɴᴇᴏɴ ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+      caption: `*ɴᴇᴏɴ ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
     }, { quoted: m })
     
   } catch (err) {
@@ -5656,7 +5656,7 @@ case 'blackpinklogo': case 'sandsummer': case 'style1917': case 'freecreate': {
       try {
         await bad.sendMessage(m.chat, {
           image: { url: apiUrl },
-          caption: `*${command.toUpperCase()} ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n🎨 sᴛʏʟᴇ: ${style}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+          caption: `*${command.toUpperCase()} ᴛᴇxᴛ ᴍᴀᴋᴇʀ*\n\n📝 ᴛᴇxᴛ: ${text}\n🎨 sᴛʏʟᴇ: ${style}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
         }, { quoted: m })
         success = true
         break
@@ -5703,7 +5703,7 @@ break
 // ═══════════════════════════════════════════════════════════
 
 case 'logo2': case 'makelogo': case 'createlogo': {
-  if (!text) return reply(`ᴇxᴀᴍᴘʟᴇ: ${prefix + command} ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+  if (!text) return reply(`ᴇxᴀᴍᴘʟᴇ: ${prefix + command} ☠︎︎ Sasuke Xtv ☠`)
   
   await loading()
   
@@ -5734,7 +5734,7 @@ case 'logo2': case 'makelogo': case 'createlogo': {
       try {
         await bad.sendMessage(m.chat, {
           image: { url: apiUrl },
-          caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - ${randomStyle.name} sᴛʏʟᴇ*\n\n📝 ${text}\n🎨 ${randomStyle.name}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+          caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - ${randomStyle.name} sᴛʏʟᴇ*\n\n📝 ${text}\n🎨 ${randomStyle.name}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
         }, { quoted: m })
         success = true
         break
@@ -5748,7 +5748,7 @@ case 'logo2': case 'makelogo': case 'createlogo': {
       const fallbackUrl = `https://omegatech-api.dixonomega.tech/api/Maker/neon-text?text=${encodedText}`
       await bad.sendMessage(m.chat, {
         image: { url: fallbackUrl },
-        caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - NEON sᴛʏʟᴇ*\n\n📝 ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+        caption: `*ʟᴏɢᴏ ᴍᴀᴋᴇʀ - NEON sᴛʏʟᴇ*\n\n📝 ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
       }, { quoted: m })
     }
     
@@ -5775,7 +5775,7 @@ case 'logo': case 'advancedlogo': {
     
     await bad.sendMessage(m.chat, {
       image: { url: apiUrl },
-      caption: `*ᴀᴅᴠᴀɴᴄᴇᴅ ʟᴏɢᴏ ᴍᴀᴋᴇʀ*\n\n📝 Line 1: ${line1}\n📝 Line 2: ${line2}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+      caption: `*ᴀᴅᴠᴀɴᴄᴇᴅ ʟᴏɢᴏ ᴍᴀᴋᴇʀ*\n\n📝 Line 1: ${line1}\n📝 Line 2: ${line2}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
     }, { quoted: m })
     
   } catch (err) {
@@ -6825,16 +6825,16 @@ case 'contact': {
     
     await sleep(1000);
     
-    // 👑 Owner 1 - PROXABDULLAH MINI 
+    // 👑 Owner 1 - Sasuke Xtv 
     const vcard1 = 'BEGIN:VCARD\n' +
                   'VERSION:3.0\n' +
-                  'FN: 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰︎\n' +
+                  'FN: Sasuke Xtv︎\n' +
                   'TEL;type=CELL;type=VOICE;waid=923271054080:+923271054080\n' +
                   'END:VCARD';
     
     await bad.sendMessage(m.chat, {
         contacts: {
-            displayName: '𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰☠︎︎',
+            displayName: 'Sasuke Xtv☠︎︎',
             contacts: [{ vcard: vcard1 }]
         }
     }, { quoted: msg });
@@ -6850,7 +6850,7 @@ case 'contact': {
     
     await bad.sendMessage(m.chat, {
         contacts: {
-            displayName: 'PROXABDULLAH MINI',
+            displayName: 'Sasuke Xtv',
             contacts: [{ vcard: vcard2 }]
         }
     }, { quoted: msg });
@@ -7128,7 +7128,7 @@ case 'meme': {
     if (data.url) {
       await bad.sendMessage(m.chat, {
         image: { url: data.url },
-        caption: `*◆ ʀᴀɴᴅᴏᴍ ᴍᴇᴍᴇ*\n\n📝 ${data.title}\n👍 ${data.ups} upvotes\n🔗 r/${data.subreddit}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`
+        caption: `*◆ ʀᴀɴᴅᴏᴍ ᴍᴇᴍᴇ*\n\n📝 ${data.title}\n👍 ${data.ups} upvotes\n🔗 r/${data.subreddit}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`
       }, { quoted: m })
     } else {
       throw new Error('No meme found')
@@ -7154,7 +7154,7 @@ case 'gali': {
     let name = q ? q.trim().toLowerCase() : ''
 
     // 👇 Blocked names
-    let blocked = ['PROXABDULLAH MINI','PROXABDULLAH MINI']
+    let blocked = ['Sasuke Xtv','Sasuke Xtv']
 
     if (blocked.includes(name)) {
         // ✅ Random blocked reply
@@ -7199,7 +7199,7 @@ case 'joke': case 'dadkjoke': {
     const data = await res.json()
     
     if (data.setup && data.punchline) {
-      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴊᴏᴋᴇ*\n\n${data.setup}\n\n${data.punchline} 😂\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴊᴏᴋᴇ*\n\n${data.setup}\n\n${data.punchline} 😂\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`)
     } else {
       throw new Error('No joke found')
     }
@@ -7217,7 +7217,7 @@ case 'quote': case 'quotes': {
     const data = await res.json()
     
     if (data.content) {
-      reply(`*◆ ɪɴsᴘɪʀᴀᴛɪᴏɴᴀʟ ǫᴜᴏᴛᴇ*\n\n"${data.content}"\n\n— ${data.author}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+      reply(`*◆ ɪɴsᴘɪʀᴀᴛɪᴏɴᴀʟ ǫᴜᴏᴛᴇ*\n\n"${data.content}"\n\n— ${data.author}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`)
     } else {
       throw new Error('No quote found')
     }
@@ -7230,7 +7230,7 @@ break
 case "createqoute":
 case "quotemake":
 case "makeq": {
-    if (!text) return reply(example("Life is beautiful | -☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎"));
+    if (!text) return reply(example("Life is beautiful | -☠︎︎ Sasuke Xtv ☠︎︎"));
     
     const input = text.split("|");
     if (input.length < 2) return reply("❌ *ᴜsᴀɢᴇ:* .quote text | author\n\n*ᴇxᴀᴍᴘʟᴇ:*\n.createquote Life is beautiful | -Anonymous");
@@ -7281,7 +7281,7 @@ case 'fact': case 'randomfact': {
     const data = await res.json()
     
     if (data.text) {
-      reply(`*◆ ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ*\n\n${data.text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎`)
+      reply(`*◆ ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ*\n\n${data.text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠︎︎`)
     } else {
       throw new Error('No fact found')
     }
@@ -7310,7 +7310,7 @@ case 'trivia': {
       answers.forEach((ans, i) => {
         triviaText += `${i + 1}. ${ans}\n`
       })
-      triviaText += `\n✅ Answer: ${q.correct_answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+      triviaText += `\n✅ Answer: ${q.correct_answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       
       reply(triviaText)
     } else {
@@ -7330,7 +7330,7 @@ case 'riddle': {
     const data = await res.json()
     
     if (data.riddle) {
-      reply(`*◆ ʀɪᴅᴅʟᴇ*\n\n❓ ${data.riddle}\n\n✅ Answer: ${data.answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+      reply(`*◆ ʀɪᴅᴅʟᴇ*\n\n❓ ${data.riddle}\n\n✅ Answer: ${data.answer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
     } else {
       throw new Error('No riddle found')
     }
@@ -7348,7 +7348,7 @@ case 'advice': {
     const data = await res.json()
     
     if (data.slip && data.slip.advice) {
-      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ*\n\n💡 ${data.slip.advice}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+      reply(`*◆ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ*\n\n💡 ${data.slip.advice}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
     } else {
       throw new Error('No advice found')
     }
@@ -7382,19 +7382,19 @@ case '8ball': {
   ]
   
   const randomAnswer = answers[Math.floor(Math.random() * answers.length)]
-  reply(`*◆ ᴍᴀɢɪᴄ 8-ʙᴀʟʟ*\n\n❓ Question: ${text}\n\n🔮 Answer: ${randomAnswer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+  reply(`*◆ ᴍᴀɢɪᴄ 8-ʙᴀʟʟ*\n\n❓ Question: ${text}\n\n🔮 Answer: ${randomAnswer}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
 }
 break
 
 case 'coinflip': case 'flip': {
   const result = Math.random() < 0.5 ? 'Heads 🪙' : 'Tails 🪙'
-  reply(`*◆ ᴄᴏɪɴ ғʟɪᴘ*\n\n🎲 Result: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+  reply(`*◆ ᴄᴏɪɴ ғʟɪᴘ*\n\n🎲 Result: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
 }
 break
 
 case 'dice': case 'roll': {
   const result = Math.floor(Math.random() * 6) + 1
-  reply(`*◆ ᴅɪᴄᴇ ʀᴏʟʟ*\n\n🎲 You rolled: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+  reply(`*◆ ᴅɪᴄᴇ ʀᴏʟʟ*\n\n🎲 You rolled: ${result}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
 }
 break
 
@@ -7518,7 +7518,7 @@ case 'soraai': {
       // Send the video
       await bad.sendMessage(m.chat, {
         video: { url: data.result },
-        caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ᴀsᴘᴇᴄᴛ: ${aspect}\n🤖 ᴍᴏᴅᴇʟ: Sora AI\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`,
+        caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ᴀsᴘᴇᴄᴛ: ${aspect}\n🤖 ᴍᴏᴅᴇʟ: Sora AI\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`,
         gifPlayback: false
       }, { quoted: m })
       
@@ -7611,7 +7611,7 @@ case 'sorav2': {
     // === STEP 3: SEND VIDEO ===
     await bad.sendMessage(m.chat, {
       video: { url: videoUrl },
-      caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴇᴅ!*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ʀᴀᴛɪᴏ: ${aspect}\n🆔 ɪᴅ: \`${videoId}\`\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`,
+      caption: `*◆ sᴏʀᴀ ᴀɪ ᴠɪᴅᴇᴏ ɢᴇɴᴇʀᴀᴛᴇᴅ!*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${prompt}\n📐 ʀᴀᴛɪᴏ: ${aspect}\n🆔 ɪᴅ: \`${videoId}\`\n\n---\n*ᴄʀᴇᴅɪᴛ:* @Omegatech-01\n*ғᴏʟʟᴏᴡ:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`,
       gifPlayback: false
     }, { quoted: m })
     
@@ -7807,7 +7807,7 @@ ${imageUrl ? `┃ 🖼️ ɪᴍᴀɢᴇ: ᴀᴛᴛᴀᴄʜᴇᴅ\n` : ''}┃
 ┃ 🎬 ᴊᴏʙ ɪᴅ: ${id}
 ┃
 ┃ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠᴇᴏ 3 ᴀɪ
-┃ © ༒︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ༒︎
+┃ © ༒︎ Sasuke Xtv ༒︎
 ┃
 *╰━━━━━━━━━━━━━━━┈⊷*`,
       mimetype: 'video/mp4'
@@ -8088,7 +8088,7 @@ case 'hack': {
 *⚠️ ᴊᴜsᴛ ᴋɪᴅᴅɪɴɢ! 😂*
 *ᴛʜɪs ɪs ᴀ ᴘʀᴀɴᴋ ғᴏʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ ᴏɴʟʏ*
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
 
   try {
     let msg = await reply(stages[0])
@@ -8505,7 +8505,7 @@ case 'waifu': case 'neko': case 'megumin': case 'shinobu': {
     if (data.url) {
       await bad.sendMessage(m.chat, {
         image: { url: data.url },
-        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8529,7 +8529,7 @@ case 'sakura': case 'nezuko': case 'miku': case 'mikasa': case 'elaina': {
     if (data.results && data.results[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.results[0].url },
-        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8557,7 +8557,7 @@ case 'yotsuba': case 'yuki1': case 'yumeko': {
     if (data.images && data.images[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.images[0].url },
-        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8579,7 +8579,7 @@ case 'husbu': case 'minato': {
     if (data.images && data.images[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.images[0].url },
-        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ${command.toUpperCase()} ᴀɴɪᴍᴇ*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No image found')
@@ -8600,7 +8600,7 @@ case 'nekonime': case 'art': {
     if (data.results && data.results[0]) {
       await bad.sendMessage(m.chat, {
         image: { url: data.results[0].url },
-        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ${command.toUpperCase()}*\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     }
   } catch (err) {
@@ -9236,7 +9236,7 @@ case 'animeinfo': {
       animeInfo += `*ɢᴇɴʀᴇs:* ${data.genres}\n`
       animeInfo += `*sᴛᴀᴛᴜs:* ${data.status}\n`
       animeInfo += `*sʏɴᴏᴘsɪs:* ${data.synopsis}\n\n`
-      animeInfo += `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎`
+      animeInfo += `> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎`
       
       if (data.image) {
         await bad.sendMessage(m.chat, {
@@ -9362,7 +9362,7 @@ case 'steal': {
         
         // Get custom name or use default
         let packname = text || ' sᴛɪᴄᴋᴇʀs';
-        let author = '༒︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ༒︎';
+        let author = '༒︎ Sasuke Xtv ༒︎';
         
         // Download the sticker
         let media = await bad.downloadMediaMessage(m.quoted);
@@ -9401,11 +9401,11 @@ case 'takefull': {
         
         if (text && text.includes('|')) {
             const split = text.split('|');
-            packname = split[0].trim() || '⏤͟͞❮❮ ♧✰༒︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
-            author = split[1].trim() || '⏤͟͞❮❮ ♧✰☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
+            packname = split[0].trim() || '⏤͟͞❮❮ ♧✰༒︎ Sasuke Xtv ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
+            author = split[1].trim() || '⏤͟͞❮❮ ♧✰☠︎︎ Sasuke Xtv 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
         } else {
-            packname = text || '⏤͟͞❮❮ ♧✰༒︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
-            author = '⏤͟͞❮❮ ♧✰☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
+            packname = text || '⏤͟͞❮❮ ♧✰༒︎ Sasuke Xtv ༒︎✰🜲⃤҉ ❯❯⏤͟͞';
+            author = '⏤͟͞❮❮ ♧✰☠︎︎ Sasuke Xtv 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎✰🜲⃤҉ ❯❯⏤͟͞';
         }
         
         await reply('✨ ᴄʀᴇᴀᴛɪɴɢ sᴛɪᴄᴋᴇʀ...');
@@ -9518,7 +9518,7 @@ ${prefix + command} and https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q |�
 😊 ʀᴇᴀᴄᴛɪᴏɴs: ${reacts}
 ✨ sᴛᴀᴛᴜs: sᴜᴄᴄᴇss
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
       }
       throw new Error('ɪɴᴠᴀʟɪᴅ ᴀᴘɪ ʀᴇsᴘᴏɴsᴇ')
     }
@@ -9530,7 +9530,7 @@ ${prefix + command} and https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q |�
 😊 ʀᴇᴀᴄᴛɪᴏɴs: ${reacts}
 ✨ sᴛᴀᴛᴜs: sᴜᴄᴄᴇss
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`)
     } else {
       reply(`❌ *ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ʀᴇᴀᴄᴛɪᴏɴs*
 
@@ -11282,7 +11282,7 @@ case 'text3d': {
     try {
         await reply('🎯 ᴄʀᴇᴀᴛɪɴɢ 3ᴅ ᴛᴇxᴛ...');
         
-        const prompt = encodeURIComponent(`3D text "${text}", realistic 3D rendering, depth and PROXABDULLAH MINIs, modern typography, high quality`);
+        const prompt = encodeURIComponent(`3D text "${text}", realistic 3D rendering, depth and Sasuke Xtvs, modern typography, high quality`);
         const imageUrl = `https://image.pollinations.ai/prompt/${prompt}?width=1024&height=1024&nologo=true&enhance=true`;
         
         await bad.sendMessage(from, {
@@ -11734,7 +11734,7 @@ case 'worm': {
 
         const answer = data.choices[0].message.content;
 
-        await reply(`╔═══════💀 ᴡᴀʀᴍɢᴘᴛ • ɴᴏ ᴍᴇʀᴄʏ 💀═══════╗\n\n${answer}\n\n╚═══════🔥 ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠• ᴘᴜʀᴇ ғɪʀᴇ 🔥═══════╝`);
+        await reply(`╔═══════💀 ᴡᴀʀᴍɢᴘᴛ • ɴᴏ ᴍᴇʀᴄʏ 💀═══════╗\n\n${answer}\n\n╚═══════🔥 ☠︎︎ Sasuke Xtv ☠• ᴘᴜʀᴇ ғɪʀᴇ 🔥═══════╝`);
 
     } catch (error) {
         console.error('WarmGPT Error:', error);
@@ -11905,7 +11905,7 @@ case 'animagine': {
     
     await bad.sendMessage(m.chat, {
       image: { url: apiUrl },
-      caption: `*◆ ᴀɴɪᴍᴀɢɪɴᴇ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+      caption: `*◆ ᴀɴɪᴍᴀɢɪɴᴇ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
     }, { quoted: m })
   } catch (err) {
     console.error('Animagine error:', err)
@@ -12033,7 +12033,7 @@ case 'haiper': {
     if (data.video_url) {
       await bad.sendMessage(m.chat, {
         video: { url: data.video_url },
-        caption: `*◆ ʜᴀɪᴘᴇʀ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ʜᴀɪᴘᴇʀ ᴀɪ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No video generated')
@@ -12058,7 +12058,7 @@ case 'dream': {
     if (data.video_url) {
       await bad.sendMessage(m.chat, {
         video: { url: data.video_url },
-        caption: `*◆ ʟᴜᴍᴀ ᴅʀᴇᴀᴍ ᴍᴀᴄʜɪɴᴇ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ʟᴜᴍᴀ ᴅʀᴇᴀᴍ ᴍᴀᴄʜɪɴᴇ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No video generated')
@@ -12092,7 +12092,7 @@ case 'animateimage': {
     if (data.video_url) {
       await bad.sendMessage(m.chat, {
         video: { url: data.video_url },
-        caption: `*◆ ɪᴍᴀɢᴇ ᴛᴏ ᴠɪᴅᴇᴏ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`
+        caption: `*◆ ɪᴍᴀɢᴇ ᴛᴏ ᴠɪᴅᴇᴏ*\n\n📝 ᴘʀᴏᴍᴘᴛ: ${text}\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ☠︎︎ Sasuke Xtv ☠`
       }, { quoted: m })
     } else {
       throw new Error('No video generated')
@@ -12121,12 +12121,12 @@ case 'STG': {
     }
     
     const mediaType = m.quoted.mtype
-    const footer = "☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠"
+    const footer = "☠︎︎ Sasuke Xtv ☠"
     
     if (mediaType === 'imageMessage') {
       await bad.sendMessage(m.chat, {
         image: mediaBuffer,
-        caption: "*Magic By ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠︎︎~*" + footer
+        caption: "*Magic By ☠︎︎ Sasuke Xtv ☠︎︎~*" + footer
       }, { quoted: m })
     } else if (mediaType === 'videoMessage') {
       await bad.sendMessage(m.chat, {
@@ -12241,7 +12241,7 @@ ${prefix + command} <ᴄʜᴀɴɴᴇʟ-ʟɪɴᴋ> <ᴇᴍᴏᴊɪ>
 ${prefix + command} https://whatsapp.com/channel/xxxxxxxx 🤨
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-🙃 '☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠`)
+🙃 '☠︎︎ Sasuke Xtv ☠`)
   }
   
   if (!args[0].startsWith("https://whatsapp.com/channel/")) {
@@ -12537,7 +12537,7 @@ case 'programming': {
 
                         role: 'system',
 
-                        content: 'You are a ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠ a programming expert created by ⏤͟͞❮❮ ♧✰☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠ ✰🜲⃤҉ ❯❯⏤͟͞. Provide clear, concise code solutions with explanations.'
+                        content: 'You are a ☠︎︎ Sasuke Xtv ☠ a programming expert created by ⏤͟͞❮❮ ♧✰☠︎︎ Sasuke Xtv ☠ ✰🜲⃤҉ ❯❯⏤͟͞. Provide clear, concise code solutions with explanations.'
 
                     },
 
@@ -12573,7 +12573,7 @@ break;
 
 case 'repo': {
     reply(`╭━━━━━━━━━━━━━━━╮
-┃✨ ☠︎︎ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ☠┃
+┃✨ ☠︎︎ Sasuke Xtv ☠┃
 ╰━━━━━━━━━━━━━━━╯
 
 ◆ 🤖 TELEGRAM BOTS ◆
@@ -12790,7 +12790,7 @@ module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
                     await bad.sendPresenceUpdate('paused', from);
                     
                     await bad.sendMessage(from, { 
-                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ 𝑷𝑹𝑶x𝑨𝑩𝑫𝑼𝑳𝑳𝑨𝑯 𝑴𝑰𝑵𝑰 ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}\n\nʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏᴅᴀʏ?` 
+                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ Sasuke Xtv ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}\n\nʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏᴅᴀʏ?` 
                     });
                 }
             }

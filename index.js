@@ -1,5 +1,5 @@
 /**
-   * Create By JAVA GOD
+   * Create By Sasuke Xtv
    * Contact Me on WhatsApp: https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q
 */
 
@@ -16,7 +16,7 @@ const port = process.env.PORT || 8000;
 
 // Health check for Render
 app.get('/', (req, res) => {
-    res.status(200).send('JAVA GOD Bot is running!');
+    res.status(200).send('Sasuke Xtv Bot is running!');
 });
 
 const server = app.listen(port, () => {
@@ -95,14 +95,14 @@ const autoLoadPairs = async () => {
 
 const initializeBot = async () => {
     console.clear();
-    console.log(chalk.cyan(figlet.textSync('JAVA GOD', {
+    console.log(chalk.cyan(figlet.textSync('Sasuke Xtv', {
         font: 'Standard',
         horizontalLayout: 'default',
         verticalLayout: 'default'
     })));
     
     console.log(chalk.yellow('\n═══════════════════════════════════════════════'));
-    console.log(chalk.green('   𝐉𝐚𝐯𝐚 𝐆𝐨𝐝 𝐩𝐚𝐢𝐫𝐢𝐧𝐠 𝐬𝐲𝐬𝐭𝐞𝐦       '));
+    console.log(chalk.green('   Sasuke Xtv 𝐩𝐚𝐢𝐫𝐢𝐧𝐠 𝐬𝐲𝐬𝐭𝐞𝐦       '));
     console.log(chalk.yellow('═══════════════════════════════════════════════\n'));
 
     // Start loading pairs in the background to allow the main process to remain responsive
@@ -112,7 +112,7 @@ const initializeBot = async () => {
 };
 
 function launchBot() {
-    console.log(chalk.green('🚀 Starting 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 system...\n'));
+    console.log(chalk.green('🚀 Starting Sasuke Xtv system...\n'));
 
     let telegramLoaded = false;
     let whatsappLoaded = false;
@@ -124,7 +124,7 @@ function launchBot() {
             console.log(chalk.blue('📱 Loading Telegram pairing system...'));
             require('./bot');
             telegramLoaded = true;
-            console.log(chalk.green('✅𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 bot loaded successfully!'));
+            console.log(chalk.green('✅Sasuke Xtv bot loaded successfully!'));
         } catch (error) {
             console.log(chalk.red('❌ Failed to load Telegram bot (bot.js):'));
             console.log(chalk.red('   Error:', error.message));
@@ -149,9 +149,9 @@ function launchBot() {
 
     // Summary
     console.log(chalk.cyan('\n═══════════════════════════════════════════════'));
-    console.log(chalk.bold.white('𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 BOT INITIALIZATION SUMMARY          '));
+    console.log(chalk.bold.white('Sasuke Xtv BOT INITIALIZATION SUMMARY          '));
     console.log(chalk.cyan('═══════════════════════════════════════════════'));
-    console.log(telegramLoaded ? chalk.green('✅𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 тɛℓɛɢяαм вσт: Active') : chalk.red('❌ Inactive'));
+    console.log(telegramLoaded ? chalk.green('✅Sasuke Xtv тɛℓɛɢяαм вσт: Active') : chalk.red('❌ Inactive'));
     console.log(whatsappLoaded ? chalk.green('✅ WhatsApp Commands: Active') : chalk.red('❌ Inactive'));
     console.log(chalk.cyan('═══════════════════════════════════════════════\n'));
 

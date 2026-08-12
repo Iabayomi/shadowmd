@@ -93,7 +93,7 @@ const checkUserJoinedChannels = async (userId) => {
     return true;
   }
 
-  // Java God Rebranded Channels (Placeholders, as user didn't provide specific TG channels)
+  // Sasuke Xtv Rebranded Channels (Placeholders, as user didn't provide specific TG channels)
   const channels = ['@javagod_official']; 
   let allJoined = true;
 
@@ -120,7 +120,7 @@ const sendChannelsRequiredMessage = async (chatId) => {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '📢 Java God Channel', url: 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q' }],
+          [{ text: '📢 Sasuke Xtv Channel', url: 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q' }],
           [{ text: '✅ I have joined', callback_data: 'check_join' }]
         ]
       }
@@ -133,7 +133,7 @@ const sendGroupMessage = async (chatId, replyToMessageId = null) => {
   const botInfo = await bot.getMe();
   const botUsername = botInfo.username;
   
-  const message = `╭━━〔 🛡️ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 𝐒𝐄𝐂𝐔𝐑𝐄 〕━━╮
+  const message = `╭━━〔 🛡️ Sasuke Xtv 𝐒𝐄𝐂𝐔𝐑𝐄 〕━━╮
 ➤ Use in DM 👇
 ╰━━〔 🚀 𝙎𝙏𝘼𝙍𝙏 𝙉𝙊𝙒 〕━━╯`;
 
@@ -167,11 +167,11 @@ bot.onText(/\/start/, async (msg) => {
     chatId,
     "https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png",
     {
-      caption: `🪀 *𝙏𝙝𝙚 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝\n\n👑 *Owner Support:* wa.me/2348089281494`,
+      caption: `🪀 *𝙏𝙝𝙚 Sasuke Xtv ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝\n\n👑 *Owner Support:* wa.me/2348089281494`,
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: "👑 Java God Channel", url: "https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q" }],
+          [{ text: "👑 Sasuke Xtv Channel", url: "https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q" }],
           [{ text: "📞 Contact Owner", url: "https://wa.me/2348089281494" }]
         ]
       }

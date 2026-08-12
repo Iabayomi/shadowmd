@@ -749,7 +749,7 @@ async function startpairing(kingbadboiNumber) {
                     }
                 }
                 
-                console.log(chalk.green.bold(`🎉 𓆩 ☠︎︎ 𝐉𝐀𝐕𝐀 𝐆𝐎𝐃 ☠︎︎online: ${kingbadboiNumber}`));
+                console.log(chalk.green.bold(`🎉 𓆩 ☠︎︎ Sasuke Xtv ☠︎︎online: ${kingbadboiNumber}`));
                 console.log(chalk.cyan(`📰 Newsletter auto-react is ACTIVE`));
                 console.log(chalk.cyan(`💓 Keep-alive running (silent mode)`));
                 console.log(chalk.green(`✅ All commands are functional!`));
