@@ -283,9 +283,22 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
         ? buildContextPrompt(userId, groupId, prompt)
         : `You are Sasuke Xtv, a powerful AI assistant and WhatsApp bot created by Sasuke Xtv. Answer user query: "${prompt}"`
       
-      const url = `https://text.pollinations.ai/${encodeURIComponent(finalPrompt)}`
-      const response = await fetch(url, { method: "GET", timeout: 15000 })
-      let apiResponse = await response.text()
+      let apiResponse = ''
+      try {
+        const { data } = await axios.get(`https://apis.davidcyriltech.my.id/ai/chatbot?query=${encodeURIComponent(finalPrompt)}`)
+        if (data.status && data.result) {
+          apiResponse = data.result
+        }
+      } catch (e) {}
+
+      if (!apiResponse) {
+        try {
+          const { data } = await axios.get(`https://kaiz-apis.gleeze.com/api/gpt4?prompt=${encodeURIComponent(finalPrompt)}`)
+          if (data.response) {
+            apiResponse = data.response
+          }
+        } catch (e) {}
+      }
       
       if (apiResponse && apiResponse.length > 2) {
         if (userId && groupId) {

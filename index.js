@@ -223,13 +223,13 @@ function launchBot() {
     ];
 
     process.on('unhandledRejection', (reason, promise) => {
-        if (ignoredErrors.some(e => String(reason).includes(e))) return;
-        console.log(chalk.red('\n⚠️  Unhandled Promise Rejection:'), reason);
+        // Never crash on unhandled rejection
+        console.log(chalk.yellow('\n⚠️  Caught Rejection (Handled):'), reason?.message || reason);
     });
 
     process.on('uncaughtException', (error) => {
-        if (ignoredErrors.some(e => String(error).includes(e))) return;
-        console.log(chalk.red('\n❌ Uncaught Exception:'), error.message);
+        // Never exit on uncaught exception to ensure 24/7 uptime
+        console.log(chalk.yellow('\n⚠️  Caught Exception (Handled):'), error?.message || error);
     });
 
     console.log(chalk.blue('📊 Bot monitoring active...'));
