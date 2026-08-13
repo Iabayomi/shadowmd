@@ -95,6 +95,24 @@ setTimeout(() => {
 
 const AUTH_FILE = './auth.json';
 const PAIRING_DIR = './kingbadboitimewisher/pairing/';
+const LOCK_FILE = './kingbadboitimewisher/bot.lock';
+
+// 🔥 SINGLETON LOCK - Prevents multiple bot instances
+if (fs.existsSync(LOCK_FILE)) {
+    try {
+        const pid = fs.readFileSync(LOCK_FILE, 'utf8');
+        // Check if process is actually running
+        process.kill(parseInt(pid), 0);
+        console.log(chalk.red.bold(`⚠️ Another bot instance is already running (PID: ${pid}). Exiting...`));
+        process.exit(0);
+    } catch (e) {
+        // Process not running, stale lock file
+        fs.unlinkSync(LOCK_FILE);
+    }
+}
+fs.writeFileSync(LOCK_FILE, process.pid.toString());
+process.on('exit', () => { if (fs.existsSync(LOCK_FILE)) fs.unlinkSync(LOCK_FILE); });
+
 const startpairing = require('./pair');
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -159,8 +177,9 @@ const initializeBot = async () => {
     console.log(chalk.green('   Sasuke Xtv 𝐩𝐚𝐢𝐫𝐢𝐧𝐠 𝐬𝐲𝐬𝐭𝐞𝐦       '));
     console.log(chalk.yellow('═══════════════════════════════════════════════\n'));
 
-    // Start loading pairs in the background to allow the main process to remain responsive
-    autoLoadPairs().catch(err => console.error('Error in autoLoadPairs:', err));
+    // 🔥 ONLY ONE SYSTEM SHOULD LOAD PAIRS
+    // launchBot() will trigger bot.js, which calls autoload.js
+    // We don't need to call autoLoadPairs() here anymore
     
     launchBot();
 };

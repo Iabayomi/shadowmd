@@ -218,6 +218,16 @@ async function startpairing(kingbadboiNumber) {
     }
     
     const tracker = rentbotTracker.get(kingbadboiNumber);
+    
+    // 🔥 Prevent duplicate connections
+    if (tracker.connection) {
+        try {
+            console.log(chalk.yellow(`🔄 Closing existing connection for ${kingbadboiNumber}...`));
+            tracker.connection.ev.removeAllListeners();
+            tracker.connection.terminate();
+        } catch (e) {}
+    }
+
     tracker.retryCount++;
     tracker.disconnected = false;
     tracker.lastActivity = Date.now();
@@ -462,7 +472,8 @@ async function startpairing(kingbadboiNumber) {
             mek = smsg(badboiConnect, badboijid, store);
             
             // Pass to your command handler (drenox.js)
-            handleMessage(badboiConnect, mek, chatUpdate, store);
+            // 🔥 Await the handler to catch errors and ensure processing
+            await handleMessage(badboiConnect, mek, chatUpdate, store);
             
         } catch (err) {
             console.log(chalk.red(`❌ Message handler error: ${err.message}`));

@@ -12601,41 +12601,42 @@ await handleMessageCommand(bad, m, chatUpdate, store)
 
             
             // ==================== AUTO PRESENCE ====================
-            const lastPresence = activePresence.get(chatId)
+            // Fix: Use 'from' instead of undefined 'chatId'
+            const lastPresence = activePresence.get(from)
             if (!lastPresence || Date.now() - lastPresence > 3000) {
-                activePresence.set(chatId, Date.now())
+                activePresence.set(from, Date.now())
                 
                 if (global.autoPresence && global.autoPresence !== 'off') {
                     const presenceType = global.autoPresence === 'typing' ? 'composing' 
                                        : global.autoPresence === 'recording' ? 'recording'
                                        : 'available'
                     
-                    await bad.sendPresenceUpdate(presenceType, chatId)
+                    try { await bad.sendPresenceUpdate(presenceType, from) } catch {}
                     
                     setTimeout(async () => {
                         try {
-                            await bad.sendPresenceUpdate('paused', chatId)
+                            await bad.sendPresenceUpdate('paused', from)
                         } catch {}
                     }, 10000)
                 }
                 
                 if (!global.autoPresence || global.autoPresence === 'off') {
                     if (global.autoTyping) {
-                        await bad.sendPresenceUpdate('composing', chatId)
+                        try { await bad.sendPresenceUpdate('composing', from) } catch {}
                         
                         setTimeout(async () => {
                             try {
-                                await bad.sendPresenceUpdate('paused', chatId)
+                                await bad.sendPresenceUpdate('paused', from)
                             } catch {}
                         }, 10000)
                     }
                     
                     if (global.autoRecording) {
-                        await bad.sendPresenceUpdate('recording', chatId)
+                        try { await bad.sendPresenceUpdate('recording', from) } catch {}
                         
                         setTimeout(async () => {
                             try {
-                                await bad.sendPresenceUpdate('paused', chatId)
+                                await bad.sendPresenceUpdate('paused', from)
                             } catch {}
                         }, 10000)
                     }
@@ -12708,6 +12709,7 @@ await handleMessageCommand(bad, m, chatUpdate, store)
                 continue
             }
             
+            const sender = msg.key.participant || msg.key.remoteJid
             console.log(`👤 User: ${sender}`)
             console.log(`💬 Message: "${body.substring(0, 50)}..."`)
             
@@ -13145,9 +13147,7 @@ module.exports.setupEventListeners = function(bad, store) {
 // ==================== OTHER EXPORTS ====================
 module.exports = { 
     handleMessage, 
-    setupEventListeners: function(bad, store) {
-        // Setup any other event listeners here if needed
-    },
+    setupEventListeners: module.exports.setupEventListeners, // Fix: Use the real function defined above
     groupMetadataCache,
     refreshGroupMetadata,
     checkAdminStatus
