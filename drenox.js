@@ -1486,9 +1486,18 @@ case "virus":
 case "text-bug":
 case "loc-bug": {
     if (!isCreator) return reply(mess.owner)
-    if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴛᴀʀɢᴇᴛ ɴᴜᴍʙᴇʀ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} 234xxxxxxxxx`)
     
-    const target = text.replace(/[^0-9]/g, "") + "@s.whatsapp.net"
+    let target;
+    if (m.quoted) {
+        target = m.quoted.sender;
+    } else if (m.mentionedJid && m.mentionedJid.length > 0) {
+        target = m.mentionedJid[0];
+    } else if (text) {
+        target = text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+    } else {
+        return reply(`❌ *ᴘʟᴇᴀsᴇ ᴛᴀʀɢᴇᴛ sᴏᴍᴇᴏɴᴇ!*\n\n• Reply to a message\n• Tag someone (@user)\n• Type number manually`);
+    }
+    
     await reply(`🚀 *sᴇɴᴅɪɴɢ ${command.toUpperCase()} ᴘᴀʏʟᴏᴀᴅ ᴛᴏ ᴛᴀʀɢᴇᴛ...*`)
     
     try {
