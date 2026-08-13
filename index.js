@@ -95,23 +95,6 @@ setTimeout(() => {
 
 const AUTH_FILE = './auth.json';
 const PAIRING_DIR = './kingbadboitimewisher/pairing/';
-const LOCK_FILE = './kingbadboitimewisher/bot.lock';
-
-// 🔥 SINGLETON LOCK - Prevents multiple bot instances
-if (fs.existsSync(LOCK_FILE)) {
-    try {
-        const pid = fs.readFileSync(LOCK_FILE, 'utf8');
-        // Check if process is actually running
-        process.kill(parseInt(pid), 0);
-        console.log(chalk.red.bold(`⚠️ Another bot instance is already running (PID: ${pid}). Exiting...`));
-        process.exit(0);
-    } catch (e) {
-        // Process not running, stale lock file
-        fs.unlinkSync(LOCK_FILE);
-    }
-}
-fs.writeFileSync(LOCK_FILE, process.pid.toString());
-process.on('exit', () => { if (fs.existsSync(LOCK_FILE)) fs.unlinkSync(LOCK_FILE); });
 
 const startpairing = require('./pair');
 
