@@ -14,10 +14,64 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 8000;
 
-// Health check for Render
+// Health check & Admin Panel
 app.get('/', (req, res) => {
-    res.status(200).send('Sasuke Xtv Bot is running!');
+    const uptime = runtime(process.uptime());
+    const pairedUsersCount = fs.existsSync(PAIRING_DIR) 
+        ? fs.readdirSync(PAIRING_DIR, { withFileTypes: true }).filter(d => d.isDirectory()).length 
+        : 0;
+
+    res.status(200).send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sasuke Xtv Admin Panel</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f0f; color: #e0e0e0; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; }
+            .card { background: #1a1a1a; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); border: 1px solid #333; max-width: 500px; width: 90%; text-align: center; }
+            h1 { color: #bb86fc; margin-bottom: 0.5rem; }
+            .status { display: inline-block; padding: 0.5rem 1rem; background: #03dac6; color: #000; border-radius: 20px; font-weight: bold; margin-bottom: 1.5rem; }
+            .info { text-align: left; background: #252525; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+            .info p { margin: 0.5rem 0; font-size: 0.9rem; }
+            .info b { color: #cf6679; }
+            .footer { font-size: 0.8rem; color: #777; margin-top: 1rem; }
+            .btn { display: block; width: 100%; padding: 0.8rem; background: #bb86fc; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 1rem; transition: 0.3s; }
+            .btn:hover { background: #9965f4; }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>Sasuke Xtv Bot</h1>
+            <div class="status">● ONLINE</div>
+            <div class="info">
+                <p><b>Uptime:</b> ${uptime}</p>
+                <p><b>Active Sessions:</b> ${pairedUsersCount}</p>
+                <p><b>Platform:</b> Linux (Render/Railway)</p>
+                <p><b>Version:</b> 2.0.0</p>
+            </div>
+            <a href="https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q" class="btn">Join Official Channel</a>
+            <div class="footer">Powered by Sasuke Xtv Official</div>
+        </div>
+    </body>
+    </html>
+    `);
 });
+
+// Helper function for uptime
+function runtime(seconds) {
+	seconds = Number(seconds);
+	var d = Math.floor(seconds / (3600 * 24));
+	var h = Math.floor(seconds % (3600 * 24) / 3600);
+	var m = Math.floor(seconds % 3600 / 60);
+	var s = Math.floor(seconds % 60);
+	var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
+	var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+	var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+	var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+	return dDisplay + hDisplay + mDisplay + sDisplay;
+}
 
 const server = app.listen(port, () => {
     console.log(chalk.green(`🌐 Web server started on port ${port}`));

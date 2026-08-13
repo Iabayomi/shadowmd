@@ -1362,6 +1362,157 @@ case 'menu2': {
 ┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ Sasuke Xtv ☠︎︎*
 ┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎ Sasuke Xtv 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎*
 ┃✮│ 📦 ᴠᴇʀsɪᴏɴ  : *2.0*
+┃✮│ 📡 ᴘʟᴀᴛғᴏʀᴍ : *𝙇𝙄𝙉𝙐𝙓*
+┃✮╰────────────────
+╰━━━━━━━━━━━━━━━┈⊷
+
+╭━━〔 👑 ᴏᴡɴᴇʀ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}ᴘᴜʙʟɪᴄ
+┃✮│➣ ${prefix}sᴇʟꜰ
+┃✮│➣ ${prefix}ʙʟᴏᴄᴋ
+┃✮│➣ ${prefix}ᴜɴʙʟᴏᴄᴋ
+┃✮│➣ ${prefix}ʙʀᴏᴀᴅᴄᴀsᴛ
+┃✮│➣ ${prefix}sᴇᴛᴘᴘʙᴏᴛ
+┃✮│➣ ${prefix}ᴀᴜᴛᴏʙɪᴏ
+┃✮│➣ ${prefix}ᴀᴅᴅᴏᴡɴᴇʀ
+┃✮│➣ ${prefix}ᴅᴇʟᴏᴡɴᴇʀ
+┃✮│➣ ${prefix}ᴀᴅᴅᴘʀᴇᴍ
+┃✮│➣ ${prefix}ᴅᴇʟᴘʀᴇᴍ
+┃✮│➣ ${prefix}ʀᴜɴᴛɪᴍᴇ
+┃✮│➣ ${prefix}sᴘᴇᴇᴅ
+┃✮│➣ ${prefix}ɢᴇᴛᴘᴘ
+┃✮│➣ ${prefix}ᴀᴜᴛᴏᴘʀᴇsᴇɴᴄᴇ
+┃✮│➣ ${prefix}ᴀᴜᴛᴏʀᴇᴄᴏʀᴅɪɴɢ
+┃✮│➣ ${prefix}ᴀᴜᴛᴏᴛʏᴘɪɴɢ
+┃✮│➣ ${prefix}sᴇᴛᴘʀᴇꜰɪx
+┃✮│➣ ${prefix}ᴄʟᴇᴀʀᴛᴍᴘ
+┃✮│➣ ${prefix}ʀᴇsᴛᴀʀᴛ
+┃✮│➣ ${prefix}sᴀᴠᴇsᴛᴀᴛᴜs
+┃✮│➣ ${prefix}ᴀᴜᴛᴏʀᴇᴀᴅ
+┃✮│➣ ${prefix}ᴀᴜᴛᴏᴠɪᴇᴡsᴛᴀᴛᴜs
+┃✮│➣ ${prefix}ᴀᴜᴛᴏʟɪᴋᴇsᴛᴀᴛᴜs
+┃✮│➣ ${prefix}ꜰɪxᴏᴡɴᴇʀ
+┃✮│➣ ${prefix}ᴄᴄɢᴇɴ
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+╭━━〔 👥 ɢʀᴏᴜᴘ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}ᴀᴅᴅ
+┃✮│➣ ${prefix}ᴋɪᴄᴋ
+┃✮│➣ ${prefix}ᴘʀᴏᴍᴏᴛᴇ
+┃✮│➣ ${prefix}ᴅᴇᴍᴏᴛᴇ
+┃✮│➣ ${prefix}ɢʀᴏᴜᴘ
+┃✮│➣ ${prefix}ᴛᴀɢᴀʟʟ
+┃✮│➣ ${prefix}ʜɪᴅᴇᴛᴀɢ
+┃✮│➣ ${prefix}ᴇᴅɪᴛɪɴꜰᴏ
+┃✮│➣ ${prefix}sᴇᴛɴᴀᴍᴇ
+┃✮│➣ ${prefix}sᴇᴛᴅᴇsᴄ
+┃✮│➣ ${prefix}sᴇᴛᴘᴘɢᴄ
+┃✮│➣ ${prefix}ʟɪɴᴋɢᴄ
+┃✮│➣ ${prefix}ʀᴇᴠᴏᴋᴇ
+┃✮│➣ ${prefix}ᴀɴᴛɪʟɪɴᴋ
+┃✮│➣ ${prefix}ᴀɴᴛɪᴛᴏxɪᴄ
+┃✮│➣ ${prefix}ᴡᴇʟᴄᴏᴍᴇ
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+╭━━〔 ⬇️ ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}ᴘʟᴀʏ
+┃✮│➣ ${prefix}ʏᴛᴍᴘ𝟹
+┃✮│➣ ${prefix}ʏᴛᴍᴘ𝟺
+┃✮│➣ ${prefix}ᴛɪᴋᴛᴏᴋ
+┃✮│➣ ${prefix}ɪɢᴅʟ
+┃✮│➣ ${prefix}ꜰʙᴅʟ
+┃✮│➣ ${prefix}ɢɪᴛᴄʟᴏɴᴇ
+┃✮│➣ ${prefix}ᴍᴇᴅɪᴀꜰɪʀᴇ
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+╭━━〔 🤖 ᴀɪ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}ᴀɪ
+┃✮│➣ ${prefix}ɢᴘᴛ
+┃✮│➣ ${prefix}ɢᴇᴍɪɴɪ
+┃✮│➣ ${prefix}ᴅᴇᴇᴘsᴇᴇᴋ
+┃✮│➣ ${prefix}ᴍɪsᴛʀᴀʟ
+┃✮│➣ ${prefix}ɢʀᴏǫ
+┃✮│➣ ${prefix}ᴀɪᴅᴇᴛᴇᴄᴛ
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+╭━━〔 🛠️ ᴜᴛɪʟɪᴛʏ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}sᴛɪᴄᴋᴇʀ
+┃✮│➣ ${prefix}ᴛᴏɪᴍɢ
+┃✮│➣ ${prefix}ᴛᴏᴍᴘ𝟹
+┃✮│➣ ${prefix}ᴛᴏᴠᴏɪᴄᴇ
+┃✮│➣ ${prefix}ᴛᴏɢɪꜰ
+┃✮│➣ ${prefix}ᴇʙɪɴᴀʀʏ
+┃✮│➣ ${prefix}ᴅʙɪɴᴀʀʏ
+┃✮│➣ ${prefix}ssᴡᴇʙ
+┃✮│➣ ${prefix}ǫʀ
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+╭━━〔 🦠 ʙᴜɢ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}ʙᴜɢ
+┃✮│➣ ${prefix}ᴄʀᴀsʜ
+┃✮│➣ ${prefix}ᴜɪ-ʙᴜɢ
+┃✮│➣ ${prefix}ɪᴏs-ʙᴜɢ
+┃✮│➣ ${prefix}ᴀɴᴅʀᴏɪᴅ-ʙᴜɢ
+┃✮│➣ ${prefix}ᴠɪʀᴜs
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+> ρσωєяє∂ ву Sasuke Xtv`
+
+  await bad.sendMessage(from, {
+    image: { url: randomImage },
+    caption: menuText,
+    contextInfo: {
+      forwardingScore: 0,
+      isForwarded: false
+    }
+  }, { quoted: m })
+}
+break
+
+case 'bugmenu': {
+  if (!isCreator) return reply(global.ownermess)
+  await loading()
+  const menuText = `
+╭━━〔 🦠 Sasuke Xtv ʙᴜɢ ᴍᴇɴᴜ 〕━━┈⊷
+┃✮│➣ ${prefix}ʙᴜɢ
+┃✮│➣ ${prefix}ᴄʀᴀsʜ
+┃✮│➣ ${prefix}ᴜɪ-ʙᴜɢ
+┃✮│➣ ${prefix}ɪᴏs-ʙᴜɢ
+┃✮│➣ ${prefix}ᴀɴᴅʀᴏɪᴅ-ʙᴜɢ
+┃✮│➣ ${prefix}ᴠɪʀᴜs
+┃✮│➣ ${prefix}ᴛᴇxᴛ-ʙᴜɢ
+┃✮│➣ ${prefix}ʟᴏᴄ-ʙᴜɢ
+╰━━━━━━━━━━━━━━━━━━━━━┈⊷
+
+> ρσωєяє∂ ву Sasuke Xtv`
+
+  await bad.sendMessage(from, {
+    image: { url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png' },
+    caption: menuText,
+    contextInfo: {
+      forwardingScore: 0,
+      isForwarded: false
+    }
+  }, { quoted: m })
+}
+break
+
+  await loading()
+  
+  const menuImages = [
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png'
+  ]
+  
+  const randomImage = menuImages[Math.floor(Math.random() * menuImages.length)]
+  const uptime = runtime(process.uptime())
+  
+  const menuText = `
+╭━━〔 ☠️ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ☠️ 〕━━┈⊷
+┃✮╭────────────────
+┃✮│ 🤖 ʙᴏᴛ  :*☠︎︎ Sasuke Xtv ☠︎︎*
+┃✮│ 👑 ᴏᴡɴᴇʀ : *☠︎︎ Sasuke Xtv 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 ☠︎︎*
+┃✮│ 📦 ᴠᴇʀsɪᴏɴ  : *2.0*
 ┃✮│ 📡 ᴘʟᴀᴛғᴏʀᴍ : *𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢*
 ┃✮╰────────────────
 ╰━━━━━━━━━━━━━━━┈⊷
@@ -1963,9 +2114,9 @@ case 'listmenu': {
 *┇*✾╭┉┉┉┉┉┉┉┉┉┉━┈᛭*
 *┋❁┋. ʙᴏᴛ ɴᴀᴍᴇ: Sasuke Xtv*
 *┋❁┋. ᴄᴏᴍᴍᴀɴᴅs: 𝟮𝟬𝟱*
-*┋❁┋. ᴅᴇᴠ : ρяσχαв∂υℓℓαн*
+*┋❁┋. ᴅᴇᴠ : Sasuke Xtv*
 *┋❁┋. ᴘʟᴀᴛғᴏʀᴍ: 𝙇𝙄𝙉𝙐𝙓*
-*┋❁┋. ᴏᴡɴᴇʀ : ρяσχαв∂υℓℓαн*
+*┋❁┋. ᴏᴡɴᴇʀ : Sasuke Xtv*
 *┋❁┋. ᴍᴏᴅᴇ: 𝙋𝙐𝘽𝙇𝙄𝘾*
 *┇*✾╰┉┉┉┉┉┉┉┉┉┉━┈⊷
 *╰══════════════════⍟*
@@ -1989,7 +2140,7 @@ case 'listmenu': {
 *┃✮│➣ ${prefix}ɪᴍᴀɢᴇᴍᴇɴᴜ*
 *╰━━━━━━━━━━━━━━━┈⊷*
 
-> ρσωєяє∂ ву ρяσχαв∂υℓℓαн`
+> ρσωєяє∂ ву Sasuke Xtv`
 
   await bad.sendMessage(from, {
     image: { url: randomImage },
@@ -11751,8 +11902,8 @@ case 'groq': {
     
     try {
         const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(text)}`;
-        const response = await fetch(url, { method: "GET", timeout: 10000 });
-        const data = await response.json();
+        const response = await axios.get(url, { timeout: 15000 });
+        const data = response.data;
         
         const result = data.result || data.response || data.message || data.data;
         
