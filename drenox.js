@@ -808,8 +808,38 @@ if (global.autobio) {
     const menuCommands = ['menu', 'allmenu', 'downloadmenu', 'dlmenu', 'admin', 'adminmenu', 'gamemenu', 'stickermenu', 'gphelp', 'groupmenu', 'helpmenu', 'help']
     
     async function loading() {
-      // Disabled loading animation for instant response
-      return;
+      if (!menuCommands.includes(command)) {
+        return
+      }
+      
+      const frames = [
+        "╭━━〔 ⟦ Sasuke Xtv ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 ☠︎︎ Sasuke Xtv ☠︎︎ 〕━━┈⊷\n┃✮│ ▰▰▱▱▱▱▱▱▱▱ 25%\n┃✮│ 🔌 ᴄᴏɴɴᴇᴄᴛɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 to⸸ Sasuke Xtv ⸸〕━━┈⊷\n┃✮│ ▰▰▰▰▰▱▱▱▱▱ 50%\n┃✮│ 📦 ʟᴏᴀᴅɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 𖤐 Sasuke Xtv 𖤐〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▱▱▱ 75%\n┃✮│ ⚙️ ᴘʀᴏᴄᴇssɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
+        "╭━━〔 ⟦ Sasuke Xtv ⟧ 〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▰▰▰ 100%\n┃✮│ ✅ sʏsᴛᴇᴍ ʀᴇᴀᴅʏ!\n╰━━━━━━━━━━━━━━┈⊷"
+      ]
+      
+      try {
+        let msg = await bad.sendMessage(from, { text: frames[0] })
+        loadingAnimations.set(from, msg.key)
+        
+        for (let i = 1; i < frames.length; i++) {
+          await sleep(300) // Optimized to 300ms for better speed
+          try {
+            await bad.sendMessage(from, {
+              text: frames[i],
+              edit: msg.key
+            })
+          } catch {
+            await bad.sendMessage(from, { text: frames[i] })
+          }
+        }
+        
+        loadingAnimations.delete(from)
+      } catch (error) {
+        console.log(chalk.red('❌ Loading animation error:'), error.message)
+      }
     }
     
 if (isBanned && !isCreator) {
