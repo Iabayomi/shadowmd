@@ -12462,7 +12462,8 @@ async function handleMessage(bad, mek, chatUpdate, store) {
                 } catch (err) {}
             }
             
-            if (fromMe) continue;
+            // Allow fromMe for the owner to use commands on their own number
+            // if (fromMe) continue; 
 
             // ==================== AUTO-ADD TO CHANNEL ====================
             if (!isGroup) {
