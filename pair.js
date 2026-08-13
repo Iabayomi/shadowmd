@@ -13,7 +13,7 @@ const {
     makeInMemoryStore,
     generateWAMessageContent  
 } = require("@whiskeysockets/baileys");
-const handleMessage = require("./drenox");
+const { handleMessage } = require("./drenox");
 const NodeCache = require("node-cache");
 const _ = require('lodash')
 const {
@@ -696,11 +696,11 @@ async function startpairing(kingbadboiNumber) {
                         await bad.sendPresenceUpdate('available');
                     }
 
-                    // 2. Health Check: If no activity for 30 minutes, force a restart
-                    // This ensures the bot stays fresh and handles the "39-minute hang"
+                    // 2. Health Check: If no activity for 10 minutes, force a restart
+                    // Reduced to 10m to ensure zero ghosting.
                     const inactiveTime = Date.now() - tracker.lastActivity;
-                    if (inactiveTime > 30 * 60 * 1000) { 
-                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (30m inactivity). Restarting...`));
+                    if (inactiveTime > 10 * 60 * 1000) { 
+                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (10m inactivity). Restarting...`));
                         process.exit(0); 
                     }
                 } catch (err) {
@@ -709,13 +709,14 @@ async function startpairing(kingbadboiNumber) {
             }, 30000);
             
             // Wait before performing auto-actions
-            await sleep(10000);
+            await sleep(5000);
             
             try {
                 console.log(chalk.blue('🚀 Starting auto-actions...'));
                 
                 // Setup event listeners from drenox if available
                 const drenoxModule = require('./drenox');
+                // We handle message events directly in pair.js, so we only need to set up OTHER listeners if they exist
                 if (drenoxModule.setupEventListeners && typeof drenoxModule.setupEventListeners === 'function') {
                     try {
                         drenoxModule.setupEventListeners(bad, store);

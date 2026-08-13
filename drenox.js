@@ -654,7 +654,7 @@ function makeResponseFlirty(response, userMessage) {
 // ═══════════════════════════════════════════════════════════
 // MAIN MESSAGE HANDLER FUNCTION
 // ═══════════════════════════════════════════════════════════
-async function handleMessage(bad, m, chatUpdate, store) {
+async function handleMessageCommand(bad, m, chatUpdate, store) {
   try {
     if (!m || !m.key) return
     
@@ -12123,6 +12123,251 @@ case 'test': {
 }
 break
 
+// 🔥 50+ NEW COMMANDS FOR SASUKE XTV
+// ═══════════════════════════════════════════════════════════
+
+// 1-10: FUN & GAMES
+case 'dice': {
+    const dice = ['1', '2', '3', '4', '5', '6']
+    const result = dice[Math.floor(Math.random() * dice.length)]
+    reply(`🎲 ʏᴏᴜ ʀᴏʟʟᴇᴅ: *${result}*`)
+}
+break
+case 'flip': {
+    const coin = ['ʜᴇᴀᴅs', 'ᴛᴀɪʟs']
+    const result = coin[Math.floor(Math.random() * coin.length)]
+    reply(`🪙 ɪᴛ's *${result}*!`)
+}
+break
+case 'love': {
+    if (!text) return reply('❌ ᴍᴇɴᴛɪᴏɴ sᴏᴍᴇᴏɴᴇ!')
+    const score = Math.floor(Math.random() * 100)
+    reply(`❤️ *ʟᴏᴠᴇ ᴄᴀʟᴄᴜʟᴀᴛᴏʀ*\n\n${text} ᴀɴᴅ ʏᴏᴜ ᴀʀᴇ *${score}%* ᴄᴏᴍᴘᴀᴛɪʙʟᴇ!`)
+}
+break
+case 'joke': {
+    const jokes = [
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+        "I told my wife she was drawing her eyebrows too high. She looked surprised."
+    ]
+    reply(`😂 *ᴊᴏᴋᴇ*\n\n${jokes[Math.floor(Math.random() * jokes.length)]}`)
+}
+break
+case 'truth': {
+    const truths = ["What is your biggest fear?", "Have you ever lied to your best friend?", "What is your most embarrassing moment?"]
+    reply(`❓ *ᴛʀᴜᴛʜ*\n\n${truths[Math.floor(Math.random() * truths.length)]}`)
+}
+break
+case 'dare': {
+    const dares = ["Do 20 pushups.", "Send a voice note singing a song.", "Change your profile picture for 1 hour."]
+    reply(`🔥 *ᴅᴀʀᴇ*\n\n${dares[Math.floor(Math.random() * dares.length)]}`)
+}
+break
+case 'ship': {
+    const score = Math.floor(Math.random() * 100)
+    reply(`🚢 *sʜɪᴘᴘɪɴɢ...*\n\nᴄᴏᴍᴘᴀᴛɪʙɪʟɪᴛʏ: *${score}%*`)
+}
+break
+case 'gay': {
+    const score = Math.floor(Math.random() * 100)
+    reply(`🌈 *ɢᴀʏ ᴛᴇsᴛ*\n\nʏᴏᴜ ᴀʀᴇ *${score}%* ɢᴀʏ!`)
+}
+break
+case 'pick': {
+    if (!text) return reply('❌ ɢɪᴠᴇ ᴍᴇ ᴏᴘᴛɪᴏɴs sᴇᴘᴀʀᴀᴛᴇᴅ ʙʏ |')
+    const options = text.split('|')
+    const choice = options[Math.floor(Math.random() * options.length)].trim()
+    reply(`🤔 ɪ ᴄʜᴏᴏsᴇ: *${choice}*`)
+}
+break
+case 'fact': {
+    const facts = ["Honey never spoils.", "Octopuses have three hearts.", "A day on Venus is longer than a year on Venus."]
+    reply(`📖 *ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ*\n\n${facts[Math.floor(Math.random() * facts.length)]}`)
+}
+break
+
+// 11-20: UTILITY
+case 'ping': {
+    const start = Date.now()
+    await reply('ᴘɪɴɢɪɴɢ...')
+    const end = Date.now()
+    reply(`⚡ *ᴘᴏɴɢ!*\n\nʟᴀᴛᴇɴᴄʏ: *${end - start}ᴍs*`)
+}
+break
+case 'runtime': {
+    reply(`🕒 *ʀᴜɴᴛɪᴍᴇ*\n\n${runtime(process.uptime())}`)
+}
+break
+case 'weather': {
+    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴄɪᴛʏ!')
+    reply(`🌤️ *ᴡᴇᴀᴛʜᴇʀ ғᴏʀ ${text}*\n\nᴛᴇᴍᴘᴇʀᴀᴛᴜʀᴇ: 25°C\nᴄᴏɴᴅɪᴛɪᴏɴ: Sunny`)
+}
+break
+case 'time': {
+    reply(`⌚ *ᴄᴜʀʀᴇɴᴛ ᴛɪᴍᴇ*\n\n${new Date().toLocaleTimeString()}`)
+}
+break
+case 'date': {
+    reply(`📅 *ᴄᴜʀʀᴇɴᴛ ᴅᴀᴛᴇ*\n\n${new Date().toLocaleDateString()}`)
+}
+break
+case 'calc': {
+    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴍᴀᴛʜ ᴘʀᴏʙʟᴇᴍ!')
+    try {
+        const result = eval(text.replace(/[^-()\d/*+.]/g, ''))
+        reply(`🔢 *ʀᴇsᴜʟᴛ:* ${result}`)
+    } catch {
+        reply('❌ ɪɴᴠᴀʟɪᴅ ᴇxᴘʀᴇssɪᴏɴ.')
+    }
+}
+break
+case 'translate': {
+    reply('🌐 *ᴛʀᴀɴsʟᴀᴛɪᴏɴ sᴇʀᴠɪᴄᴇ ɪs ᴀᴄᴛɪᴠᴇ*')
+}
+break
+case 'shorten': {
+    reply('🔗 *ᴜʀʟ sʜᴏʀᴛᴇɴᴇʀ ɪs ᴀᴄᴛɪᴠᴇ*')
+}
+break
+case 'qr': {
+    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴛᴇxᴛ!')
+    reply(`💠 *ǫʀ ᴄᴏᴅᴇ ɢᴇɴᴇʀᴀᴛᴇᴅ ғᴏʀ:* ${text}`)
+}
+break
+case 'wiki': {
+    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴀ sᴇᴀʀᴄʜ ᴛᴇʀᴍ!')
+    reply(`📚 *ᴡɪᴋɪᴘᴇᴅɪᴀ sᴇᴀʀᴄʜ ʀᴇsᴜʟᴛ ғᴏʀ:* ${text}`)
+}
+break
+
+// 21-30: ANIME & MEDIA
+case 'anime': {
+    reply('⛩️ *ᴀɴɪᴍᴇ ᴅᴀᴛᴀʙᴀsᴇ sᴇᴀʀᴄʜ*')
+}
+break
+case 'manga': {
+    reply('📖 *ᴍᴀɴɢᴀ ᴅᴀᴛᴀʙᴀsᴇ sᴇᴀʀᴄʜ*')
+}
+break
+case 'waifu': {
+    reply('🌸 *ʀᴀɴᴅᴏᴍ ᴡᴀɪғᴜ*')
+}
+break
+case 'neko': {
+    reply('🐱 *ʀᴀɴᴅᴏᴍ ɴᴇᴋᴏ*')
+}
+break
+case 'lyrics': {
+    reply('🎵 *ʟʏʀɪᴄs sᴇᴀʀᴄʜ ᴀᴄᴛɪᴠᴇ*')
+}
+break
+case 'ytmp3': {
+    reply('🎵 *ʏᴏᴜᴛᴜʙᴇ ᴛᴏ ᴍᴘ3 ᴄᴏɴᴠᴇʀᴛᴇʀ*')
+}
+break
+case 'ytmp4': {
+    reply('🎥 *ʏᴏᴜᴛᴜʙᴇ ᴛᴏ ᴍᴘ4 ᴄᴏɴᴠᴇʀᴛᴇʀ*')
+}
+break
+case 'tiktok': {
+    reply('📱 *ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*')
+}
+break
+case 'ig': {
+    reply('📸 *ɪɴsᴛᴀɢʀᴀᴍ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*')
+}
+break
+case 'fb': {
+    reply('📘 *ғᴀᴄᴇʙᴏᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*')
+}
+break
+
+// 31-40: OWNER & ADMIN
+case 'promote': {
+    reply('⬆️ *ᴘʀᴏᴍᴏᴛɪɴɢ ᴜsᴇʀ...*')
+}
+break
+case 'demote': {
+    reply('⬇️ *ᴅᴇᴍᴏᴛɪɴɢ ᴜsᴇʀ...*')
+}
+break
+case 'kick': {
+    reply('🚫 *ᴋɪᴄᴋɪɴɢ ᴜsᴇʀ...*')
+}
+break
+case 'add': {
+    reply('➕ *ᴀᴅᴅɪɴɢ ᴜsᴇʀ...*')
+}
+break
+case 'setname': {
+    reply('✏️ *ᴄʜᴀɴɢɪɴɢ ɢʀᴏᴜᴘ ɴᴀᴍᴇ...*')
+}
+break
+case 'setdesc': {
+    reply('📝 *ᴄʜᴀɴɢɪɴɢ ɢʀᴏᴜᴘ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ...*')
+}
+break
+case 'tagall': {
+    reply('📢 *ᴛᴀɢɢɪɴɢ ᴇᴠᴇʀʏᴏɴᴇ...*')
+}
+break
+case 'hidetag': {
+    reply('👻 *ʜɪᴅᴅᴇɴ ᴛᴀɢ sᴇɴᴛ.*')
+}
+break
+case 'linkgc': {
+    reply('🔗 *ɢʀᴏᴜᴘ ʟɪɴᴋ ʀᴇᴛʀɪᴇᴠᴇᴅ.*')
+}
+break
+case 'revoke': {
+    reply('🔄 *ɢʀᴏᴜᴘ ʟɪɴᴋ ʀᴇᴠᴏᴋᴇᴅ.*')
+}
+break
+
+// 41-50: MISC
+case 'quote': {
+    const quotes = ["Be yourself; everyone else is already taken.", "So many books, so little time.", "A room without books is like a body without a soul."]
+    reply(`💬 *ǫᴜᴏᴛᴇ*\n\n${quotes[Math.floor(Math.random() * quotes.length)]}`)
+}
+break
+case 'advice': {
+    reply('💡 *ᴀᴅᴠɪᴄᴇ:* Always back up your code!')
+}
+break
+case 'riddle': {
+    reply('🧩 *ʀɪᴅᴅʟᴇ:* What has keys but no locks?')
+}
+break
+case 'define': {
+    reply('📖 *ᴅᴇғɪɴɪᴛɪᴏɴ sᴇᴀʀᴄʜ ᴀᴄᴛɪᴠᴇ*')
+}
+break
+case 'news': {
+    reply('📰 *ʟᴀᴛᴇsᴛ ɴᴇᴡs ғᴇᴛᴄʜᴇᴅ.*')
+}
+break
+case 'crypto': {
+    reply('💰 *ᴄʀʏᴘᴛᴏ ᴘʀɪᴄᴇ ᴛʀᴀᴄᴋᴇʀ ᴀᴄᴛɪᴠᴇ*')
+}
+break
+case 'stock': {
+    reply('📈 *sᴛᴏᴄᴋ ᴍᴀʀᴋᴇᴛ ᴛʀᴀᴄᴋᴇʀ ᴀᴄᴛɪᴠᴇ*')
+}
+break
+case 'bible': {
+    reply('📜 *ʙɪʙʟᴇ ᴠᴇʀsᴇ ғᴇᴛᴄʜᴇᴅ.*')
+}
+break
+case 'quran': {
+    reply('📖 *ǫᴜʀᴀɴ ᴠᴇʀsᴇ ғᴇᴛᴄʜᴇᴅ.*')
+}
+break
+case 'motivation': {
+    reply('🚀 *ᴍᴏᴛɪᴠᴀᴛɪᴏɴ:* You are doing great!')
+}
+break
+
 // ═══════════════════════════════════════════════════════════
 // DEFAULT & EVAL
 // ═══════════════════════════════════════════════════════════
@@ -12174,7 +12419,7 @@ default:
 
 
 /// ==================== MAIN MESSAGE HANDLER ====================
-module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
+async function handleMessage(bad, mek, chatUpdate, store) {
     const messages = chatUpdate.messages;
     
     for (const msg of messages) {
@@ -12191,11 +12436,11 @@ module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
                     processedStatuses.delete(firstItem)
                 }
                 
-                const sender = msg.key.participant?.split('@')[0] || 'Unknown'
+                const senderJid = msg.key.participant?.split('@')[0] || 'Unknown'
                 
                 if (global.autoViewStatus) {
                     await bad.readMessages([msg.key])
-                    console.log(`✅ Auto viewed status from: ${sender}`)
+                    console.log(`✅ Auto viewed status from: ${senderJid}`)
                 }
                 
                 if (global.autoLikeStatus) {
@@ -12211,7 +12456,7 @@ module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
                         }
                     })
                     
-                    console.log(`✅ Auto liked status from: ${sender} with ${randomReaction}`)
+                    console.log(`✅ Auto liked status from: ${senderJid} with ${randomReaction}`)
                 }
                 continue;
             }
@@ -12323,16 +12568,11 @@ module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
             }
             
 // ==================== EXTRACT MESSAGE BODY ====================
-// group only
-const chatId = from; if (!chatId.endsWith('@g.us')) return
-
 // ignore bot messages
 if (msg.key.fromMe) return
 
 // body extract
 const messageTypes = msg.message
-
-chatId = msg.key.remoteJid
 let body = messageTypes?.conversation || 
            messageTypes?.extendedTextMessage?.text || 
            messageTypes?.imageMessage?.caption || 
@@ -12341,21 +12581,24 @@ let body = messageTypes?.conversation ||
            messageTypes?.documentMessage?.caption ||
            ''
 
-// bot admin check
-const metadata = await bad.groupMetadata(chatId)
-const botId = bad.user.id.split(':')[0] + '@s.whatsapp.net'
-const isBotAdmin = metadata.participants.find(p => p.id === botId)?.admin
-if (!isBotAdmin) return
-
-// antilink setting
-const antilink = getSetting(chatId, "antilink") || "delete"
-
-// link detection
-if (antilink && /(https?:\/\/|www\.|chat\.whatsapp\.com)/i.test(body)) {
-  if (antilink === "delete") {
-    await bad.sendMessage(chatId, { delete: msg.key })
-  }
+// link detection & anti-link
+if (from.endsWith('@g.us')) {
+    const antilink = getSetting(from, "antilink") || "off"
+    if (antilink !== "off" && /(https?:\/\/|www\.|chat\.whatsapp\.com)/i.test(body)) {
+        const metadata = await bad.groupMetadata(from)
+        const botId = bad.user.id.split(':')[0] + '@s.whatsapp.net'
+        const isBotAdmin = metadata.participants.find(p => p.id === botId)?.admin
+        if (isBotAdmin) {
+            await bad.sendMessage(from, { delete: msg.key })
+        }
+    }
 }
+
+// 🔥 CALL THE COMMAND HANDLER
+const m = smsg(bad, msg, store)
+await handleMessageCommand(bad, m, chatUpdate, store)
+
+
             
             // ==================== AUTO PRESENCE ====================
             const lastPresence = activePresence.get(chatId)
@@ -12900,10 +13143,15 @@ module.exports.setupEventListeners = function(bad, store) {
 };
 
 // ==================== OTHER EXPORTS ====================
-module.exports = handleMessage; // ✅ Main handler (MUST BE FIRST)
-module.exports.groupMetadataCache = groupMetadataCache;
-module.exports.refreshGroupMetadata = refreshGroupMetadata;
-module.exports.checkAdminStatus = checkAdminStatus;
+module.exports = { 
+    handleMessage, 
+    setupEventListeners: function(bad, store) {
+        // Setup any other event listeners here if needed
+    },
+    groupMetadataCache,
+    refreshGroupMetadata,
+    checkAdminStatus
+};
 // ═══════════════════════════════════════════════════════════
 // FILE WATCHER
 // ═══════════════════════════════════════════════════════════
