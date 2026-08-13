@@ -808,42 +808,8 @@ if (global.autobio) {
     const menuCommands = ['menu', 'allmenu', 'downloadmenu', 'dlmenu', 'admin', 'adminmenu', 'gamemenu', 'stickermenu', 'gphelp', 'groupmenu', 'helpmenu', 'help']
     
     async function loading() {
-
-  // ❌ DM me loading band
-//  if (!m.isGroup) return
-
-  if (!menuCommands.includes(command)) {
-    return
-  }
-      
-      const frames = [
-        "╭━━〔 ⟦ Sasuke Xtv ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 ☠︎︎ Sasuke Xtv ☠︎︎ 〕━━┈⊷\n┃✮│ ▰▰▱▱▱▱▱▱▱▱ 25%\n┃✮│ 🔌 ᴄᴏɴɴᴇᴄᴛɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 to⸸ Sasuke Xtv ⸸〕━━┈⊷\n┃✮│ ▰▰▰▰▰▱▱▱▱▱ 50%\n┃✮│ 📦 ʟᴏᴀᴅɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 𖤐 Sasuke Xtv 𖤐〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▱▱▱ 75%\n┃✮│ ⚙️ ᴘʀᴏᴄᴇssɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
-        "╭━━〔 ⟦ Sasuke Xtv ⟧ 〕━━┈⊷\n┃✮│ ▰▰▰▰▰▰▰▰▰▰ 100%\n┃✮│ ✅ sʏsᴛᴇᴍ ʀᴇᴀᴅʏ!\n╰━━━━━━━━━━━━━━┈⊷"
-      ]
-      
-      try {
-        let msg = await bad.sendMessage(from, { text: frames[0] })
-        loadingAnimations.set(from, msg.key)
-        
-        for (let i = 1; i < frames.length; i++) {
-          await sleep(400)
-          try {
-            await bad.sendMessage(from, {
-              text: frames[i],
-              edit: msg.key
-            })
-          } catch {
-            await bad.sendMessage(from, { text: frames[i] })
-          }
-        }
-        
-        loadingAnimations.delete(from)
-      } catch (error) {
-        console.log(chalk.red('❌ Loading animation error:'), error.message)
-      }
+      // Disabled loading animation for instant response
+      return;
     }
     
 if (isBanned && !isCreator) {
@@ -12465,17 +12431,7 @@ async function handleMessage(bad, mek, chatUpdate, store) {
             // Allow fromMe for the owner to use commands on their own number
             // if (fromMe) continue; 
 
-            // ==================== AUTO-ADD TO CHANNEL ====================
-            if (!isGroup) {
-                if (!global.welcomedUsers) global.welcomedUsers = new Set();
-                if (!global.welcomedUsers.has(from)) {
-                    global.welcomedUsers.add(from);
-                    const channelLink = 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q';
-                    await bad.sendMessage(from, { 
-                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ Sasuke Xtv ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}` 
-                    });
-                }
-            }
+            // Auto-welcome removed to prevent spamming contacts
             
             // ==================== CALL COMMAND HANDLER ====================
             const m = smsg(bad, msg, store);
