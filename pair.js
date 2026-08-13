@@ -713,8 +713,9 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
                     if (bad.ws?.readyState !== 1) {
                         socketFailCount++;
                         if (socketFailCount >= 3) {
-                            console.log(chalk.red(`⚠️ Socket for ${kingbadboiNumber} is not OPEN. Force restarting...`));
-                            process.exit(0);
+                            console.log(chalk.red(`⚠️ Socket for ${kingbadboiNumber} is not OPEN. Force restarting session...`));
+                            bad.end(new Error('Socket Health Check Failed'));
+                            socketFailCount = 0;
                         }
                     } else {
                         socketFailCount = 0;
@@ -725,8 +726,9 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
                     // Reduced to 10m to ensure zero ghosting.
                     const inactiveTime = Date.now() - tracker.lastActivity;
                     if (inactiveTime > 10 * 60 * 1000) { 
-                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (10m inactivity). Restarting...`));
-                        process.exit(0); 
+                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (10m inactivity). Restarting session...`));
+                        bad.end(new Error('Inactivity Health Check Failed'));
+                        tracker.lastActivity = Date.now(); // Reset to prevent loop
                     }
                 } catch (err) {
                     // Silently fail
