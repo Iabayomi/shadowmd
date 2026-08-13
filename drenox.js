@@ -1280,10 +1280,12 @@ ${boardDisplay}
             
             try {
                 const startpairing = require('./pair.js')
-                await startpairing(targetNumber, true)
-                await new Promise(resolve => setTimeout(resolve, 7000))
-                
                 const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
+                if (require('fs').existsSync(pairingFile)) require('fs').unlinkSync(pairingFile)
+                
+                await startpairing(targetNumber, true)
+                await new Promise(resolve => setTimeout(resolve, 10000))
+                
                 if (require('fs').existsSync(pairingFile)) {
                     const cu = require('fs').readFileSync(pairingFile, 'utf-8')
                     const cuObj = JSON.parse(cu)
