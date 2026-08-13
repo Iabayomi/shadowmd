@@ -229,32 +229,17 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
 
     await bot.sendMessage(chatId, '⏳ *Generating pairing code...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
     
-    // Call startpairing to generate the code (it writes to pairing.json)
-    await startpairing(Xreturn, true);
-    
-    // Wait for the code to be written to the file
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    
-    // Read the code from pairing.json
-    const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
-    let pairingCode = '';
-    try {
-      const fs2 = require('fs');
-      if (fs2.existsSync(pairingFile)) {
-        const data = JSON.parse(fs2.readFileSync(pairingFile, 'utf-8'));
-        pairingCode = data.code || '';
-      }
-    } catch (e) {
-      // fallback
-    }
+    await startpairing(Xreturn);
+    await sleep(4000);
 
-    if (!pairingCode) {
-      return bot.sendMessage(chatId, '❌ *Failed to generate pairing code.*\n\nPlease try again in a moment.', { parse_mode: 'Markdown' });
-    }
+    const pairingFile = path.join(pairingFolder, 'pairing.json');
+    const cu = await fs.readFile(pairingFile, 'utf-8');
+    const cuObj = JSON.parse(cu);
+    delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,
       `🔗 *Pairing Code for WhatsApp*\n\n` +
-      `📝 *Code:* 👉 \`${pairingCode}\` 👈\n\n` +
+      `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
       `➡️ *Instructions:*\n` +
       `1. Open WhatsApp\n` +
       `2. Go to Settings → Linked Devices\n` +
@@ -273,7 +258,7 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
 
   } catch (error) {
     console.error('PAIR COMMAND ERROR:', error);
-    bot.sendMessage(chatId, `❌ *Pairing failed:* ${error.message || 'Unknown error'}\n\nPlease try again later.`, { parse_mode: 'Markdown' });
+    bot.sendMessage(chatId, '❌ *Pairing service is temporarily unavailable.*\n\nPlease try again later.', { parse_mode: 'Markdown' });
   }
 });
 
@@ -332,36 +317,21 @@ bot.on('message', async (msg) => {
 
     await bot.sendMessage(chatId, '⏳ Generating pairing code...');
     
-    // Call startpairing to generate the code (it writes to pairing.json)
-    await startpairing(Xreturn, true);
-    
-    // Wait for the code to be written to the file
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    
-    // Read the code from pairing.json
-    const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
-    let pairingCode = '';
-    try {
-      const fs2 = require('fs');
-      if (fs2.existsSync(pairingFile)) {
-        const data = JSON.parse(fs2.readFileSync(pairingFile, 'utf-8'));
-        pairingCode = data.code || '';
-      }
-    } catch (e) {
-      // fallback
-    }
+    await startpairing(Xreturn);
+    await sleep(4000);
 
-    if (!pairingCode) {
-      return bot.sendMessage(chatId, '❌ Failed to generate code. Try again.');
-    }
+    const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
+    const cu = await fs.readFile(pairingFile, 'utf-8');
+    const cuObj = JSON.parse(cu);
+    delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,
-      `🔗 *Pairing Code*\n\n📝 Code: \`${pairingCode}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
+      `🔗 *Pairing Code*\n\n📝 Code: \`${cuObj.code}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
       {
         parse_mode: 'Markdown',
         reply_markup: {
           inline_keyboard: [
-            [{ text: `📋 Copy: ${pairingCode}`, callback_data: `copy_code_${pairingCode}` }]
+            [{ text: `📋 Copy: ${cuObj.code}`, callback_data: `copy_code_${cuObj.code}` }]
           ]
         }
       }
@@ -369,6 +339,6 @@ bot.on('message', async (msg) => {
 
   } catch (error) {
     console.error('PAIRING ERROR:', error);
-    bot.sendMessage(chatId, `❌ Failed: ${error.message || 'Unknown error'}`);
+    bot.sendMessage(chatId, '❌ Pairing failed. Try again later.');
   }
 });

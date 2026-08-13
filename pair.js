@@ -13,7 +13,7 @@ const {
     makeInMemoryStore,
     generateWAMessageContent  
 } = require("@whiskeysockets/baileys");
-const { handleMessage } = require("./drenox");
+const handleMessage = require("./drenox");
 const NodeCache = require("node-cache");
 const _ = require('lodash')
 const {
@@ -31,7 +31,7 @@ const path = require('path')
 let themeemoji = "😎";
 const chalk = require('chalk')
 const { writeExif, imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./allfunc/exif');
-const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch, smsg } = require('./allfunc/myfunc')
+const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch } = require('./allfunc/myfunc')
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -205,44 +205,27 @@ function ensureDirectoryExists(dirPath) {
     }
 }
 
-async function startpairing(kingbadboiNumber, forcePairing = false) {
+async function startpairing(kingbadboiNumber) {
     ensureDirectoryExists('./kingbadboitimewisher/pairing');
-    
-    const sessionPath = `./kingbadboitimewisher/pairing/${kingbadboiNumber}`;
-    
-    // If force pairing, clean up old session
-    if (forcePairing) {
-        deleteFolderRecursive(sessionPath);
-    }
-    ensureDirectoryExists(sessionPath);
     
     if (!rentbotTracker.has(kingbadboiNumber)) {
         rentbotTracker.set(kingbadboiNumber, {
             connection: null,
             retryCount: 0,
             disconnected: false,
-            lastActivity: Date.now(),
-            isConnecting: false
+            lastActivity: Date.now()
         });
     }
     
     const tracker = rentbotTracker.get(kingbadboiNumber);
-    tracker.isConnecting = true;
-
-    // 🔥 Close existing connection safely
-    if (tracker.connection) {
-        try {
-            console.log(chalk.yellow(`🔄 Closing existing connection for ${kingbadboiNumber}...`));
-            tracker.connection.ev.removeAllListeners();
-            tracker.connection.terminate();
-        } catch (e) {}
-    }
-
     tracker.retryCount++;
     tracker.disconnected = false;
     tracker.lastActivity = Date.now();
 
     const { version, isLatest } = await fetchLatestBaileysVersion();
+    
+    const sessionPath = `./kingbadboitimewisher/pairing/${kingbadboiNumber}`;
+    ensureDirectoryExists(sessionPath);
     
     const {
         state,
@@ -280,60 +263,41 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
     
     if (store) store.bind(bad.ev);
 
-    // 🔥 ALWAYS generate pairing code (force pairing or fresh session)
-    let targetPhone = kingbadboiNumber.replace(/[^0-9]/g, '');
-    
-    if (!targetPhone) {
-        tracker.isConnecting = false;
-        throw new Error('Invalid phone number');
-    }
-    
-    try {
-        // Wait for socket to be connected before requesting pairing code
-        await new Promise((resolve, reject) => {
-            const timeout = setTimeout(() => {
-                bad.ev.removeAllListeners('connection.update');
-                reject(new Error('Connection timeout - could not establish socket'));
-            }, 30000);
-            
-            bad.ev.on('connection.update', (update) => {
-                const { connection } = update;
-                if (connection === 'open') {
-                    clearTimeout(timeout);
-                    resolve();
-                } else if (connection === 'close') {
-                    clearTimeout(timeout);
-                    reject(new Error('Socket closed before pairing'));
-                }
-            });
-        });
-        
-        console.log(chalk.green(`✅ Socket connected for ${kingbadboiNumber}. Requesting pairing code...`));
-        
-        // Request pairing code
-        let code = await bad.requestPairingCode(targetPhone);
-        code = code?.match(/.{1,4}/g)?.join("-") || code;
-        
-        console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
+    if (pairingCode && !state.creds.registered) {
+        if (useMobile) {
+            throw new Error('Cannot use pairing code with mobile API');
+        }
 
-        // Save to pairing.json
-        fs.writeFileSync(
-            './kingbadboitimewisher/pairing/pairing.json',
-            JSON.stringify({ 
-                number: kingbadboiNumber,
-                code: code,
-                timestamp: new Date().toISOString()
-            }, null, 2),
-            'utf8'
-        );
+        let phoneNumber = kingbadboiNumber.replace(/[^0-9]/g, '');
         
-        console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
-        // NOTE: Do NOT set isConnecting to false yet - we still need to set up event listeners
-        // The socket will continue to run in the background
-    } catch (err) {
-        console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
-        tracker.isConnecting = false;
-        throw err;
+        if (!phoneNumber) {
+            throw new Error('Invalid phone number');
+        }
+        
+        setTimeout(async () => {
+            try {
+                let code = await bad.requestPairingCode(phoneNumber, 'SHADOWMD');
+                code = code?.match(/.{1,4}/g)?.join("-") || code;
+                
+                console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
+
+                ensureDirectoryExists('./kingbadboitimewisher/pairing');
+                
+                fs.writeFileSync(
+                    './kingbadboitimewisher/pairing/pairing.json',
+                    JSON.stringify({ 
+                        number: kingbadboiNumber,
+                        code: code,
+                        timestamp: new Date().toISOString()
+                    }, null, 2),
+                    'utf8'
+                );
+                
+                console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
+            } catch (err) {
+                console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
+            }
+        }, 3000);
     }
 
     bad.newsletterMsg = async (key, content = {}, timeout = 5000) => {
@@ -498,8 +462,7 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
             mek = smsg(badboiConnect, badboijid, store);
             
             // Pass to your command handler (drenox.js)
-            // 🔥 Await the handler to catch errors and ensure processing
-            await handleMessage(badboiConnect, mek, chatUpdate, store);
+            handleMessage(badboiConnect, mek, chatUpdate, store);
             
         } catch (err) {
             console.log(chalk.red(`❌ Message handler error: ${err.message}`));
@@ -648,7 +611,6 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
         const tracker = rentbotTracker.get(kingbadboiNumber);
 
         if (connection === "close") {
-            tracker.isConnecting = false; // Release lock
             let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
             console.log(chalk.yellow(`🔌 Connection closed for ${kingbadboiNumber}, reason: ${reason}`));
 
@@ -708,7 +670,6 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
                 }
             }
         } else if (connection === "open") {
-            tracker.isConnecting = false; // Release lock
             console.log(chalk.bgGreen.black(`✅ Connected: ${kingbadboiNumber}`));
             tracker.retryCount = 0;
             tracker.disconnected = false;
@@ -727,22 +688,20 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
                     if (bad.ws?.readyState !== 1) {
                         socketFailCount++;
                         if (socketFailCount >= 3) {
-                            console.log(chalk.red(`⚠️ Socket for ${kingbadboiNumber} is not OPEN. Force restarting session...`));
-                            bad.end(new Error('Socket Health Check Failed'));
-                            socketFailCount = 0;
+                            console.log(chalk.red(`⚠️ Socket for ${kingbadboiNumber} is not OPEN. Force restarting...`));
+                            process.exit(0);
                         }
                     } else {
                         socketFailCount = 0;
                         await bad.sendPresenceUpdate('available');
                     }
 
-                    // 2. Health Check: If no activity for 10 minutes, force a restart
-                    // Reduced to 10m to ensure zero ghosting.
+                    // 2. Health Check: If no activity for 30 minutes, force a restart
+                    // This ensures the bot stays fresh and handles the "39-minute hang"
                     const inactiveTime = Date.now() - tracker.lastActivity;
-                    if (inactiveTime > 10 * 60 * 1000) { 
-                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (10m inactivity). Restarting session...`));
-                        bad.end(new Error('Inactivity Health Check Failed'));
-                        tracker.lastActivity = Date.now(); // Reset to prevent loop
+                    if (inactiveTime > 30 * 60 * 1000) { 
+                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (30m inactivity). Restarting...`));
+                        process.exit(0); 
                     }
                 } catch (err) {
                     // Silently fail
@@ -750,14 +709,13 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
             }, 30000);
             
             // Wait before performing auto-actions
-            await sleep(5000);
+            await sleep(10000);
             
             try {
                 console.log(chalk.blue('🚀 Starting auto-actions...'));
                 
                 // Setup event listeners from drenox if available
                 const drenoxModule = require('./drenox');
-                // We handle message events directly in pair.js, so we only need to set up OTHER listeners if they exist
                 if (drenoxModule.setupEventListeners && typeof drenoxModule.setupEventListeners === 'function') {
                     try {
                         drenoxModule.setupEventListeners(bad, store);
@@ -815,14 +773,73 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
 
     bad.ev.on('creds.update', saveCreds);
 
-    // Store the code so it can be read from pairing.json by callers
-    // Return the socket for autoload, but the code is available in pairing.json
-    // For direct callers (bot.js), they should read pairing.json after calling this
     return bad;
 }
 
+function smsg(bad, m, store) {
+    if (!m) return m
+    let M = proto.WebMessageInfo
+    if (m.key) {
+        m.id = m.key.id
+        m.isBaileys = m.id.startsWith('BAE5') && m.id.length === 16
+       
+        m.chat = m.key.remoteJid
+        m.fromMe = m.key.fromMe
+        m.isGroup = m.chat.endsWith('@g.us')
+        m.sender = bad.decodeJid(m.fromMe && bad.user.id || m.participant || m.key.participant || m.chat || '')
+        if (m.isGroup) m.participant = bad.decodeJid(m.key.participant) || ''
+    }
+    if (m.message) {
+        m.mtype = getContentType(m.message)
+        m.msg = (m.mtype == 'viewOnceMessage' ? m.message[m.mtype]?.message?.[getContentType(m.message[m.mtype]?.message)] : m.message[m.mtype]) || {}
+        m.body = m.message.conversation || m.msg?.caption || m.msg?.text || (m.mtype == 'listResponseMessage' && m.msg?.singleSelectReply?.selectedRowId) || (m.mtype == 'buttonsResponseMessage' && m.msg?.selectedButtonId) || (m.mtype == 'viewOnceMessage' && m.msg?.caption) || m.text || ''
+        let quoted = m.quoted = m.msg?.contextInfo?.quotedMessage || null
+        m.mentionedJid = m.msg?.contextInfo?.mentionedJid || []
+        if (m.quoted) {
+            let type = getContentType(quoted)
+            m.quoted = m.quoted[type]
+            if (['productMessage'].includes(type)) {
+                type = getContentType(m.quoted)
+                m.quoted = m.quoted[type]
+            }
+            if (typeof m.quoted === 'string') m.quoted = {
+                text: m.quoted
+            }
+            m.quoted.mtype = type
+            m.quoted.id = m.msg.contextInfo.stanzaId
+            m.quoted.chat = m.msg.contextInfo.remoteJid || m.chat
+            m.quoted.isBaileys = m.quoted.id ? m.quoted.id.startsWith('BAE5') && m.quoted.id.length === 16 : false
+            m.quoted.sender = bad.decodeJid(m.msg.contextInfo.participant)
+            m.quoted.fromMe = m.quoted.sender === bad.decodeJid(bad.user.id)
+            m.quoted.text = m.quoted.text || m.quoted.caption || m.quoted.conversation || m.quoted.contentText || m.quoted.selectedDisplayText || m.quoted.title || ''
+            m.quoted.mentionedJid = m.msg.contextInfo ? m.msg.contextInfo.mentionedJid : []
+            m.getQuotedObj = m.getQuotedMessage = async () => {
+                if (!m.quoted.id) return false
+                let q = await store.loadMessage(m.chat, m.quoted.id, bad)
+                return exports.smsg(bad, q, store)
+            }
+            let vM = m.quoted.fakeObj = M.fromObject({
+                key: {
+                    remoteJid: m.quoted.chat,
+                    fromMe: m.quoted.fromMe,
+                    id: m.quoted.id
+                },
+                message: quoted,
+                ...(m.isGroup ? { participant: m.quoted.sender } : {})
+            })
+            m.quoted.delete = () => bad.sendMessage(m.quoted.chat, { delete: vM.key })
+            m.quoted.copyNForward = (jid, forceForward = false, options = {}) => bad.copyNForward(jid, vM, forceForward, options)
+            m.quoted.download = () => bad.downloadMediaMessage(m.quoted)
+        }
+    }
+    if (m.msg?.url) m.download = () => bad.downloadMediaMessage(m.msg)
+    m.text = m.msg?.text || m.msg?.caption || m.message?.conversation || m.msg?.contentText || m.msg?.selectedDisplayText || m.msg?.title || ''
+    m.reply = (text, chatId = m.chat, options = {}) => Buffer.isBuffer(text) ? bad.sendMedia(chatId, text, 'file', '', m, { ...options }) : bad.sendText(chatId, text, m, { ...options })
+    m.copy = () => exports.smsg(bad, M.fromObject(M.toObject(m)))
+    m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => bad.copyNForward(jid, m, forceForward, options)
 
-
+    return m
+}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

