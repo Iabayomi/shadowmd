@@ -229,8 +229,8 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
 
     await bot.sendMessage(chatId, '⏳ *Generating pairing code...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
     
-    await startpairing(Xreturn);
-    await sleep(4000);
+    await startpairing(Xreturn, true);
+    await sleep(7000); // Increased to 7s to ensure code is generated and written
 
     const pairingFile = path.join(pairingFolder, 'pairing.json');
     const cu = await fs.readFile(pairingFile, 'utf-8');
@@ -317,8 +317,8 @@ bot.on('message', async (msg) => {
 
     await bot.sendMessage(chatId, '⏳ Generating pairing code...');
     
-    await startpairing(Xreturn);
-    await sleep(4000);
+    await startpairing(Xreturn, true);
+    await sleep(7000); // Increased to 7s
 
     const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
     const cu = await fs.readFile(pairingFile, 'utf-8');

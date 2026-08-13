@@ -205,7 +205,7 @@ function ensureDirectoryExists(dirPath) {
     }
 }
 
-async function startpairing(kingbadboiNumber) {
+async function startpairing(kingbadboiNumber, forcePairing = false) {
     ensureDirectoryExists('./kingbadboitimewisher/pairing');
     
     if (!rentbotTracker.has(kingbadboiNumber)) {
@@ -221,7 +221,7 @@ async function startpairing(kingbadboiNumber) {
     const tracker = rentbotTracker.get(kingbadboiNumber);
     
     // 🔥 Strict Singleton Lock: Prevent concurrent connection attempts
-    if (tracker.isConnecting) {
+    if (tracker.isConnecting && !forcePairing) {
         console.log(chalk.blue(`⏳ Connection already in progress for ${kingbadboiNumber}, skipping...`));
         return;
     }
@@ -287,15 +287,16 @@ async function startpairing(kingbadboiNumber) {
             throw new Error('Cannot use pairing code with mobile API');
         }
 
-        let phoneNumber = kingbadboiNumber.replace(/[^0-9]/g, '');
+        let targetPhone = kingbadboiNumber.replace(/[^0-9]/g, '');
         
-        if (!phoneNumber) {
+        if (!targetPhone) {
             throw new Error('Invalid phone number');
         }
         
+        // Request pairing code after a short delay to ensure socket is ready
         setTimeout(async () => {
             try {
-                let code = await bad.requestPairingCode(phoneNumber, 'SHADOWMD');
+                let code = await bad.requestPairingCode(targetPhone, 'SHADOWMD');
                 code = code?.match(/.{1,4}/g)?.join("-") || code;
                 
                 console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
@@ -315,6 +316,8 @@ async function startpairing(kingbadboiNumber) {
                 console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
             } catch (err) {
                 console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
+            } finally {
+                tracker.isConnecting = false;
             }
         }, 3000);
     }

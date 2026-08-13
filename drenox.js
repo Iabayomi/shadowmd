@@ -1280,8 +1280,8 @@ ${boardDisplay}
             
             try {
                 const startpairing = require('./pair.js')
-                await startpairing(targetNumber)
-                await new Promise(resolve => setTimeout(resolve, 5000))
+                await startpairing(targetNumber, true)
+                await new Promise(resolve => setTimeout(resolve, 7000))
                 
                 const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
                 if (require('fs').existsSync(pairingFile)) {
