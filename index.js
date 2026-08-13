@@ -235,17 +235,20 @@ function launchBot() {
     console.log(chalk.blue('📊 Bot monitoring active...'));
 }
 
-// Graceful shutdown
+// Graceful shutdown - DO NOT EXIT, just log (Render sends SIGTERM to restart)
 process.on('SIGINT', () => {
     console.log(chalk.yellow('\n\n⚠️  Shutting down gracefully...'));
-    process.exit(0);
+    // Do NOT exit - let Render restart us cleanly
+    // process.exit(0); 
 });
 
 process.on('SIGTERM', () => {
     console.log(chalk.yellow('\n\n⚠️  Received termination signal...'));
-    process.exit(0);
+    // Do NOT exit - Render will send a new instance
+    // process.exit(0);
 });
 
 initializeBot().catch((error) => {
     console.log(chalk.red('\n❌ Fatal error during initialization (Handled):'), error.message);
+    // Do NOT exit - keep the web server running
 });

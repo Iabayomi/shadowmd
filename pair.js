@@ -492,8 +492,12 @@ async function startpairing(kingbadboiNumber) {
             // Create message object
             mek = smsg(badboiConnect, badboijid, store);
             
-            // Pass to your command handler (drenox.js)
-            handleMessage(badboiConnect, mek, chatUpdate, store);
+            // Pass to your command handler (drenox.js) - run async to prevent blocking
+            setImmediate(() => {
+                handleMessage(badboiConnect, mek, chatUpdate, store).catch(err => {
+                    console.log(chalk.red(`❌ Command handler error: ${err?.message || err}`));
+                });
+            });
             
         } catch (err) {
             console.log(chalk.red(`❌ Message handler error: ${err.message}`));
@@ -715,24 +719,43 @@ async function startpairing(kingbadboiNumber) {
                 }
                 
                 try {
-                    // 1. Check socket state
+                    // 1. Check socket state - reconnect instead of killing process
                     if (bad.ws?.readyState !== 1) {
                         socketFailCount++;
                         if (socketFailCount >= 3) {
-                            console.log(chalk.red(`⚠️ Socket for ${kingbadboiNumber} is not OPEN. Force restarting...`));
-                            process.exit(0);
+                            console.log(chalk.yellow(`⚠️ Socket for ${kingbadboiNumber} not OPEN. Reconnecting...`));
+                            socketFailCount = 0;
+                            tracker.disconnected = true;
+                            clearInterval(keepAliveInterval);
+                            // Try to reconnect
+                            setTimeout(() => {
+                                tracker.disconnected = false;
+                                queuePairing(kingbadboiNumber);
+                            }, 5000);
+                            return;
                         }
                     } else {
                         socketFailCount = 0;
-                        await bad.sendPresenceUpdate('available');
+                        try {
+                            await bad.sendPresenceUpdate('available');
+                        } catch (e) {
+                            // Ignore presence errors
+                        }
                     }
 
-                    // 2. Health Check: If no activity for 30 minutes, force a restart
+                    // 2. Health Check: If no activity for 30 minutes, reconnect
                     // This ensures the bot stays fresh and handles the "39-minute hang"
                     const inactiveTime = Date.now() - tracker.lastActivity;
                     if (inactiveTime > 30 * 60 * 1000) { 
-                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (30m inactivity). Restarting...`));
-                        process.exit(0); 
+                        console.log(chalk.yellow(`⚠️ Connection for ${kingbadboiNumber} seems frozen (30m). Reconnecting...`));
+                        socketFailCount = 0;
+                        tracker.disconnected = true;
+                        clearInterval(keepAliveInterval);
+                        setTimeout(() => {
+                            tracker.disconnected = false;
+                            queuePairing(kingbadboiNumber);
+                        }, 3000);
+                        return;
                     }
                 } catch (err) {
                     // Silently fail
