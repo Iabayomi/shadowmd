@@ -247,6 +247,5 @@ process.on('SIGTERM', () => {
 });
 
 initializeBot().catch((error) => {
-    console.log(chalk.red('\n❌ Fatal error during initialization:'), error.message);
-    process.exit(1);
+    console.log(chalk.red('\n❌ Fatal error during initialization (Handled):'), error.message);
 });

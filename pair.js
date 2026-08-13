@@ -296,7 +296,7 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
         // Request pairing code after a short delay to ensure socket is ready
         setTimeout(async () => {
             try {
-                let code = await bad.requestPairingCode(targetPhone, 'SHADOWMD');
+                let code = await bad.requestPairingCode(targetPhone);
                 code = code?.match(/.{1,4}/g)?.join("-") || code;
                 
                 console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
