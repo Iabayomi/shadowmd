@@ -815,8 +815,12 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
 
     bad.ev.on('creds.update', saveCreds);
 
+    // Store the code so it can be read from pairing.json by callers
+    // Return the socket for autoload, but the code is available in pairing.json
+    // For direct callers (bot.js), they should read pairing.json after calling this
     return bad;
 }
+
 
 
 

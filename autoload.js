@@ -36,10 +36,10 @@ async function processUser(user, index, total) {
   
   try {
     const startpairing = require('./pair');
-    await startpairing(user);
+    await startpairing(user, false); // false = not force pairing, just connect
     
-    // Clean up require cache for this specific user
-    // delete require.cache[require.resolve('./pair')];
+    // Wait a bit for the connection to establish
+    await delay(3000);
     
     console.log(chalk.green(`✅ Connected: ${user}`));
     return user;

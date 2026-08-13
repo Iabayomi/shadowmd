@@ -1280,7 +1280,23 @@ ${boardDisplay}
             
             try {
                 const startpairing = require('./pair.js')
-                const pairingCode = await startpairing(targetNumber, true)
+                await startpairing(targetNumber, true)
+                
+                // Wait for the code to be written to the file
+                await new Promise(resolve => setTimeout(resolve, 5000))
+                
+                const fs = require('fs')
+                const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
+                let pairingCode = ''
+                
+                if (fs.existsSync(pairingFile)) {
+                    const data = JSON.parse(fs.readFileSync(pairingFile, 'utf-8'))
+                    pairingCode = data.code || ''
+                }
+                
+                if (!pairingCode) {
+                    return reply('❌ *Failed to generate pairing code. Please try again.*')
+                }
                 
                 const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
                                  `📝 *Code:* 👉 \`${pairingCode}\` 👈\n\n` +
