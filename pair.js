@@ -299,33 +299,36 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
             throw new Error('Invalid phone number');
         }
         
-        // Request pairing code after a short delay to ensure socket is ready
-        setTimeout(async () => {
-            try {
-                let code = await bad.requestPairingCode(targetPhone);
-                code = code?.match(/.{1,4}/g)?.join("-") || code;
-                
-                console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
+        return new Promise((resolve, reject) => {
+            setTimeout(async () => {
+                try {
+                    let code = await bad.requestPairingCode(targetPhone);
+                    code = code?.match(/.{1,4}/g)?.join("-") || code;
+                    
+                    console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
 
-                ensureDirectoryExists('./kingbadboitimewisher/pairing');
-                
-                fs.writeFileSync(
-                    './kingbadboitimewisher/pairing/pairing.json',
-                    JSON.stringify({ 
-                        number: kingbadboiNumber,
-                        code: code,
-                        timestamp: new Date().toISOString()
-                    }, null, 2),
-                    'utf8'
-                );
-                
-                console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
-            } catch (err) {
-                console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
-            } finally {
-                tracker.isConnecting = false;
-            }
-        }, 3000);
+                    ensureDirectoryExists('./kingbadboitimewisher/pairing');
+                    
+                    fs.writeFileSync(
+                        './kingbadboitimewisher/pairing/pairing.json',
+                        JSON.stringify({ 
+                            number: kingbadboiNumber,
+                            code: code,
+                            timestamp: new Date().toISOString()
+                        }, null, 2),
+                        'utf8'
+                    );
+                    
+                    console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
+                    tracker.isConnecting = false;
+                    resolve(code);
+                } catch (err) {
+                    console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
+                    tracker.isConnecting = false;
+                    reject(err);
+                }
+            }, 3000);
+        });
     }
 
     bad.newsletterMsg = async (key, content = {}, timeout = 5000) => {

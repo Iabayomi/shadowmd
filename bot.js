@@ -264,7 +264,7 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
 
   } catch (error) {
     console.error('PAIR COMMAND ERROR:', error);
-    bot.sendMessage(chatId, '❌ *Pairing service is temporarily unavailable.*\n\nPlease try again later.', { parse_mode: 'Markdown' });
+    bot.sendMessage(chatId, `❌ *Pairing failed:* ${error.message || 'Unknown error'}\n\nPlease try again later.`, { parse_mode: 'Markdown' });
   }
 });
 
@@ -351,6 +351,6 @@ bot.on('message', async (msg) => {
 
   } catch (error) {
     console.error('PAIRING ERROR:', error);
-    bot.sendMessage(chatId, '❌ Pairing failed. Try again later.');
+    bot.sendMessage(chatId, `❌ Failed: ${error.message || 'Unknown error'}`);
   }
 });
