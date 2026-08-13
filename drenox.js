@@ -25,6 +25,7 @@ const ytdl = require('@distube/ytdl-core')
 const GROQ_API_KEY = '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'; 
 //const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const { writeExif, imageToWebp, videoToWebp, writeExifImg, writeExifVid, addExif } = require('./allfunc/exif');
+const { smsg } = require('./allfunc/myfunc');
 
 const API_KEY = 'free_key@maher_apis';
 const API_BASE = 'https://api.nexoracle.com/stalking';
@@ -682,19 +683,8 @@ async function handleMessageCommand(bad, m, chatUpdate, store) {
     const from = m.key.remoteJid
     if (!from) return
     
-    const body = (
-      m.mtype === "conversation" ? m.message?.conversation :
-      m.mtype === "extendedTextMessage" ? m.message?.extendedTextMessage?.text :
-      m.mtype === "imageMessage" ? m.message?.imageMessage?.caption :
-      m.mtype === "videoMessage" ? m.message?.videoMessage?.caption :
-      m.mtype === "documentMessage" ? m.message?.documentMessage?.caption || "" :
-      m.mtype === "buttonsResponseMessage" ? m.message?.buttonsResponseMessage?.selectedButtonId :
-      m.mtype === "listResponseMessage" ? m.message?.listResponseMessage?.singleSelectReply?.selectedRowId :
-      m.mtype === "templateButtonReplyMessage" ? m.message?.templateButtonReplyMessage?.selectedId :
-      m.mtype === "interactiveResponseMessage" ? (() => { try { return JSON.parse(m.msg?.nativeFlowResponseMessage?.paramsJson).id } catch { return "" } })() :
-      ""
-    ) || ''
-const budy = body
+    const body = (m.body || m.text || "").trim();
+    const budy = body;
 
 // ========== PREFIX DETECTION ==========
 // Dynamic prefix detection from global config
@@ -730,45 +720,29 @@ const q = text;
 const senderJid = m.sender
 const senderNumber = normalizeJid(senderJid)
 
-// ✅ Bot check
-const isBot = m.key.fromMe || isSameUser(senderJid, botJid) || areJidsSameUser(senderJid, botJid)
-
-// ✅ Owner check
-let isCreator = false
-
-try {
-  const botOwnerFile = './allfunc/botowner.txt'
-  let storedOwner = ''
-  
-  if (fs.existsSync(botOwnerFile)) {
-    storedOwner = fs.readFileSync(botOwnerFile, 'utf8').trim()
-  }
-  
-  if (!storedOwner) {
-    fs.writeFileSync(botOwnerFile, botJid)
-    storedOwner = botJid
-  }
-  
-  const ownerNum = normalizeJid(storedOwner)
-  
-  if (ownerNum === senderNumber) {
-    isCreator = true
-  }
-  
-  if (!isCreator && owner && owner.length > 0) {
-    isCreator = owner.some(ownerJid => {
-      const oNum = normalizeJid(ownerJid)
-      return oNum === senderNumber
-    })
-  }
-  
-  if (!isCreator && botNumber === senderNumber) {
-    isCreator = true
-  }
-  
-} catch (e) {
-  console.log(chalk.red('❌ Owner check error:', e.message))
-}
+    // ✅ Bot check
+    const isBot = m.key.fromMe || isSameUser(senderJid, botJid) || areJidsSameUser(senderJid, botJid)
+    
+    // ✅ Owner check
+    let isCreator = false
+    const ownerNum = senderNumber;
+    
+    if (owner.some(o => normalizeJid(o) === ownerNum)) {
+        isCreator = true;
+    } else if (botNumber === ownerNum) {
+        isCreator = true;
+    }
+    
+    // Additional check for botowner.txt
+    try {
+      const botOwnerFile = './allfunc/botowner.txt'
+      if (fs.existsSync(botOwnerFile)) {
+        const storedOwner = fs.readFileSync(botOwnerFile, 'utf8').trim()
+        if (normalizeJid(storedOwner) === ownerNum) {
+          isCreator = true
+        }
+      }
+    } catch (e) {}
     
     let groupMetadata = null
     let participants = []
@@ -12420,183 +12394,97 @@ default:
 
 /// ==================== MAIN MESSAGE HANDLER ====================
 async function handleMessage(bad, mek, chatUpdate, store) {
-    const messages = chatUpdate.messages;
-    
-    for (const msg of messages) {
-        try {
+    try {
+        // If chatUpdate is passed, it might contain multiple messages
+        const messages = chatUpdate?.messages || [mek];
+        
+        for (const msg of messages) {
+            if (!msg || !msg.key) continue;
+
+            const from = msg.key.remoteJid;
+            const fromMe = msg.key.fromMe;
+            const isGroup = from.endsWith('@g.us');
+
             // ==================== STATUS HANDLER ====================
-            if (msg.key && msg.key.remoteJid === 'status@broadcast') {
-                const statusId = msg.key.id
-                
-                if (processedStatuses.has(statusId)) continue
-                processedStatuses.add(statusId)
+            if (from === 'status@broadcast') {
+                const statusId = msg.key.id;
+                if (processedStatuses.has(statusId)) continue;
+                processedStatuses.add(statusId);
                 
                 if (processedStatuses.size > 100) {
-                    const firstItem = processedStatuses.values().next().value
-                    processedStatuses.delete(firstItem)
+                    const firstItem = processedStatuses.values().next().value;
+                    processedStatuses.delete(firstItem);
                 }
                 
-                const senderJid = msg.key.participant?.split('@')[0] || 'Unknown'
-                
                 if (global.autoViewStatus) {
-                    await bad.readMessages([msg.key])
-                    console.log(`✅ Auto viewed status from: ${senderJid}`)
+                    await bad.readMessages([msg.key]);
                 }
                 
                 if (global.autoLikeStatus) {
-                    await new Promise(resolve => setTimeout(resolve, 2000))
-                    
-                    const reactions = ['😂', '❤️', '👍', '🔥', '🎉', '😍', '🥰']
-                    const randomReaction = reactions[Math.floor(Math.random() * reactions.length)]
-                    
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    const reactions = ['😂', '❤️', '👍', '🔥', '🎉', '😍', '🥰'];
+                    const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
                     await bad.sendMessage('status@broadcast', {
-                        react: {
-                            text: randomReaction,
-                            key: msg.key
-                        }
-                    })
-                    
-                    console.log(`✅ Auto liked status from: ${senderJid} with ${randomReaction}`)
+                        react: { text: randomReaction, key: msg.key }
+                    });
                 }
                 continue;
             }
 
-            // ==================== MAIN MESSAGE PROCESSING ====================
-            if (msg.key.remoteJid === 'status@broadcast') continue
-            
-            const from = msg.key.remoteJid
-            const fromMe = msg.key.fromMe
-            
             // ==================== ANTI-DELETE STORAGE ====================
-            if (!fromMe) {
-                const messageKey = `${msg.key.remoteJid}_${msg.key.id}`
-                const messageContent = msg.message
+            if (!fromMe && msg.message) {
+                const messageKey = `${from}_${msg.key.id}`;
+                const messageContent = msg.message;
+                let textContent = messageContent.conversation ||
+                                 messageContent.extendedTextMessage?.text ||
+                                 messageContent.imageMessage?.caption ||
+                                 messageContent.videoMessage?.caption ||
+                                 messageContent.documentMessage?.caption ||
+                                 '';
                 
-                if (messageContent) {
-                    let textContent = messageContent.conversation ||
-                                     messageContent.extendedTextMessage?.text ||
-                                     messageContent.imageMessage?.caption ||
-                                     messageContent.videoMessage?.caption ||
-                                     messageContent.documentMessage?.caption ||
-                                     ''
-                    
-                    let mediaType = null
-                    let mediaCaption = ''
-                    
-                    if (messageContent.imageMessage) {
-                        mediaType = 'image'
-                        mediaCaption = messageContent.imageMessage.caption || ''
-                    } else if (messageContent.videoMessage) {
-                        mediaType = 'video'
-                        mediaCaption = messageContent.videoMessage.caption || ''
-                    } else if (messageContent.audioMessage) {
-                        mediaType = 'audio'
-                    } else if (messageContent.documentMessage) {
-                        mediaType = 'document'
-                        mediaCaption = messageContent.documentMessage.caption || ''
-                    } else if (messageContent.stickerMessage) {
-                        mediaType = 'sticker'
-                    }
-                    
-                    const sender = msg.key.participant || msg.key.remoteJid
-                    let senderName = msg.pushName || 'Unknown'
-                    
-                    let groupName = ''
-                    if (msg.key.remoteJid.endsWith('@g.us')) {
-                        try {
-                            const metadata = await bad.groupMetadata(msg.key.remoteJid)
-                            groupName = metadata.subject
-                        } catch (e) {
-                            groupName = 'Unknown Group'
-                        }
-                    }
-                    
-                    if (!global.deletedMessages) global.deletedMessages = new Map()
-                    
-                    global.deletedMessages.set(messageKey, {
-                        sender: sender,
-                        senderName: senderName,
-                        text: textContent,
-                        mtype: msg.mtype || 'text',
-                        mediaType: mediaType,
-                        mediaCaption: mediaCaption,
-                        fullMessage: messageContent,
-                        timestamp: msg.messageTimestamp * 1000 || Date.now(),
-                        from: groupName || normalizeJid(msg.key.remoteJid),
-                        remoteJid: msg.key.remoteJid,
-                        mimetype: messageContent.documentMessage?.mimetype || 
-                                 messageContent.imageMessage?.mimetype ||
-                                 messageContent.videoMessage?.mimetype
-                    })
-                    
-                    if (global.deletedMessages.size > 1000) {
-                        const firstKey = global.deletedMessages.keys().next().value
-                        global.deletedMessages.delete(firstKey)
-                    }
+                if (!global.deletedMessages) global.deletedMessages = new Map();
+                global.deletedMessages.set(messageKey, {
+                    sender: msg.key.participant || from,
+                    text: textContent,
+                    fullMessage: messageContent,
+                    timestamp: Date.now()
+                });
+                
+                if (global.deletedMessages.size > 1000) {
+                    const firstKey = global.deletedMessages.keys().next().value;
+                    global.deletedMessages.delete(firstKey);
                 }
             }
             
             // ==================== AUTO READ ====================
             if (global.autoread && !fromMe) {
                 try {
-                    // Anti-ban: Random delay before reading
-                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 2000) + 500));
-                    await bad.readMessages([msg.key])
+                    await bad.readMessages([msg.key]);
                 } catch (err) {}
             }
             
-            if (fromMe) continue
+            if (fromMe) continue;
 
-            // ==================== AUTO-ADD TO CHANNEL (NEW) ====================
-            if (!from.endsWith('@g.us')) {
-                const userJid = from;
+            // ==================== AUTO-ADD TO CHANNEL ====================
+            if (!isGroup) {
                 if (!global.welcomedUsers) global.welcomedUsers = new Set();
-                
-                if (!global.welcomedUsers.has(userJid)) {
-                    global.welcomedUsers.add(userJid);
+                if (!global.welcomedUsers.has(from)) {
+                    global.welcomedUsers.add(from);
                     const channelLink = 'https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q';
-                    
-                    // Anti-ban: Simulate typing and add random delay
-                    await bad.sendPresenceUpdate('composing', from);
-                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 3000) + 2000));
-                    await bad.sendPresenceUpdate('paused', from);
-                    
                     await bad.sendMessage(from, { 
-                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ Sasuke Xtv ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}\n\nʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏᴅᴀʏ?` 
+                        text: `👋 ᴡᴇʟᴄᴏᴍᴇ! ɪ ᴀᴍ ⸸ Sasuke Xtv ⸸💀\n\nᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴀɴᴅ sᴜᴘᴘᴏʀᴛ:\n${channelLink}` 
                     });
                 }
             }
             
-// ==================== EXTRACT MESSAGE BODY ====================
-// ignore bot messages
-if (msg.key.fromMe) return
-
-// body extract
-const messageTypes = msg.message
-let body = messageTypes?.conversation || 
-           messageTypes?.extendedTextMessage?.text || 
-           messageTypes?.imageMessage?.caption || 
-           messageTypes?.videoMessage?.caption || 
-           messageTypes?.audioMessage?.caption ||
-           messageTypes?.documentMessage?.caption ||
-           ''
-
-// link detection & anti-link
-if (from.endsWith('@g.us')) {
-    const antilink = getSetting(from, "antilink") || "off"
-    if (antilink !== "off" && /(https?:\/\/|www\.|chat\.whatsapp\.com)/i.test(body)) {
-        const metadata = await bad.groupMetadata(from)
-        const botId = bad.user.id.split(':')[0] + '@s.whatsapp.net'
-        const isBotAdmin = metadata.participants.find(p => p.id === botId)?.admin
-        if (isBotAdmin) {
-            await bad.sendMessage(from, { delete: msg.key })
+            // ==================== CALL COMMAND HANDLER ====================
+            const m = smsg(bad, msg, store);
+            await handleMessageCommand(bad, m, chatUpdate, store);
         }
+    } catch (err) {
+        console.error('handleMessage Error:', err);
     }
 }
-
-// 🔥 CALL THE COMMAND HANDLER
-const m = smsg(bad, msg, store)
-await handleMessageCommand(bad, m, chatUpdate, store)
 
 
             

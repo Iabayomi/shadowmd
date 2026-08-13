@@ -39,14 +39,14 @@ async function processUser(user, index, total) {
     await startpairing(user);
     
     // Clean up require cache for this specific user
-    delete require.cache[require.resolve('./pair')];
+    // delete require.cache[require.resolve('./pair')];
     
     console.log(chalk.green(`✅ Connected: ${user}`));
     return user;
   } catch (error) {
     console.log(chalk.red(`❌ Failed for ${user}: ${error.message}`));
     // Clean up cache even on error
-    delete require.cache[require.resolve('./pair')];
+    // delete require.cache[require.resolve('./pair')];
     throw error;
   }
 }

@@ -5,6 +5,10 @@
 
 const fetch = require('node-fetch')
 const axios = require("axios");
+const { 
+    proto, 
+    getContentType 
+} = require("@whiskeysockets/baileys");
 
 // Helper function to sleep/delay
 const sleep = (ms) => {
@@ -126,6 +130,71 @@ class Function {
     }
 }
 
+function smsg(bad, m, store) {
+    if (!m) return m
+    let M = proto.WebMessageInfo
+    if (m.key) {
+        m.id = m.key.id
+        m.isBaileys = m.id.startsWith('BAE5') && m.id.length === 16
+       
+        m.chat = m.key.remoteJid
+        m.fromMe = m.key.fromMe
+        m.isGroup = m.chat.endsWith('@g.us')
+        m.sender = bad.decodeJid(m.fromMe && bad.user.id || m.participant || m.key.participant || m.chat || '')
+        if (m.isGroup) m.participant = bad.decodeJid(m.key.participant) || ''
+    }
+    if (m.message) {
+        m.mtype = getContentType(m.message)
+        m.msg = (m.mtype == 'viewOnceMessage' ? m.message[m.mtype]?.message?.[getContentType(m.message[m.mtype]?.message)] : m.message[m.mtype]) || {}
+        m.body = m.message.conversation || m.msg?.caption || m.msg?.text || (m.mtype == 'listResponseMessage' && m.msg?.singleSelectReply?.selectedRowId) || (m.mtype == 'buttonsResponseMessage' && m.msg?.selectedButtonId) || (m.mtype == 'viewOnceMessage' && m.msg?.caption) || m.text || ''
+        let quoted = m.quoted = m.msg?.contextInfo?.quotedMessage || null
+        m.mentionedJid = m.msg?.contextInfo?.mentionedJid || []
+        if (m.quoted) {
+            let type = getContentType(quoted)
+            m.quoted = m.quoted[type]
+            if (['productMessage'].includes(type)) {
+                type = getContentType(m.quoted)
+                m.quoted = m.quoted[type]
+            }
+            if (typeof m.quoted === 'string') m.quoted = {
+                text: m.quoted
+            }
+            m.quoted.mtype = type
+            m.quoted.id = m.msg.contextInfo.stanzaId
+            m.quoted.chat = m.msg.contextInfo.remoteJid || m.chat
+            m.quoted.isBaileys = m.quoted.id ? m.quoted.id.startsWith('BAE5') && m.quoted.id.length === 16 : false
+            m.quoted.sender = bad.decodeJid(m.msg.contextInfo.participant)
+            m.quoted.fromMe = m.quoted.sender === bad.decodeJid(bad.user.id)
+            m.quoted.text = m.quoted.text || m.quoted.caption || m.quoted.conversation || m.quoted.contentText || m.quoted.selectedDisplayText || m.quoted.title || ''
+            m.quoted.mentionedJid = m.msg.contextInfo ? m.msg.contextInfo.mentionedJid : []
+            m.getQuotedObj = m.getQuotedMessage = async () => {
+                if (!m.quoted.id) return false
+                let q = await store.loadMessage(m.chat, m.quoted.id, bad)
+                return smsg(bad, q, store)
+            }
+            let vM = M.fromObject({
+                key: {
+                    remoteJid: m.quoted.chat,
+                    fromMe: m.quoted.fromMe,
+                    id: m.quoted.id
+                },
+                message: quoted,
+                ...(m.isGroup ? { participant: m.quoted.sender } : {})
+            })
+            m.quoted.delete = () => bad.sendMessage(m.quoted.chat, { delete: vM.key })
+            m.quoted.copyNForward = (jid, forceForward = false, options = {}) => bad.copyNForward(jid, vM, forceForward, options)
+            m.quoted.download = () => bad.downloadMediaMessage(m.quoted)
+        }
+    }
+    if (m.msg?.url) m.download = () => bad.downloadMediaMessage(m.msg)
+    m.text = m.msg?.text || m.msg?.caption || m.message?.conversation || m.msg?.contentText || m.msg?.selectedDisplayText || m.msg?.title || ''
+    m.reply = (text, chatId = m.chat, options = {}) => Buffer.isBuffer(text) ? bad.sendMedia(chatId, text, 'file', '', m, { ...options }) : bad.sendText(chatId, text, m, { ...options })
+    m.copy = () => smsg(bad, M.fromObject(M.toObject(m)))
+    m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => bad.copyNForward(jid, m, forceForward, options)
+
+    return m
+}
+
 // Export all functions
 module.exports = {
     simple: new Function(),
@@ -134,5 +203,6 @@ module.exports = {
     getBuffer,
     getSizeMedia,
     generateMessageTag,
-    fetch
+    fetch,
+    smsg
 }

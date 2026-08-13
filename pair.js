@@ -31,7 +31,7 @@ const path = require('path')
 let themeemoji = "😎";
 const chalk = require('chalk')
 const { writeExif, imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./allfunc/exif');
-const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch } = require('./allfunc/myfunc')
+const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch, smsg } = require('./allfunc/myfunc')
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -213,13 +213,22 @@ async function startpairing(kingbadboiNumber) {
             connection: null,
             retryCount: 0,
             disconnected: false,
-            lastActivity: Date.now()
+            lastActivity: Date.now(),
+            isConnecting: false
         });
     }
     
     const tracker = rentbotTracker.get(kingbadboiNumber);
     
-    // 🔥 Prevent duplicate connections
+    // 🔥 Strict Singleton Lock: Prevent concurrent connection attempts
+    if (tracker.isConnecting) {
+        console.log(chalk.blue(`⏳ Connection already in progress for ${kingbadboiNumber}, skipping...`));
+        return;
+    }
+    
+    tracker.isConnecting = true;
+
+    // 🔥 Close existing connection safely
     if (tracker.connection) {
         try {
             console.log(chalk.yellow(`🔄 Closing existing connection for ${kingbadboiNumber}...`));
@@ -622,6 +631,7 @@ async function startpairing(kingbadboiNumber) {
         const tracker = rentbotTracker.get(kingbadboiNumber);
 
         if (connection === "close") {
+            tracker.isConnecting = false; // Release lock
             let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
             console.log(chalk.yellow(`🔌 Connection closed for ${kingbadboiNumber}, reason: ${reason}`));
 
@@ -681,6 +691,7 @@ async function startpairing(kingbadboiNumber) {
                 }
             }
         } else if (connection === "open") {
+            tracker.isConnecting = false; // Release lock
             console.log(chalk.bgGreen.black(`✅ Connected: ${kingbadboiNumber}`));
             tracker.retryCount = 0;
             tracker.disconnected = false;
@@ -788,70 +799,7 @@ async function startpairing(kingbadboiNumber) {
     return bad;
 }
 
-function smsg(bad, m, store) {
-    if (!m) return m
-    let M = proto.WebMessageInfo
-    if (m.key) {
-        m.id = m.key.id
-        m.isBaileys = m.id.startsWith('BAE5') && m.id.length === 16
-       
-        m.chat = m.key.remoteJid
-        m.fromMe = m.key.fromMe
-        m.isGroup = m.chat.endsWith('@g.us')
-        m.sender = bad.decodeJid(m.fromMe && bad.user.id || m.participant || m.key.participant || m.chat || '')
-        if (m.isGroup) m.participant = bad.decodeJid(m.key.participant) || ''
-    }
-    if (m.message) {
-        m.mtype = getContentType(m.message)
-        m.msg = (m.mtype == 'viewOnceMessage' ? m.message[m.mtype]?.message?.[getContentType(m.message[m.mtype]?.message)] : m.message[m.mtype]) || {}
-        m.body = m.message.conversation || m.msg?.caption || m.msg?.text || (m.mtype == 'listResponseMessage' && m.msg?.singleSelectReply?.selectedRowId) || (m.mtype == 'buttonsResponseMessage' && m.msg?.selectedButtonId) || (m.mtype == 'viewOnceMessage' && m.msg?.caption) || m.text || ''
-        let quoted = m.quoted = m.msg?.contextInfo?.quotedMessage || null
-        m.mentionedJid = m.msg?.contextInfo?.mentionedJid || []
-        if (m.quoted) {
-            let type = getContentType(quoted)
-            m.quoted = m.quoted[type]
-            if (['productMessage'].includes(type)) {
-                type = getContentType(m.quoted)
-                m.quoted = m.quoted[type]
-            }
-            if (typeof m.quoted === 'string') m.quoted = {
-                text: m.quoted
-            }
-            m.quoted.mtype = type
-            m.quoted.id = m.msg.contextInfo.stanzaId
-            m.quoted.chat = m.msg.contextInfo.remoteJid || m.chat
-            m.quoted.isBaileys = m.quoted.id ? m.quoted.id.startsWith('BAE5') && m.quoted.id.length === 16 : false
-            m.quoted.sender = bad.decodeJid(m.msg.contextInfo.participant)
-            m.quoted.fromMe = m.quoted.sender === bad.decodeJid(bad.user.id)
-            m.quoted.text = m.quoted.text || m.quoted.caption || m.quoted.conversation || m.quoted.contentText || m.quoted.selectedDisplayText || m.quoted.title || ''
-            m.quoted.mentionedJid = m.msg.contextInfo ? m.msg.contextInfo.mentionedJid : []
-            m.getQuotedObj = m.getQuotedMessage = async () => {
-                if (!m.quoted.id) return false
-                let q = await store.loadMessage(m.chat, m.quoted.id, bad)
-                return exports.smsg(bad, q, store)
-            }
-            let vM = m.quoted.fakeObj = M.fromObject({
-                key: {
-                    remoteJid: m.quoted.chat,
-                    fromMe: m.quoted.fromMe,
-                    id: m.quoted.id
-                },
-                message: quoted,
-                ...(m.isGroup ? { participant: m.quoted.sender } : {})
-            })
-            m.quoted.delete = () => bad.sendMessage(m.quoted.chat, { delete: vM.key })
-            m.quoted.copyNForward = (jid, forceForward = false, options = {}) => bad.copyNForward(jid, vM, forceForward, options)
-            m.quoted.download = () => bad.downloadMediaMessage(m.quoted)
-        }
-    }
-    if (m.msg?.url) m.download = () => bad.downloadMediaMessage(m.msg)
-    m.text = m.msg?.text || m.msg?.caption || m.message?.conversation || m.msg?.contentText || m.msg?.selectedDisplayText || m.msg?.title || ''
-    m.reply = (text, chatId = m.chat, options = {}) => Buffer.isBuffer(text) ? bad.sendMedia(chatId, text, 'file', '', m, { ...options }) : bad.sendText(chatId, text, m, { ...options })
-    m.copy = () => exports.smsg(bad, M.fromObject(M.toObject(m)))
-    m.copyNForward = (jid = m.chat, forceForward = false, options = {}) => bad.copyNForward(jid, m, forceForward, options)
 
-    return m
-}
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {

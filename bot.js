@@ -235,7 +235,7 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
     const pairingFile = path.join(pairingFolder, 'pairing.json');
     const cu = await fs.readFile(pairingFile, 'utf-8');
     const cuObj = JSON.parse(cu);
-    delete require.cache[require.resolve('./pair.js')];
+    // delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,
       `🔗 *Pairing Code for WhatsApp*\n\n` +
@@ -323,7 +323,7 @@ bot.on('message', async (msg) => {
     const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
     const cu = await fs.readFile(pairingFile, 'utf-8');
     const cuObj = JSON.parse(cu);
-    delete require.cache[require.resolve('./pair.js')];
+    // delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,
       `🔗 *Pairing Code*\n\n📝 Code: \`${cuObj.code}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
