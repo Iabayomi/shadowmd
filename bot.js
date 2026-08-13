@@ -230,11 +230,25 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
     await bot.sendMessage(chatId, '⏳ *Generating pairing code...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
     
     await startpairing(Xreturn);
-    await sleep(4000);
+    await sleep(12000);
 
     const pairingFile = path.join(pairingFolder, 'pairing.json');
-    const cu = await fs.readFile(pairingFile, 'utf-8');
-    const cuObj = JSON.parse(cu);
+    
+    // Wait until the pairing code file is written (up to 30 seconds)
+    let cuObj = null;
+    for (let i = 0; i < 15; i++) {
+      await sleep(2000);
+      if (await exists(pairingFile)) {
+        const cu = await fs.readFile(pairingFile, 'utf-8');
+        cuObj = JSON.parse(cu);
+        if (cuObj.code && cuObj.code !== 'SHAD-OWMD') break;
+      }
+    }
+    
+    if (!cuObj || !cuObj.code || cuObj.code === 'SHAD-OWMD') {
+      return bot.sendMessage(chatId, '❌ *Pairing failed.*\n\nPlease check that you are using a valid number.\n\nIf the issue persists, the server may be having network issues. Try again later.', { parse_mode: 'Markdown' });
+    }
+    
     delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,
@@ -318,11 +332,25 @@ bot.on('message', async (msg) => {
     await bot.sendMessage(chatId, '⏳ Generating pairing code...');
     
     await startpairing(Xreturn);
-    await sleep(4000);
+    await sleep(12000);
 
     const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
-    const cu = await fs.readFile(pairingFile, 'utf-8');
-    const cuObj = JSON.parse(cu);
+    
+    // Wait until the pairing code file is written (up to 30 seconds)
+    let cuObj = null;
+    for (let i = 0; i < 15; i++) {
+      await sleep(2000);
+      if (await exists(pairingFile)) {
+        const cu = await fs.readFile(pairingFile, 'utf-8');
+        cuObj = JSON.parse(cu);
+        if (cuObj.code && cuObj.code !== 'SHAD-OWMD') break;
+      }
+    }
+    
+    if (!cuObj || !cuObj.code || cuObj.code === 'SHAD-OWMD') {
+      return bot.sendMessage(chatId, '❌ Pairing failed. Try again.');
+    }
+    
     delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,

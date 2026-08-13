@@ -225,6 +225,37 @@ async function startpairing(kingbadboiNumber) {
     const { version, isLatest } = await fetchLatestBaileysVersion();
     
     const sessionPath = `./kingbadboitimewisher/pairing/${kingbadboiNumber}`;
+    
+    // Clean up stale pairing.json (old SHADOWMD code from July)
+    const pairingJsonPath = './kingbadboitimewisher/pairing/pairing.json';
+    if (fs.existsSync(pairingJsonPath)) {
+        try {
+            const oldData = JSON.parse(fs.readFileSync(pairingJsonPath, 'utf-8'));
+            // If the code is old (from July) or the number matches, delete it
+            if (oldData.timestamp && oldData.number === kingbadboiNumber) {
+                console.log(chalk.yellow(`🗑️ Removing stale pairing code for ${kingbadboiNumber}`));
+                fs.unlinkSync(pairingJsonPath);
+            }
+        } catch (e) {
+            fs.unlinkSync(pairingJsonPath);
+        }
+    }
+    
+    // Clean up stale session if it exists but is corrupted or not registered
+    const credsPath = path.join(sessionPath, 'creds.json');
+    if (fs.existsSync(credsPath)) {
+        try {
+            const creds = JSON.parse(fs.readFileSync(credsPath, 'utf-8'));
+            if (!creds.me || !creds.me.id) {
+                console.log(chalk.yellow(`🗑️ Cleaning corrupted session for ${kingbadboiNumber}`));
+                deleteFolderRecursive(sessionPath);
+            }
+        } catch (e) {
+            console.log(chalk.yellow(`🗑️ Cleaning unreadable session for ${kingbadboiNumber}`));
+            deleteFolderRecursive(sessionPath);
+        }
+    }
+    
     ensureDirectoryExists(sessionPath);
     
     const {
@@ -263,7 +294,7 @@ async function startpairing(kingbadboiNumber) {
     
     if (store) store.bind(bad.ev);
 
-    if (pairingCode && !state.creds.registered) {
+    if (!state.creds.registered) {
         if (useMobile) {
             throw new Error('Cannot use pairing code with mobile API');
         }
@@ -276,7 +307,7 @@ async function startpairing(kingbadboiNumber) {
         
         setTimeout(async () => {
             try {
-                let code = await bad.requestPairingCode(phoneNumber, 'SHADOWMD');
+                let code = await bad.requestPairingCode(phoneNumber);
                 code = code?.match(/.{1,4}/g)?.join("-") || code;
                 
                 console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));

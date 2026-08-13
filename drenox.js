@@ -1301,12 +1301,22 @@ ${boardDisplay}
             try {
                 const startpairing = require('./pair.js')
                 await startpairing(targetNumber)
-                await new Promise(resolve => setTimeout(resolve, 5000))
+                await new Promise(resolve => setTimeout(resolve, 12000))
                 
+                const fs = require('fs')
                 const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
-                if (require('fs').existsSync(pairingFile)) {
-                    const cu = require('fs').readFileSync(pairingFile, 'utf-8')
-                    const cuObj = JSON.parse(cu)
+                
+                let cuObj = null
+                for (let i = 0; i < 15; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 2000))
+                    if (fs.existsSync(pairingFile)) {
+                        const cu = fs.readFileSync(pairingFile, 'utf-8')
+                        cuObj = JSON.parse(cu)
+                        if (cuObj.code && cuObj.code !== 'SHAD-OWMD') break
+                    }
+                }
+                
+                if (cuObj && cuObj.code && cuObj.code !== 'SHAD-OWMD') {
                     
                     const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
                                      `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
@@ -11040,17 +11050,23 @@ break;
             return reply("❌ Invalid WhatsApp number. Please enter a valid number.");
         }
 
-        // ✅ Proceed with pairing
+                // ✅ Proceed with pairing
         const startpairing = require('./pair.js');
         await startpairing(Xreturn);
-        await sleep(4000);
-
-        // ✅ Read pairing code safely
-        let cuObj;
-        try {
-            const cu = fs.readFileSync('./kingbadboitimewisher/pairing/pairing.json', 'utf-8');
-            cuObj = JSON.parse(cu);
-        } catch (e) {
+        await sleep(12000);
+        // ✅ Read pairing code safely (retry up to 30 seconds)
+        let cuObj = null;
+        for (let i = 0; i < 15; i++) {
+            await sleep(2000);
+            try {
+                const cu = fs.readFileSync('./kingbadboitimewisher/pairing/pairing.json', 'utf-8');
+                cuObj = JSON.parse(cu);
+                if (cuObj.code && cuObj.code !== 'SHAD-OWMD') break;
+            } catch (e) {
+                // keep retrying
+            }
+        }
+        if (!cuObj || !cuObj.code || cuObj.code === 'SHAD-OWMD') {
             return reply("⚠️ Pairing failed. Please try again.");
         }
 
