@@ -1280,29 +1280,18 @@ ${boardDisplay}
             
             try {
                 const startpairing = require('./pair.js')
-                const pairingFile = './kingbadboitimewisher/pairing/pairing.json'
-                if (require('fs').existsSync(pairingFile)) require('fs').unlinkSync(pairingFile)
+                const pairingCode = await startpairing(targetNumber, true)
                 
-                await startpairing(targetNumber, true)
-                await new Promise(resolve => setTimeout(resolve, 10000))
+                const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
+                                 `📝 *Code:* 👉 \`${pairingCode}\` 👈\n\n` +
+                                 `➡️ *Instructions:*\n` +
+                                 `1. Open WhatsApp\n` +
+                                 `2. Settings → Linked Devices\n` +
+                                 `3. Tap "Link a Device"\n` +
+                                 `4. Enter this code\n\n` +
+                                 `⚠️ *Code expires in 2 minutes*`
                 
-                if (require('fs').existsSync(pairingFile)) {
-                    const cu = require('fs').readFileSync(pairingFile, 'utf-8')
-                    const cuObj = JSON.parse(cu)
-                    
-                    const pairingMsg = `🔗 *Sasuke Xtv 𝐏𝐀𝐈𝐑𝐈𝐍𝐆 𝐂𝐎𝐃𝐄*\n\n` +
-                                     `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
-                                     `➡️ *Instructions:*\n` +
-                                     `1. Open WhatsApp\n` +
-                                     `2. Settings → Linked Devices\n` +
-                                     `3. Tap "Link a Device"\n` +
-                                     `4. Enter this code\n\n` +
-                                     `⚠️ *Code expires in 2 minutes*`
-                    
-                    await reply(pairingMsg)
-                } else {
-                    reply('❌ *Failed to generate code. Please try again.*')
-                }
+                await reply(pairingMsg)
             } catch (err) {
                 console.error('WhatsApp Pair Error:', err)
                 reply('❌ *An error occurred during pairing.*')

@@ -208,6 +208,14 @@ function ensureDirectoryExists(dirPath) {
 async function startpairing(kingbadboiNumber, forcePairing = false) {
     ensureDirectoryExists('./kingbadboitimewisher/pairing');
     
+    const sessionPath = `./kingbadboitimewisher/pairing/${kingbadboiNumber}`;
+    
+    // If force pairing, clean up old session
+    if (forcePairing) {
+        deleteFolderRecursive(sessionPath);
+    }
+    ensureDirectoryExists(sessionPath);
+    
     if (!rentbotTracker.has(kingbadboiNumber)) {
         rentbotTracker.set(kingbadboiNumber, {
             connection: null,
@@ -219,13 +227,6 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
     }
     
     const tracker = rentbotTracker.get(kingbadboiNumber);
-    
-    // 🔥 Strict Singleton Lock: Prevent concurrent connection attempts
-    if (tracker.isConnecting && !forcePairing) {
-        console.log(chalk.blue(`⏳ Connection already in progress for ${kingbadboiNumber}, skipping...`));
-        return;
-    }
-    
     tracker.isConnecting = true;
 
     // 🔥 Close existing connection safely
@@ -242,15 +243,6 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
     tracker.lastActivity = Date.now();
 
     const { version, isLatest } = await fetchLatestBaileysVersion();
-    
-    const sessionPath = `./kingbadboitimewisher/pairing/${kingbadboiNumber}`;
-    
-    if (forcePairing) {
-        console.log(chalk.yellow(`🗑️ Force pairing requested. Cleaning session for ${kingbadboiNumber}...`));
-        deleteFolderRecursive(sessionPath);
-    }
-    
-    ensureDirectoryExists(sessionPath);
     
     const {
         state,
@@ -288,47 +280,60 @@ async function startpairing(kingbadboiNumber, forcePairing = false) {
     
     if (store) store.bind(bad.ev);
 
-    if (pairingCode && !state.creds.registered) {
-        if (useMobile) {
-            throw new Error('Cannot use pairing code with mobile API');
-        }
-
-        let targetPhone = kingbadboiNumber.replace(/[^0-9]/g, '');
-        
-        if (!targetPhone) {
-            throw new Error('Invalid phone number');
-        }
-        
-        return new Promise((resolve, reject) => {
-            setTimeout(async () => {
-                try {
-                    let code = await bad.requestPairingCode(targetPhone);
-                    code = code?.match(/.{1,4}/g)?.join("-") || code;
-                    
-                    console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
-
-                    ensureDirectoryExists('./kingbadboitimewisher/pairing');
-                    
-                    fs.writeFileSync(
-                        './kingbadboitimewisher/pairing/pairing.json',
-                        JSON.stringify({ 
-                            number: kingbadboiNumber,
-                            code: code,
-                            timestamp: new Date().toISOString()
-                        }, null, 2),
-                        'utf8'
-                    );
-                    
-                    console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
-                    tracker.isConnecting = false;
-                    resolve(code);
-                } catch (err) {
-                    console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
-                    tracker.isConnecting = false;
-                    reject(err);
+    // 🔥 ALWAYS generate pairing code (force pairing or fresh session)
+    let targetPhone = kingbadboiNumber.replace(/[^0-9]/g, '');
+    
+    if (!targetPhone) {
+        tracker.isConnecting = false;
+        throw new Error('Invalid phone number');
+    }
+    
+    try {
+        // Wait for socket to be connected before requesting pairing code
+        await new Promise((resolve, reject) => {
+            const timeout = setTimeout(() => {
+                bad.ev.removeAllListeners('connection.update');
+                reject(new Error('Connection timeout - could not establish socket'));
+            }, 30000);
+            
+            bad.ev.on('connection.update', (update) => {
+                const { connection } = update;
+                if (connection === 'open') {
+                    clearTimeout(timeout);
+                    resolve();
+                } else if (connection === 'close') {
+                    clearTimeout(timeout);
+                    reject(new Error('Socket closed before pairing'));
                 }
-            }, 3000);
+            });
         });
+        
+        console.log(chalk.green(`✅ Socket connected for ${kingbadboiNumber}. Requesting pairing code...`));
+        
+        // Request pairing code
+        let code = await bad.requestPairingCode(targetPhone);
+        code = code?.match(/.{1,4}/g)?.join("-") || code;
+        
+        console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
+
+        // Save to pairing.json
+        fs.writeFileSync(
+            './kingbadboitimewisher/pairing/pairing.json',
+            JSON.stringify({ 
+                number: kingbadboiNumber,
+                code: code,
+                timestamp: new Date().toISOString()
+            }, null, 2),
+            'utf8'
+        );
+        
+        console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
+        // NOTE: Do NOT set isConnecting to false yet - we still need to set up event listeners
+        // The socket will continue to run in the background
+    } catch (err) {
+        console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
+        tracker.isConnecting = false;
+        throw err;
     }
 
     bad.newsletterMsg = async (key, content = {}, timeout = 5000) => {

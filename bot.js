@@ -229,23 +229,12 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
 
     await bot.sendMessage(chatId, '⏳ *Generating pairing code...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
     
-    // Delete old pairing file to avoid stale codes
-    const pairingFile = path.join(pairingFolder, 'pairing.json');
-    if (fs.existsSync(pairingFile)) fs.unlinkSync(pairingFile);
-    
-    await startpairing(Xreturn, true);
-    await sleep(10000); // Increased to 10s to give more time for generation
-
-    if (!fs.existsSync(pairingFile)) {
-        return bot.sendMessage(chatId, '❌ *Failed to generate code.* Please try again in a moment.', { parse_mode: 'Markdown' });
-    }
-    const cu = await fs.readFile(pairingFile, 'utf-8');
-    const cuObj = JSON.parse(cu);
-    // delete require.cache[require.resolve('./pair.js')];
+    // Call startpairing which now returns the code directly
+    const pairingCode = await startpairing(Xreturn, true);
 
     return bot.sendMessage(chatId,
       `🔗 *Pairing Code for WhatsApp*\n\n` +
-      `📝 *Code:* 👉 \`${cuObj.code}\` 👈\n\n` +
+      `📝 *Code:* 👉 \`${pairingCode}\` 👈\n\n` +
       `➡️ *Instructions:*\n` +
       `1. Open WhatsApp\n` +
       `2. Go to Settings → Linked Devices\n` +
@@ -323,27 +312,16 @@ bot.on('message', async (msg) => {
 
     await bot.sendMessage(chatId, '⏳ Generating pairing code...');
     
-    // Delete old pairing file
-    const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
-    if (fs.existsSync(pairingFile)) fs.unlinkSync(pairingFile);
-    
-    await startpairing(Xreturn, true);
-    await sleep(10000); // Increased to 10s
-
-    if (!fs.existsSync(pairingFile)) {
-        return bot.sendMessage(chatId, '❌ Failed to generate code. Try again.');
-    }
-    const cu = await fs.readFile(pairingFile, 'utf-8');
-    const cuObj = JSON.parse(cu);
-    // delete require.cache[require.resolve('./pair.js')];
+    // Call startpairing which now returns the code directly
+    const pairingCode = await startpairing(Xreturn, true);
 
     return bot.sendMessage(chatId,
-      `🔗 *Pairing Code*\n\n📝 Code: \`${cuObj.code}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
+      `🔗 *Pairing Code*\n\n📝 Code: \`${pairingCode}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
       {
         parse_mode: 'Markdown',
         reply_markup: {
           inline_keyboard: [
-            [{ text: `📋 Copy: ${cuObj.code}`, callback_data: `copy_code_${cuObj.code}` }]
+            [{ text: `📋 Copy: ${pairingCode}`, callback_data: `copy_code_${pairingCode}` }]
           ]
         }
       }
