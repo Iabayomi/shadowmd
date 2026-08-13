@@ -167,7 +167,7 @@ function cleanupExpiredSessions() {
     if (!fs.existsSync(sessionDir)) return;
     
     const now = Date.now();
-    const oneDayAgo = now - (24 * 60 * 60 * 1000);
+    const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
     
     fs.readdirSync(sessionDir).forEach(folder => {
         if (folder === 'pairing.json') return;
@@ -184,7 +184,7 @@ function cleanupExpiredSessions() {
             
             try {
                 const stats = fs.statSync(folderPath);
-                if (stats.mtimeMs < oneDayAgo) {
+                if (stats.mtimeMs < thirtyDaysAgo) {
                     console.log(chalk.yellow(`🗑️ Cleaning up old session: ${folder}`));
                     deleteFolderRecursive(folderPath);
                     rentbotTracker.delete(folder);
@@ -676,6 +676,7 @@ async function startpairing(kingbadboiNumber) {
             tracker.lastActivity = Date.now();
             
             // 🔥 STABILITY MONITOR - Runs in background
+            let socketFailCount = 0;
             const keepAliveInterval = setInterval(async () => {
                 if (tracker.disconnected) {
                     clearInterval(keepAliveInterval);
@@ -683,24 +684,29 @@ async function startpairing(kingbadboiNumber) {
                 }
                 
                 try {
-                    // 1. Send presence to keep socket alive
-                    if (bad.ws?.readyState === 1) {
+                    // 1. Check socket state
+                    if (bad.ws?.readyState !== 1) {
+                        socketFailCount++;
+                        if (socketFailCount >= 3) {
+                            console.log(chalk.red(`⚠️ Socket for ${kingbadboiNumber} is not OPEN. Force restarting...`));
+                            process.exit(0);
+                        }
+                    } else {
+                        socketFailCount = 0;
                         await bad.sendPresenceUpdate('available');
-                        // We don't update tracker.lastActivity here, only on REAL messages
                     }
 
-                    // 2. Health Check: If no activity for 45 minutes, force a restart
-                    // This fixes the "bot stops working after 15-30 mins" issue
+                    // 2. Health Check: If no activity for 30 minutes, force a restart
+                    // This ensures the bot stays fresh and handles the "39-minute hang"
                     const inactiveTime = Date.now() - tracker.lastActivity;
-                    if (inactiveTime > 45 * 60 * 1000) { 
-                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (45m inactivity). Restarting...`));
-                        clearInterval(keepAliveInterval);
-                        process.exit(0); // Process manager (Render/Railway) will restart it
+                    if (inactiveTime > 30 * 60 * 1000) { 
+                        console.log(chalk.red(`⚠️ Connection for ${kingbadboiNumber} seems frozen (30m inactivity). Restarting...`));
+                        process.exit(0); 
                     }
                 } catch (err) {
                     // Silently fail
                 }
-            }, 30000); // Check every 30 seconds
+            }, 30000);
             
             // Wait before performing auto-actions
             await sleep(10000);

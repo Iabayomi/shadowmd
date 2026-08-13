@@ -283,11 +283,11 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
         ? buildContextPrompt(userId, groupId, prompt)
         : `⟦ Sasuke Xtv ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
       
-      const url = `https://api-toxxic.zone.id/api/ai/claude?prompt=${encodeURIComponent(finalPrompt)}`
-      const response = await fetch(url, { method: "GET", timeout: 5000 })
+      const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(finalPrompt)}`
+      const response = await fetch(url, { method: "GET", timeout: 10000 })
       const data = await response.json()
       
-      let apiResponse = data.data || data.result || data.response || data.message
+      let apiResponse = data.result || data.response || data.message || data.data
       
       if (apiResponse && apiResponse.length > 5) {
         if (userId && groupId) {
@@ -691,23 +691,33 @@ async function handleMessage(bad, m, chatUpdate, store) {
       m.mtype === "buttonsResponseMessage" ? m.message?.buttonsResponseMessage?.selectedButtonId :
       m.mtype === "listResponseMessage" ? m.message?.listResponseMessage?.singleSelectReply?.selectedRowId :
       m.mtype === "templateButtonReplyMessage" ? m.message?.templateButtonReplyMessage?.selectedId :
-      m.mtype === "interactiveResponseMessage" ? JSON.parse(m.msg?.nativeFlowResponseMessage?.paramsJson).id :
+      m.mtype === "interactiveResponseMessage" ? (() => { try { return JSON.parse(m.msg?.nativeFlowResponseMessage?.paramsJson).id } catch { return "" } })() :
       ""
     ) || ''
 const budy = body
 
 // ========== PREFIX DETECTION ==========
-// Sirf ye 5 prefixes kaam karenge: . / # ! @
-const allowedPrefixes = ['.', '/', '#', '!', '@'];
+// Dynamic prefix detection from global config
+const allowedPrefixes = global.prefa || ['.', '/', '#', '!', '@', '&', ''];
 let prefix = '';
 let isCmd = false;
 
-for (let p of allowedPrefixes) {
+// Sort prefixes by length descending to match longest prefix first (e.g., "!!" before "!")
+const sortedPrefixes = [...allowedPrefixes].sort((a, b) => b.length - a.length);
+
+for (let p of sortedPrefixes) {
+    if (p === '') continue; // Handle empty prefix separately
     if (body.startsWith(p)) {
         prefix = p;
         isCmd = true;
         break;
     }
+}
+
+// If no prefix matched but empty prefix is allowed
+if (!isCmd && allowedPrefixes.includes('')) {
+    prefix = '';
+    isCmd = true;
 }
 
 // ✅ Args & command
@@ -11740,43 +11750,17 @@ case 'groq': {
     if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ǫᴜᴇsᴛɪᴏɴ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} ᴡʜᴀᴛ ɪs ᴀɪ?`);
     
     try {
-        // ✅ NO loading message - direct API call
-        const GROQ_API_KEY = "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";
-        
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${GROQ_API_KEY}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: 'llama-3.3-70b-versatile',
-                messages: [
-                    {
-                        role: 'system',
-                        content: 'You are a helpful AI assistant.'
-                    },
-                    {
-                        role: 'user',
-                        content: text
-                    }
-                ],
-                temperature: 0.7,
-                max_tokens: 1024
-            })
-        });
-        
+        const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(text)}`;
+        const response = await fetch(url, { method: "GET", timeout: 10000 });
         const data = await response.json();
         
-        if (!response.ok) {
-            console.error('Error:', data);
-            return reply(`❌ API Error: ${data.error?.message || 'Something went wrong'}`);
+        const result = data.result || data.response || data.message || data.data;
+        
+        if (!result) {
+            return reply(`❌ ᴀᴘɪ ᴇʀʀᴏʀ: ᴄᴏᴜʟᴅ ɴᴏᴛ ɢᴇᴛ ʀᴇsᴘᴏɴsᴇ. ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.`);
         }
         
-        const result = data.choices[0].message.content;
-        
-        // ✅ Direct reply without loading message
-        await reply(`🤖 *AI Response:*\n\n${result}`);
+        await reply(`🤖 *Sasuke Xtv AI:*\n\n${result}`);
         
     } catch (error) {
         console.error('Error:', error);

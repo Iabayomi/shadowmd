@@ -53,7 +53,7 @@ const loadAdminIDs = async () => {
 loadAdminIDs();
 
 let isShuttingDown = false;
-let isAutoLoadRunning = true;
+let isAutoLoadRunning = false;
 
 const runAutoLoad = async () => {
   if (isAutoLoadRunning || isShuttingDown) return;
