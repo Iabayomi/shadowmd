@@ -281,15 +281,13 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
     try {
       const finalPrompt = userId && groupId 
         ? buildContextPrompt(userId, groupId, prompt)
-        : `⟦ Sasuke Xtv ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
+        : `You are Sasuke Xtv, a powerful AI assistant and WhatsApp bot created by Sasuke Xtv. Answer user query: "${prompt}"`
       
-      const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(finalPrompt)}`
-      const response = await fetch(url, { method: "GET", timeout: 10000 })
-      const data = await response.json()
+      const url = `https://text.pollinations.ai/${encodeURIComponent(finalPrompt)}`
+      const response = await fetch(url, { method: "GET", timeout: 15000 })
+      let apiResponse = await response.text()
       
-      let apiResponse = data.result || data.response || data.message || data.data
-      
-      if (apiResponse && apiResponse.length > 5) {
+      if (apiResponse && apiResponse.length > 2) {
         if (userId && groupId) {
           addToConversation(userId, groupId, 'assistant', apiResponse)
         }
@@ -5953,33 +5951,44 @@ case 'song': {
 
     const video = search.videos[0]
 
-    // 2️⃣ API Call
-    const api = `https://api.ootaizumi.web.id/downloader/youtube`
-    const { data } = await axios.get(api, {
-      params: {
-        url: video.url,
-        format: 'mp3'
-      }
-    })
+    // 2️⃣ API Call with fallback
+    let audioUrl = ''
+    let title = video.title
+    let author = video.author.name
+    let thumbnail = video.thumbnail
 
-    if (!data.status || !data.result?.download) {
-      throw new Error('Download failed')
+    try {
+      const { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(video.url)}`)
+      if (data.status && data.data?.download?.url) {
+        audioUrl = data.data.download.url
+      }
+    } catch (e) {}
+
+    if (!audioUrl) {
+      try {
+        const { data } = await axios.get(`https://kaiz-apis.gleeze.com/api/ytmp3?url=${encodeURIComponent(video.url)}`)
+        if (data.download?.url) {
+          audioUrl = data.download.url
+        }
+      } catch (e) {}
     }
 
-    const result = data.result
+    if (!audioUrl) {
+      throw new Error('Audio download failed from all providers')
+    }
 
     // 3️⃣ Send Audio
     await bad.sendMessage(
       m.chat,
       {
-        audio: { url: result.download },
+        audio: { url: audioUrl },
         mimetype: 'audio/mpeg',
-        fileName: `${result.title}.mp3`,
+        fileName: `${title}.mp3`,
         contextInfo: {
           externalAdReply: {
-            title: result.title,
-            body: result.author?.channelTitle || 'YouTube Audio',
-            thumbnailUrl: result.thumbnail,
+            title: title,
+            body: author || 'YouTube Audio',
+            thumbnailUrl: thumbnail,
             sourceUrl: video.url,
             mediaType: 1,
             renderLargerThumbnail: true
