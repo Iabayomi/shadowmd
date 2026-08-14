@@ -1,11 +1,3 @@
-// 🔥 CRASH PROTECTION
-process.on("uncaughtException", (err) => {
-  console.error("⚠️  Uncaught Exception in drenox (Handled):", err.message);
-});
-process.on("unhandledRejection", (reason) => {
-  console.error("⚠️  Unhandled Rejection in drenox (Handled):", reason?.message || reason);
-});
-
 const baileys = require("@whiskeysockets/baileys")
 const { 
   default: makeWASocket,

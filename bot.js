@@ -16,7 +16,6 @@ let adminIDs = [];
 
 // Store user states for pairing flow
 const userStates = new Map();
-const activePairing = new Set(); // Prevent duplicate pairing attempts for same user
 
 const exists = async (filePath) => {
   try {
@@ -101,7 +100,7 @@ const checkUserJoinedChannels = async (userId) => {
       continue;
     }
   }
-  return true; // Return true to avoid blocking the user during rebranding
+  return true; 
 };
 
 // ========== SEND CHANNELS REQUIRED MESSAGE ==========
@@ -176,14 +175,10 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
   const chatId = msg.chat.id;
   const userId = msg.from.id;
   const isGroup = msg.chat.type === 'group' || msg.chat.type === 'supergroup';
-  let text = match[1]?.trim();
+  const text = match[1]?.trim();
 
   if (isGroup) {
     return sendGroupMessage(chatId, msg.message_id);
-  }
-
-  if (activePairing.has(userId)) {
-    return bot.sendMessage(chatId, '⚠️ *You already have a pairing process running.*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
   }
 
   const allJoined = await checkUserJoinedChannels(userId);
@@ -200,11 +195,16 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
     );
   }
 
-  // Clean the number - remove any non-numeric characters automatically
-  text = text.replace(/[^0-9]/g, '');
-
-  if (text.length < 7 || text.length > 15) {
-    return bot.sendMessage(chatId, '❌ *Invalid number length.*\n\nPlease send a valid WhatsApp number with country code.\nExample: 234xxxxxxxxx', { parse_mode: 'Markdown' });
+  if (/[a-z]/i.test(text)) {
+    return bot.sendMessage(chatId, '❌ *Letters are not allowed.*\n\nPlease send only numbers.', { parse_mode: 'Markdown' });
+  }
+  
+  if (!/^\d{7,15}$/.test(text)) {
+    return bot.sendMessage(chatId, '❌ *Invalid format.*\n\nPlease send a valid WhatsApp number.\nExample: 234xxxxxxxxx', { parse_mode: 'Markdown' });
+  }
+  
+  if (text.startsWith('0')) {
+    return bot.sendMessage(chatId, '❌ *Numbers starting with 0 are not allowed.*\n\nPlease include country code.', { parse_mode: 'Markdown' });
   }
 
   const pairingFolder = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
@@ -213,42 +213,29 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
   }
 
   userStates.delete(userId);
-  activePairing.add(userId);
 
   try {
     const startpairing = require('./pair.js');
     const Xreturn = text + "@s.whatsapp.net";
 
-    await bot.sendMessage(chatId, '⏳ *Generating pairing code for ' + text + '...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
+    await bot.sendMessage(chatId, '⏳ *Generating pairing code...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
     
-    // Clear old pairing file first to ensure we don't read stale data
-    const pairingFile = path.join(pairingFolder, 'pairing.json');
-    if (await exists(pairingFile)) {
-        await fs.unlink(pairingFile).catch(() => {});
-    }
-
     await startpairing(Xreturn);
+    await sleep(12000);
+
+    const pairingFile = path.join(pairingFolder, 'pairing.json');
     
-    // Increased wait time and more frequent checks
+    // Wait until the pairing code file is written (up to 30 seconds)
     let cuObj = null;
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 15; i++) {
       await sleep(2000);
       if (await exists(pairingFile)) {
-        try {
-            const cu = await fs.readFile(pairingFile, 'utf-8');
-            cuObj = JSON.parse(cu);
-            // Ensure the code is for the number we just requested
-            if (cuObj.code && cuObj.code !== 'SHAD-OWMD' && cuObj.number.includes(text)) {
-                break;
-            }
-        } catch (e) {
-            // JSON might be partially written, wait for next tick
-        }
+        const cu = await fs.readFile(pairingFile, 'utf-8');
+        cuObj = JSON.parse(cu);
+        if (cuObj.code && cuObj.code !== 'SHAD-OWMD') break;
       }
     }
     
-    activePairing.delete(userId);
-
     if (!cuObj || !cuObj.code || cuObj.code === 'SHAD-OWMD') {
       return bot.sendMessage(chatId, '❌ *Pairing failed.*\n\nPlease check that you are using a valid number.\n\nIf the issue persists, the server may be having network issues. Try again later.', { parse_mode: 'Markdown' });
     }
@@ -275,7 +262,6 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
     );
 
   } catch (error) {
-    activePairing.delete(userId);
     console.error('PAIR COMMAND ERROR:', error);
     bot.sendMessage(chatId, '❌ *Pairing service is temporarily unavailable.*\n\nPlease try again later.', { parse_mode: 'Markdown' });
   }
@@ -311,7 +297,7 @@ bot.on('callback_query', async (callbackQuery) => {
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
   const userId = msg.from.id;
-  let text = msg.text;
+  const text = msg.text;
   
   if (msg.chat.type !== 'private') return;
   if (!text || text.startsWith('/')) return;
@@ -319,14 +305,9 @@ bot.on('message', async (msg) => {
   const userState = userStates.get(userId);
   if (!userState || userState.step !== 'awaiting_number') return;
   
-  // Clean the number
-  text = text.replace(/[^0-9]/g, '');
-  if (text.length < 7 || text.length > 15) return;
+  const phoneRegex = /^\d{7,15}$/;
+  if (!phoneRegex.test(text)) return;
   
-  if (activePairing.has(userId)) {
-    return bot.sendMessage(chatId, '⚠️ *You already have a pairing process running.*', { parse_mode: 'Markdown' });
-  }
-
   userStates.delete(userId);
   
   const allJoined = await checkUserJoinedChannels(userId);
@@ -335,46 +316,36 @@ bot.on('message', async (msg) => {
     return sendChannelsRequiredMessage(chatId);
   }
 
-  activePairing.add(userId);
-
   try {
     const startpairing = require('./pair.js');
     const Xreturn = text + "@s.whatsapp.net";
 
-    await bot.sendMessage(chatId, '⏳ *Generating pairing code for ' + text + '...*\n\nPlease wait a moment.', { parse_mode: 'Markdown' });
+    await bot.sendMessage(chatId, '⏳ Generating pairing code...');
     
-    const pairingFolder = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
-    const pairingFile = path.join(pairingFolder, 'pairing.json');
-    if (await exists(pairingFile)) {
-        await fs.unlink(pairingFile).catch(() => {});
-    }
-
     await startpairing(Xreturn);
+    await sleep(12000);
+
+    const pairingFile = path.join(__dirname, 'kingbadboitimewisher', 'pairing', 'pairing.json');
     
+    // Wait until the pairing code file is written (up to 30 seconds)
     let cuObj = null;
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 15; i++) {
       await sleep(2000);
       if (await exists(pairingFile)) {
-        try {
-            const cu = await fs.readFile(pairingFile, 'utf-8');
-            cuObj = JSON.parse(cu);
-            if (cuObj.code && cuObj.code !== 'SHAD-OWMD' && cuObj.number.includes(text)) {
-                break;
-            }
-        } catch (e) {}
+        const cu = await fs.readFile(pairingFile, 'utf-8');
+        cuObj = JSON.parse(cu);
+        if (cuObj.code && cuObj.code !== 'SHAD-OWMD') break;
       }
     }
     
-    activePairing.delete(userId);
-
     if (!cuObj || !cuObj.code || cuObj.code === 'SHAD-OWMD') {
-      return bot.sendMessage(chatId, '❌ *Pairing failed.* Try again.', { parse_mode: 'Markdown' });
+      return bot.sendMessage(chatId, '❌ Pairing failed. Try again.');
     }
     
     delete require.cache[require.resolve('./pair.js')];
 
     return bot.sendMessage(chatId,
-      `🔗 *Pairing Code for WhatsApp*\n\n📝 Code: \`${cuObj.code}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
+      `🔗 *Pairing Code*\n\n📝 Code: \`${cuObj.code}\`\n\n1. Open WhatsApp\n2. Settings → Linked Devices\n3. Link a Device\n4. Enter this code`,
       {
         parse_mode: 'Markdown',
         reply_markup: {
@@ -386,8 +357,7 @@ bot.on('message', async (msg) => {
     );
 
   } catch (error) {
-    activePairing.delete(userId);
     console.error('PAIRING ERROR:', error);
-    bot.sendMessage(chatId, '❌ *Pairing failed.* Try again later.', { parse_mode: 'Markdown' });
+    bot.sendMessage(chatId, '❌ Pairing failed. Try again later.');
   }
 });
