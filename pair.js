@@ -442,14 +442,10 @@ async function startpairing(kingbadboiNumber) {
                 await sleep(2000);
                 queuePairing(kingbadboiNumber);
             } else {
-                console.log(chalk.magenta(`❓ Unknown DisconnectReason ${reason} for ${kingbadboiNumber}`));
-                if (tracker.retryCount < 2) {
-                    await sleep(5000);
-                    queuePairing(kingbadboiNumber);
-                } else {
-                    console.log(chalk.red(`❌ Max retries for ${kingbadboiNumber}`));
-                    tracker.disconnected = true;
-                }
+                console.log(chalk.magenta(`❓ Unknown DisconnectReason ${reason} for ${kingbadboiNumber} - Auto-reconnecting...`));
+                tracker.retryCount = 0; // Reset retry count for endless uptime
+                await sleep(5000);
+                queuePairing(kingbadboiNumber);
             }
         } else if (connection === "open") {
             console.log(chalk.bgGreen.black(`✅ Connected: ${kingbadboiNumber}`));
