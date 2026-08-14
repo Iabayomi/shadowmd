@@ -14,6 +14,30 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 8000;
 
+// 🔥 SINGLE INSTANCE LOCK
+// This prevents multiple bot processes from running at once and fighting for the same token
+const LOCK_FILE = './bot.lock';
+if (fs.existsSync(LOCK_FILE)) {
+    try {
+        const oldPid = fs.readFileSync(LOCK_FILE, 'utf8');
+        // Check if the old process is actually running
+        try {
+            process.kill(parseInt(oldPid), 0);
+            console.log(chalk.red(`⚠️  Another instance (PID ${oldPid}) is already running. Exiting...`));
+            process.exit(1);
+        } catch (e) {
+            // Process not running, stale lock file
+            fs.unlinkSync(LOCK_FILE);
+        }
+    } catch (e) {
+        fs.unlinkSync(LOCK_FILE);
+    }
+}
+fs.writeFileSync(LOCK_FILE, process.pid.toString());
+process.on('exit', () => {
+    if (fs.existsSync(LOCK_FILE)) fs.unlinkSync(LOCK_FILE);
+});
+
 // Health check & Admin Panel
 app.get('/', (req, res) => {
     const uptime = runtime(process.uptime());
@@ -247,8 +271,8 @@ process.on('SIGINT', () => {
 
 process.on('SIGTERM', () => {
     console.log(chalk.yellow('\n\n⚠️  Received termination signal...'));
-    // Do NOT exit - Render will send a new instance
-    // process.exit(0);
+    // Render expects the process to exit within a few seconds of SIGTERM
+    process.exit(0);
 });
 
 initializeBot().catch((error) => {

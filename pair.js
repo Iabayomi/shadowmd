@@ -343,15 +343,16 @@ async function startpairing(kingbadboiNumber) {
 
                 ensureDirectoryExists('./kingbadboitimewisher/pairing');
                 
-                fs.writeFileSync(
-                    './kingbadboitimewisher/pairing/pairing.json',
-                    JSON.stringify({ 
-                        number: kingbadboiNumber,
-                        code: code,
-                        timestamp: new Date().toISOString()
-                    }, null, 2),
-                    'utf8'
-                );
+                const pairingData = JSON.stringify({ 
+                    number: kingbadboiNumber,
+                    code: code,
+                    timestamp: new Date().toISOString()
+                }, null, 2);
+                
+                // Write to a temporary file first, then rename to make it atomic
+                const tempFile = './kingbadboitimewisher/pairing/pairing.json.tmp';
+                fs.writeFileSync(tempFile, pairingData, 'utf8');
+                fs.renameSync(tempFile, './kingbadboitimewisher/pairing/pairing.json');
                 
                 console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
             } catch (err) {
