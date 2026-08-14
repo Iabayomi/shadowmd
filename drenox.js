@@ -6039,33 +6039,29 @@ case 'song': {
 
     const video = search.videos[0]
 
-    // 2️⃣ API Call
-    const api = `https://api.ootaizumi.web.id/downloader/youtube`
-    const { data } = await axios.get(api, {
-      params: {
-        url: video.url,
-        format: 'mp3'
-      }
-    })
+    // 2️⃣ Use @vreden/youtube_scraper which is 100% reliable
+    const { ytmp3 } = require('@vreden/youtube_scraper')
+    const ytRes = await ytmp3(video.url)
 
-    if (!data.status || !data.result?.download) {
+    if (!ytRes.status || !ytRes.download?.url) {
       throw new Error('Download failed')
     }
 
-    const result = data.result
+    const downloadUrl = ytRes.download.url
+    const title = ytRes.metadata.title
 
     // 3️⃣ Send Audio
     await bad.sendMessage(
       m.chat,
       {
-        audio: { url: result.download },
+        audio: { url: downloadUrl },
         mimetype: 'audio/mpeg',
-        fileName: `${result.title}.mp3`,
+        fileName: `${title}.mp3`,
         contextInfo: {
           externalAdReply: {
-            title: result.title,
-            body: result.author?.channelTitle || 'YouTube Audio',
-            thumbnailUrl: result.thumbnail,
+            title: title,
+            body: video.author?.name || 'Sasuke Xtv Music',
+            thumbnailUrl: video.thumbnail,
             sourceUrl: video.url,
             mediaType: 1,
             renderLargerThumbnail: true
