@@ -221,6 +221,7 @@ async function startpairing(kingbadboiNumber) {
             connection: null,
             retryCount: 0,
             disconnected: false,
+            isPairing: false,
             lastActivity: Date.now()
         });
     }
@@ -276,7 +277,7 @@ async function startpairing(kingbadboiNumber) {
         printQRInTerminal: false,
         auth: state,
         version,
-        browser: Browsers.ubuntu("Edge"),
+        browser: ["Ubuntu", "Chrome", "20.0.04"],
         getMessage: async key => {
             if (!store) return { conversation: '' };
             const jid = key.remoteJid;
@@ -302,7 +303,8 @@ async function startpairing(kingbadboiNumber) {
     
     if (store) store.bind(bad.ev);
 
-    if (!state.creds.registered) {
+        if (!state.creds.registered) {
+        tracker.isPairing = true;
         if (useMobile) {
             throw new Error('Cannot use pairing code with mobile API');
         }
@@ -324,9 +326,16 @@ async function startpairing(kingbadboiNumber) {
                     if (connected) break;
                 }
                 if (!connected) {
-                    console.log(chalk.yellow(`⚠️ Socket not connected for ${kingbadboiNumber} after 30s. Retrying in 5s...`));
-                    await sleep(5000);
+                    console.log(chalk.red(`❌ Socket failed to connect for ${kingbadboiNumber} after 30s. Pairing aborted.`));
+                    return;
                 }
+                
+                // Extra check: ensure socket is STILL open
+                if (bad.ws?.readyState !== 1) {
+                    console.log(chalk.red(`❌ Socket closed just before pairing for ${kingbadboiNumber}.`));
+                    return;
+                }
+
                 let code = await bad.requestPairingCode(phoneNumber);
                 code = code?.match(/.{1,4}/g)?.join("-") || code;
                 
@@ -348,6 +357,7 @@ async function startpairing(kingbadboiNumber) {
             } catch (err) {
                 console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
             }
+            tracker.isPairing = false;
         })();
     }
 
@@ -668,6 +678,12 @@ async function startpairing(kingbadboiNumber) {
         if (connection === "close") {
             let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
             console.log(chalk.yellow(`🔌 Connection closed for ${kingbadboiNumber}, reason: ${reason}`));
+            
+            // If we are in the middle of pairing, don't auto-reconnect as it invalidates the code
+            if (tracker.isPairing && reason !== DisconnectReason.restartRequired) {
+                console.log(chalk.red(`⚠️ Connection closed during pairing for ${kingbadboiNumber}. Aborting auto-retry to prevent code invalidation.`));
+                return;
+            }
 
             if (reason === 405) {
                 console.log(chalk.red.bold(`❌ Error 405 for ${kingbadboiNumber}: Session logged out or invalid`));
@@ -725,6 +741,7 @@ async function startpairing(kingbadboiNumber) {
                 }
             }
         } else if (connection === "open") {
+            tracker.isPairing = false;
             console.log(chalk.bgGreen.black(`✅ Connected: ${kingbadboiNumber}`));
             tracker.retryCount = 0;
             tracker.disconnected = false;
