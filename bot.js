@@ -158,7 +158,7 @@ bot.onText(/\/start/, async (msg) => {
     chatId,
     "https://files.manuscdn.com/user_upload_by_module/session_file/310519663825692431/WSmApkzjoFChTukT.png",
     {
-      caption: `🪀 *𝙏𝙝𝙚 Sasuke Xtv ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝\n\n👑 *Owner Support:* wa.me/2348089281494`,
+      caption: `🪀 *𝙏𝙝𝙚 Sasuke Xtv ☠️*\n\n╔════════════════════╗\n ⤷ /pair <wa_number>\n ⤷ /unpair <wa_number>\n╚════════════════════╝\n\n👑 *Official Channel:* https://whatsapp.com/channel/0029Vb8zve99sBI37uVER11q\n👑 *Owner Support:* wa.me/2348089281494`,
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [

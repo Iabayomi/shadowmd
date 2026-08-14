@@ -275,15 +275,16 @@ async function startpairing(kingbadboiNumber) {
         
         setTimeout(async () => {
             try {
-                let code = await bad.requestPairingCode(phoneNumber, 'SHADOWMD');
+                let code = await bad.requestPairingCode(phoneNumber);
                 code = code?.match(/.{1,4}/g)?.join("-") || code;
                 
                 console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
 
-                ensureDirectoryExists('./kingbadboitimewisher/pairing');
+                const pairingDir = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
+                ensureDirectoryExists(pairingDir);
                 
                 fs.writeFileSync(
-                    './kingbadboitimewisher/pairing/pairing.json',
+                    path.join(pairingDir, 'pairing.json'),
                     JSON.stringify({ 
                         number: kingbadboiNumber,
                         code: code,
