@@ -1,0 +1,77 @@
+async function getChatGPTResponse(prompt, userId = null, groupId = null) {
+  try {
+    if (userId && groupId) {
+      addToConversation(userId, groupId, 'user', prompt)
+    }
+    
+    try {
+      const finalPrompt = userId && groupId 
+        ? buildContextPrompt(userId, groupId, prompt)
+        : `⟦ Sasuke Xtv ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
+      
+      // Pollinations Text API - fast, free, unlimited
+      const url = `https://text.pollinations.ai/${encodeURIComponent(finalPrompt)}?model=openai`
+      const response = await fetch(url, { 
+        method: "GET",
+        signal: AbortSignal.timeout(30000),
+        headers: { 'Accept': 'text/plain' }
+      })
+      
+      let apiResponse = await response.text()
+      
+      // Clean up the response - remove quotes if present
+      if (apiResponse.startsWith('"') && apiResponse.endsWith('"')) {
+        apiResponse = apiResponse.slice(1, -1)
+      }
+      
+      if (apiResponse && apiResponse.trim().length > 5) {
+        if (userId && groupId) {
+          addToConversation(userId, groupId, 'assistant', apiResponse)
+        }
+        return apiResponse
+      }
+    } catch (apiErr) {
+      console.log(`⚠️ AI API error: ${apiErr.message}`)
+    }
+    
+    // Fallback 2: Try Gemini via Pollinations
+    try {
+      const finalPrompt = userId && groupId 
+        ? buildContextPrompt(userId, groupId, prompt)
+        : `"${prompt}"`
+      
+      const url2 = `https://text.pollinations.ai/${encodeURIComponent(finalPrompt)}?model=gemini`
+      const response2 = await fetch(url2, { 
+        method: "GET",
+        signal: AbortSignal.timeout(30000),
+        headers: { 'Accept': 'text/plain' }
+      })
+      
+      let apiResponse2 = await response2.text()
+      if (apiResponse2.startsWith('"') && apiResponse2.endsWith('"')) {
+        apiResponse2 = apiResponse2.slice(1, -1)
+      }
+      
+      if (apiResponse2 && apiResponse2.trim().length > 5) {
+        if (userId && groupId) {
+          addToConversation(userId, groupId, 'assistant', apiResponse2)
+        }
+        return apiResponse2
+      }
+    } catch (apiErr2) {
+      console.log(`⚠️ Fallback AI API error: ${apiErr2.message}`)
+    }
+    
+    const fallbackResponse = 'ɪ\'ᴍ ⸸ Sasuke Xtv ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?'
+    
+    if (userId && groupId) {
+      addToConversation(userId, groupId, 'assistant', fallbackResponse)
+    }
+    
+    return fallbackResponse
+    
+  } catch (err) {
+    console.error('❌ AI error:', err)
+    return 'sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ. ᴛʀʏ ᴀɢᴀɪɴ!'
+  }
+}

@@ -278,28 +278,73 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
       addToConversation(userId, groupId, 'user', prompt)
     }
     
+    // Pollinations Text API - free, fast, no API key needed
+    // Format: referrer=google + no model param = works reliably
+    // Keep prompt short for best results
     try {
-      const finalPrompt = userId && groupId 
-        ? buildContextPrompt(userId, groupId, prompt)
-        : `⟦ Sasuke Xtv ⟧💀 – ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴡʜᴀᴛsᴀᴘᴘ. "${prompt}"`
+      // Use a short system prefix + the user's query
+      const shortPrefix = 'You are Sasuke Xtv, a powerful WhatsApp bot. '
+      const finalPrompt = prompt.length > 80 ? prompt.substring(0, 80) : prompt
+      const fullQuery = shortPrefix + finalPrompt
       
-      const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(finalPrompt)}`
-      const response = await fetch(url, { method: "GET", timeout: 10000 })
-      const data = await response.json()
+      const url = `https://text.pollinations.ai/${encodeURIComponent(fullQuery)}?referrer=google`
+      const response = await fetch(url, { 
+        method: "GET",
+        signal: AbortSignal.timeout(20000)
+      })
       
-      let apiResponse = data.result || data.response || data.message || data.data
+      let apiResponse = await response.text()
       
-      if (apiResponse && apiResponse.length > 5) {
+      // Clean up - remove quotes and error responses
+      if (apiResponse.startsWith('"') && apiResponse.endsWith('"')) {
+        apiResponse = apiResponse.slice(1, -1)
+      }
+      
+      // Check if it's an error response
+      if (apiResponse.includes('402') || apiResponse.includes('Queue full') || apiResponse.includes('error')) {
+        throw new Error('API returned error')
+      }
+      
+      if (apiResponse && apiResponse.trim().length > 5) {
         if (userId && groupId) {
           addToConversation(userId, groupId, 'assistant', apiResponse)
         }
         return apiResponse
       }
     } catch (apiErr) {
-      console.log(`⚠️ ᴀᴘɪ ᴇʀʀᴏʀ: ${apiErr.message}`)
+      console.log(`⚠️ Primary AI API error: ${apiErr.message}`)
     }
     
-    const fallbackResponse = 'ɪ\'ᴍ ⸸ Sasuke Xtv ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?'
+    // Fallback: Try without the system prefix (shorter = more reliable)
+    try {
+      const shortPrompt = prompt.length > 60 ? prompt.substring(0, 60) : prompt
+      const url2 = `https://text.pollinations.ai/${encodeURIComponent(shortPrompt)}?referrer=google`
+      const response2 = await fetch(url2, { 
+        method: "GET",
+        signal: AbortSignal.timeout(15000)
+      })
+      
+      let apiResponse2 = await response2.text()
+      if (apiResponse2.startsWith('"') && apiResponse2.endsWith('"')) {
+        apiResponse2 = apiResponse2.slice(1, -1)
+      }
+      
+      if (apiResponse2.includes('402') || apiResponse2.includes('Queue full') || apiResponse2.includes('error')) {
+        throw new Error('Fallback API error')
+      }
+      
+      if (apiResponse2 && apiResponse2.trim().length > 5) {
+        if (userId && groupId) {
+          addToConversation(userId, groupId, 'assistant', apiResponse2)
+        }
+        return apiResponse2
+      }
+    } catch (apiErr2) {
+      console.log(`⚠️ Fallback AI API error: ${apiErr2.message}`)
+    }
+    
+    // Last resort fallback
+    const fallbackResponse = `ɪ'ᴍ ⸸ Sasuke Xtv ⸸💀, ʏᴏᴜʀ ᴘᴏᴡᴇʀғᴜʟ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ. ʏᴏᴜ ᴀsᴋᴇᴅ: "${prompt.substring(0, 50)}". ʜᴏᴡ ᴄᴀɴ ɪ ʜᴇʟᴘ ʏᴏᴜ?`
     
     if (userId && groupId) {
       addToConversation(userId, groupId, 'assistant', fallbackResponse)
@@ -308,7 +353,7 @@ async function getChatGPTResponse(prompt, userId = null, groupId = null) {
     return fallbackResponse
     
   } catch (err) {
-    console.error('❌ ᴇʀʀᴏʀ:', err)
+    console.error('❌ AI error:', err)
     return 'sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ. ᴛʀʏ ᴀɢᴀɪɴ!'
   }
 }

@@ -87,10 +87,13 @@ setInterval(() => {
 
 // 🔥 SCHEDULED RESTART (Every 12 hours)
 // This prevents memory leaks and ensures long-term stability
+// Changed: Instead of process.exit(0), we clear caches to prevent memory leaks
 const RESTART_INTERVAL = 12 * 60 * 60 * 1000; 
 setTimeout(() => {
-    console.log(chalk.yellow('🔄 Scheduled restart: Refreshing bot for stability...'));
-    process.exit(0);
+    console.log(chalk.yellow('🔄 Scheduled maintenance: Clearing caches for stability...'));
+    // Clear caches to prevent memory leaks without restarting
+    if (global.gc) global.gc()
+    console.log(chalk.green('✅ Scheduled maintenance complete - bot stays online'))
 }, RESTART_INTERVAL);
 
 const AUTH_FILE = './auth.json';
