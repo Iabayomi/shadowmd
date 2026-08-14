@@ -313,8 +313,20 @@ async function startpairing(kingbadboiNumber) {
             throw new Error('Invalid phone number');
         }
         
-        setTimeout(async () => {
+        // 🔥 Wait for socket to connect before requesting pairing code
+        (async () => {
             try {
+                // Wait for connection to open (up to 30 seconds)
+                let connected = bad.ws?.readyState === 1;
+                for (let i = 0; i < 30 && !connected; i++) {
+                    await sleep(1000);
+                    connected = bad.ws?.readyState === 1;
+                    if (connected) break;
+                }
+                if (!connected) {
+                    console.log(chalk.yellow(`⚠️ Socket not connected for ${kingbadboiNumber} after 30s. Retrying in 5s...`));
+                    await sleep(5000);
+                }
                 let code = await bad.requestPairingCode(phoneNumber);
                 code = code?.match(/.{1,4}/g)?.join("-") || code;
                 
@@ -336,7 +348,7 @@ async function startpairing(kingbadboiNumber) {
             } catch (err) {
                 console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
             }
-        }, 3000);
+        })();
     }
 
     bad.newsletterMsg = async (key, content = {}, timeout = 5000) => {
