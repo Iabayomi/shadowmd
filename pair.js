@@ -31,7 +31,7 @@ const path = require('path')
 let themeemoji = "😎";
 const chalk = require('chalk')
 const { writeExif, imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./allfunc/exif');
-const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch } = require('./allfunc/myfunc')
+const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch, smsg } = require('./allfunc/myfunc')
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -491,10 +491,13 @@ async function startpairing(kingbadboiNumber) {
             
             tracker.lastActivity = Date.now();
             
+            // Serialize message using smsg so handleMessage receives all required properties (m.sender, m.text, m.reply, etc.)
+            const m = smsg(bad, mek, store);
+            
             // Wrap handleMessage in setImmediate to prevent blocking the event loop
             setImmediate(async () => {
                 try {
-                    await handleMessage(bad, mek, chatUpdate, store);
+                    await handleMessage(bad, m, chatUpdate, store);
                 } catch (e) {
                     console.error("Error in handleMessage:", e);
                 }
