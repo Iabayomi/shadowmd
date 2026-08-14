@@ -1,3 +1,11 @@
+// 🔥 CRASH PROTECTION - Never let the bot die
+process.on("uncaughtException", (err) => {
+  console.error("⚠️  Uncaught Exception (Handled):", err.message);
+});
+process.on("unhandledRejection", (reason) => {
+  console.error("⚠️  Unhandled Rejection (Handled):", reason?.message || reason);
+});
+
 const {
     default: makeWASocket,
     jidDecode,
