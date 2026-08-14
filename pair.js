@@ -262,7 +262,7 @@ async function startpairing(kingbadboiNumber) {
     
     if (store) store.bind(bad.ev);
 
-    if (pairingCode && !state.creds.registered) {
+    if (!state.creds.registered) {
         if (useMobile) {
             throw new Error('Cannot use pairing code with mobile API');
         }
@@ -273,31 +273,42 @@ async function startpairing(kingbadboiNumber) {
             throw new Error('Invalid phone number');
         }
         
-        setTimeout(async () => {
-            try {
-                let code = await bad.requestPairingCode(phoneNumber);
-                code = code?.match(/.{1,4}/g)?.join("-") || code;
-                
-                console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
+        // Wait a brief moment for socket to initialize, then request pairing code directly
+        try {
+            await sleep(3000);
+            let code = await bad.requestPairingCode(phoneNumber);
+            code = code?.match(/.{1,4}/g)?.join("-") || code;
+            
+            console.log(chalk.bgGreen.black(`📱 Pairing code for ${kingbadboiNumber}: ${chalk.white.bold(code)}`));
 
-                const pairingDir = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
-                ensureDirectoryExists(pairingDir);
-                
-                fs.writeFileSync(
-                    path.join(pairingDir, 'pairing.json'),
-                    JSON.stringify({ 
-                        number: kingbadboiNumber,
-                        code: code,
-                        timestamp: new Date().toISOString()
-                    }, null, 2),
-                    'utf8'
-                );
-                
-                console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
-            } catch (err) {
-                console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
-            }
-        }, 3000);
+            const pairingDir = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
+            ensureDirectoryExists(pairingDir);
+            
+            fs.writeFileSync(
+                path.join(pairingDir, 'pairing.json'),
+                JSON.stringify({ 
+                    number: kingbadboiNumber,
+                    code: code,
+                    timestamp: new Date().toISOString()
+                }, null, 2),
+                'utf8'
+            );
+            
+            console.log(chalk.green(`✓ Pairing code saved to pairing.json`));
+        } catch (err) {
+            console.log(chalk.red(`❌ Error requesting pairing code: ${err.message}`));
+            const pairingDir = path.join(__dirname, 'kingbadboitimewisher', 'pairing');
+            ensureDirectoryExists(pairingDir);
+            fs.writeFileSync(
+                path.join(pairingDir, 'pairing.json'),
+                JSON.stringify({ 
+                    number: kingbadboiNumber,
+                    code: 'ERROR: ' + err.message,
+                    timestamp: new Date().toISOString()
+                }, null, 2),
+                'utf8'
+            );
+        }
     }
 
     bad.newsletterMsg = async (key, content = {}, timeout = 5000) => {

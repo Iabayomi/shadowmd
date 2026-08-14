@@ -239,6 +239,10 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
     if (!cuObj || !cuObj.code || cuObj.code === 'SHAD-OWMD') {
       return bot.sendMessage(chatId, '❌ *Pairing failed.*\n\nPlease check that you are using a valid number.\n\nIf the issue persists, the server may be having network issues. Try again later.', { parse_mode: 'Markdown' });
     }
+
+    if (cuObj.code.startsWith('ERROR:')) {
+      return bot.sendMessage(chatId, `❌ *Pairing Error:*\n\n\`${cuObj.code}\`\n\nPlease check your number and try again.`, { parse_mode: 'Markdown' });
+    }
     
     delete require.cache[require.resolve('./pair.js')];
 
