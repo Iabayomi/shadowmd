@@ -260,6 +260,39 @@ async function startpairing(kingbadboiNumber) {
     
     tracker.connection = bad;
     
+    bad.downloadMediaMessage = async (message) => {
+        let mime = (message.msg || message).mimetype || ''
+        let type = 'image'
+        if (/image/.test(mime)) type = 'image'
+        else if (/video/.test(mime)) type = 'video'
+        else if (/audio/.test(mime)) type = 'audio'
+        else if (/webp/.test(mime)) type = 'sticker'
+        else if (/document/.test(mime)) type = 'document'
+        else type = (message.mtype || '').replace(/Message/i, '').toLowerCase()
+        if (type === 'viewonce' || type === 'ephemeral' || type === 'viewoncev2') {
+            mime = message.msg?.mimetype || ''
+            if (/image/.test(mime)) type = 'image'
+            else if (/video/.test(mime)) type = 'video'
+            else if (/audio/.test(mime)) type = 'audio'
+        }
+        try {
+            const stream = await downloadContentFromMessage(message, type)
+            let buffer = Buffer.from([])
+            for await (const chunk of stream) {
+                buffer = Buffer.concat([buffer, chunk])
+            }
+            return buffer
+        } catch (e) {
+            // Fallback try standard download if specific type fails
+            const stream = await downloadContentFromMessage(message, 'image')
+            let buffer = Buffer.from([])
+            for await (const chunk of stream) {
+                buffer = Buffer.concat([buffer, chunk])
+            }
+            return buffer
+        }
+    }
+
     if (store) store.bind(bad.ev);
 
     if (!state.creds.registered) {
