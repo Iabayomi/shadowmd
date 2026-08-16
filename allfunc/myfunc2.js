@@ -1,8 +1,14 @@
 /**
-   * Create By SILVERxTALHA.
-   * Contact Me on wa.me/923104609886
-*/
-
+ * Knight Bot - A WhatsApp Bot
+ * Copyright (c) 2024 Professor
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the MIT License.
+ * 
+ * Credits:
+ * - Baileys Library by @adiwajshing
+ * - Pair Code implementation inspired by TechGod143 & DGXEON
+ */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod }
 }
@@ -159,13 +165,13 @@ const sleepy = async (ms) => {
 exports.buffergif = async (image) => {
         
 	const filename = `${Math.random().toString(36)}`
-			await fs.writeFileSync(`./GlobalMedia/trash/${filename}.gif`, image)
+			await fs.writeFileSync(`./XeonMedia/trash/${filename}.gif`, image)
 					 child_process.exec(
-								`ffmpeg -i ./GlobalMedia/trash/${filename}.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" ./GlobalMedia/trash/${filename}.mp4`
+								`ffmpeg -i ./XeonMedia/trash/${filename}.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" ./XeonMedia/trash/${filename}.mp4`
 										) 
   await sleepy(4000)
   
-	var buffer5  =  await  fs.readFileSync(`./GlobalMedia/trash/${filename}.mp4`)
-	Promise.all([unlink(`./GlobalMedia/video/${filename}.mp4`), unlink(`./GlobalMedia/gif/${filename}.gif`)])
+	var buffer5  =  await  fs.readFileSync(`./XeonMedia/trash/${filename}.mp4`)
+	Promise.all([unlink(`./XeonMedia/video/${filename}.mp4`), unlink(`./XeonMedia/gif/${filename}.gif`)])
 	return buffer5
 				   }

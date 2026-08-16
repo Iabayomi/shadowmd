@@ -1,95 +1,77 @@
-//base by SILVER 
-//re-
 class TicTacToe {
     constructor(playerX = 'x', playerO = 'o') {
-        this.playerX = playerX
-        this.playerO = playerO
-        this._currentTurn = false
-        this._x = 0
-        this._o = 0
-        this.turns = 0
+        this.playerX = playerX;
+        this.playerO = playerO;
+        this._currentTurn = false;
+        this._x = 0;
+        this._o = 0;
+        this.turns = 0;
     }
 
     get board() {
-        return this._x | this._o
+        return this._x | this._o;
     }
 
     get currentTurn() {
-        return this._currentTurn ? this.playerO : this.playerX
-    }
-
-    get enemyTurn() {
-        return this._currentTurn ? this.playerX : this.playerO
-    }
-
-    static check(state) {
-        for (let combo of [7, 56, 73, 84, 146, 273, 292, 448])
-            if ((state & combo) === combo)
-                return !0
-        return !1
-    }
-
-    /**
-     * ```js
-     * TicTacToe.toBinary(1, 2) // 0b010000000
-     * ```
-     */
-    static toBinary(x = 0, y = 0) {
-        if (x < 0 || x > 2 || y < 0 || y > 2) throw new Error('invalid position')
-        return 1 << x + (3 * y)
-    }
-
-    /**
-     * @param player `0` is `X`, `1` is `O`
-     * 
-     * - `-3` `Game Ended`
-     * - `-2` `Invalid`
-     * - `-1` `Invalid Position`
-     * - ` 0` `Position Occupied`
-     * - ` 1` `Sucess`
-     * @returns {-3|-2|-1|0|1}
-     */
-    turn(player = 0, x = 0, y) {
-        if (this.board === 511) return -3
-        let pos = 0
-        if (y == null) {
-            if (x < 0 || x > 8) return -1
-            pos = 1 << x
-        } else {
-            if (x < 0 || x > 2 || y < 0 || y > 2) return -1
-            pos = TicTacToe.toBinary(x, y)
-        }
-        if (this._currentTurn ^ player) return -2
-        if (this.board & pos) return 0
-        this[this._currentTurn ? '_o' : '_x'] |= pos
-        this._currentTurn = !this._currentTurn
-        this.turns++
-        return 1
-    }
-
-    /**
-     * @returns {('X'|'O'|1|2|3|4|5|6|7|8|9)[]}
-     */
-    static render(boardX = 0, boardO = 0) {
-        let x = parseInt(boardX.toString(2), 4)
-        let y = parseInt(boardO.toString(2), 4) * 2
-        return [...(x + y).toString(4).padStart(9, '0')].reverse().map((value, index) => value == 1 ? 'X' : value == 2 ? 'O' : ++index)
-    }
-    
-    /**
-     * @returns {('X'|'O'|1|2|3|4|5|6|7|8|9)[]}
-     */
-    render() {
-        return TicTacToe.render(this._x, this._o)
+        return this._currentTurn ? this.playerO : this.playerX;
     }
 
     get winner() {
-        let x = TicTacToe.check(this._x)
-        let o = TicTacToe.check(this._o)
-        return x ? this.playerX : o ? this.playerO : false
+        // All possible winning combinations
+        const winningPatterns = [
+            0b111000000, // Top row
+            0b000111000, // Middle row
+            0b000000111, // Bottom row
+            0b100100100, // Left column
+            0b010010010, // Middle column
+            0b001001001, // Right column
+            0b100010001, // Diagonal from top-left
+            0b001010100  // Diagonal from top-right
+        ];
+
+        // Check X's moves
+        for (let pattern of winningPatterns) {
+            if ((this._x & pattern) === pattern) {
+                return this.playerX;
+            }
+        }
+
+        // Check O's moves
+        for (let pattern of winningPatterns) {
+            if ((this._o & pattern) === pattern) {
+                return this.playerO;
+            }
+        }
+
+        return null;
+    }
+
+    turn(player, pos) {
+        // If game is over or invalid position
+        if (this.winner || pos < 0 || pos > 8) return -1;
+        
+        // If position is already taken
+        if ((this._x | this._o) & (1 << pos)) return 0;
+        
+        // Make the move
+        const value = 1 << pos;
+        if (this._currentTurn) {
+            this._o |= value;
+        } else {
+            this._x |= value;
+        }
+        
+        this._currentTurn = !this._currentTurn;
+        this.turns++;
+        return 1;
+    }
+
+    render() {
+        return [...Array(9)].map((_, i) => {
+            const bit = 1 << i;
+            return this._x & bit ? 'X' : this._o & bit ? 'O' : i + 1;
+        });
     }
 }
 
-new TicTacToe().turn
-
-module.exports = TicTacToe
+module.exports = TicTacToe; 
