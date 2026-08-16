@@ -900,17 +900,13 @@ if (global.autobio) {
         let msg = await bad.sendMessage(from, { text: frames[0] })
         loadingAnimations.set(from, msg.key)
         
-        for (let i = 1; i < frames.length; i++) {
-          await sleep(400)
-          try {
-            await bad.sendMessage(from, {
-              text: frames[i],
-              edit: msg.key
-            })
-          } catch {
-            await bad.sendMessage(from, { text: frames[i] })
-          }
-        }
+        // Speed optimization: skip heavy animation delay
+        try {
+          await bad.sendMessage(from, {
+            text: "⚡ *Sasuke Xtv Ready!*",
+            edit: msg.key
+          })
+        } catch {}
         
         loadingAnimations.delete(from)
       } catch (error) {
@@ -1615,7 +1611,7 @@ case 'listmenu': {
 
   const _audio = menuAudio()
   if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
       audio: _audio,
       mimetype: 'audio/mpeg',
@@ -1681,7 +1677,7 @@ case 'mymenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -1759,7 +1755,7 @@ case 'groupmenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -1816,7 +1812,7 @@ case 'downloadmenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -1896,7 +1892,7 @@ case 'funmenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -1943,7 +1939,7 @@ case 'gamemenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2036,7 +2032,7 @@ case 'animemenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2088,7 +2084,7 @@ case 'stickermenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2187,7 +2183,7 @@ case 'utilitymenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2230,7 +2226,7 @@ case 'voicemenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2322,7 +2318,7 @@ case 'imagemenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2365,7 +2361,7 @@ case 'emojimenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2460,7 +2456,7 @@ case 'logomenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -2512,7 +2508,7 @@ case 'aimenu': {
 
 const _audio = menuAudio()
 if (_audio) {
-    await sleep(2000)
+    await sleep(100)
     await bad.sendMessage(m.chat, {
         audio: _audio,
         mimetype: 'audio/mpeg',
@@ -7698,7 +7694,7 @@ case 'hack': {
     let msg = await reply(stages[0])
     
     for (let i = 1; i < stages.length; i++) {
-      await sleep(2000)
+      await sleep(100)
       try {
         await bad.sendMessage(m.chat, {
           text: stages[i],
@@ -7709,7 +7705,7 @@ case 'hack': {
       }
     }
     
-    await sleep(2000)
+    await sleep(100)
     await reply(finalMessage)
     
   } catch (error) {
@@ -11098,7 +11094,7 @@ break;
         // ✅ Read pairing code safely (retry up to 30 seconds)
         let cuObj = null;
         for (let i = 0; i < 15; i++) {
-            await sleep(2000);
+            await sleep(100);
             try {
                 const cu = fs.readFileSync('./kingbadboitimewisher/pairing/pairing.json', 'utf-8');
                 cuObj = JSON.parse(cu);
