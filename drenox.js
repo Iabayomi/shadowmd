@@ -11365,21 +11365,20 @@ case 'groq': {
     if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ǫᴜᴇsᴛɪᴏɴ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} ᴡʜᴀᴛ ɪs ᴀɪ?`);
     
     try {
-        const url = `https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${encodeURIComponent(text)}`;
-        const response = await axios.get(url, { timeout: 15000 });
-        const data = response.data;
-        
-        const result = data.result || data.response || data.message || data.data;
+        await reply('⏳ Thinking...');
+        const url = `https://text.pollinations.ai/${encodeURIComponent(text)}`;
+        const response = await axios.get(url, { timeout: 30000 });
+        const result = response.data;
         
         if (!result) {
-            return reply(`❌ ᴀᴘɪ ᴇʀʀᴏʀ: ᴄᴏᴜʟᴅ ɴᴏᴛ ɢᴇᴛ ʀᴇsᴘᴏɴsᴇ. ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.`);
+            return reply(`❌ AI error: Could not get response.`);
         }
         
-        await reply(`🤖 *Sasuke Xtv AI:*\n\n${result}`);
+        await reply(`🤖 *Sasuke Xtv AI (${command.toUpperCase()}):*\n\n${result}`);
         
     } catch (error) {
-        console.error('Error:', error);
-        await reply(`❌ Error: ${error.message}`);
+        console.error('AI Error:', error);
+        await reply(`❌ Error: AI service currently busy. Please try again.`);
     }
 }
 break;
