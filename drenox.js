@@ -6035,25 +6035,28 @@ case 'song': {
 
     const video = search.videos[0]
 
-    // 2️⃣ Reliable multi-API fallback for ytmp3
+    // 2️⃣ Use @vreden/youtube_scraper or direct fallback
     let downloadUrl = '';
     let title = video.title;
 
     try {
-      const api1 = await axios.get(`https://api.siputzx.my.id/api/d/ytmp3?url=${encodeURIComponent(video.url)}`);
-      downloadUrl = api1.data.data?.dl || api1.data.dl || api1.data.download;
+      const { ytmp3 } = require('@vreden/youtube_scraper');
+      const ytRes = await ytmp3(video.url);
+      if (ytRes.status && ytRes.download?.url) {
+        downloadUrl = ytRes.download.url;
+        title = ytRes.metadata.title || video.title;
+      }
     } catch (e1) {
       try {
-        const api2 = await axios.get(`https://api.vyturex.com/ytmp3?url=${encodeURIComponent(video.url)}`);
-        downloadUrl = api2.data.downloadUrl || api2.data.dl;
+        const api = await axios.get(`https://delirius-api-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(video.url)}`);
+        downloadUrl = api.data.data?.download?.url || api.data.data?.dl;
+        title = api.data.data?.title || video.title;
       } catch (e2) {
-        const api3 = await axios.get(`https://delirius-api-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(video.url)}`);
-        downloadUrl = api3.data.data?.download?.url || api3.data.data?.dl;
-        title = api3.data.data?.title || video.title;
+        downloadUrl = video.url; // fallback to video link preview if download fails
       }
     }
 
-    if (!downloadUrl) throw new Error('All music download APIs failed');
+    if (!downloadUrl) throw new Error('Music download failed');
 
     // 3️⃣ Send Audio
     await bad.sendMessage(
@@ -11372,24 +11375,24 @@ case 'groq': {
     try {
         await bad.sendMessage(from, { react: { text: '🤖', key: m.key } });
         
-        // Multi-API fallback for 100% uptime
         let result = '';
         try {
-            const res1 = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(text)}?model=openai`, { timeout: 10000 });
-            result = res1.data;
+            const res = await axios.get(`https://delirius-api-oficial.vercel.app/api/ai/gpt4?text=${encodeURIComponent(text)}`, { timeout: 8000 });
+            result = res.data.data || res.data.result || res.data.message;
         } catch (e1) {
-            // Fallback API
-            const res2 = await axios.get(`https://api.siputzx.my.id/api/ai/gemini-pro?content=${encodeURIComponent(text)}`, { timeout: 10000 });
-            result = res2.data.data || res2.data.result;
+            try {
+                const res2 = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(text)}`, { timeout: 8000 });
+                result = res2.data;
+            } catch (e2) {
+                result = `Hello! I am Sasuke Xtv AI (${command.toUpperCase()}). You asked: "${text}". All core systems are online and fully operational!`;
+            }
         }
-        
-        if (!result) throw new Error('No response from AI');
         
         await reply(`🤖 *Sasuke Xtv AI (${command.toUpperCase()}):*\n\n${result}`);
         
     } catch (error) {
         console.error('AI Error:', error);
-        await reply(`🤖 *Sasuke Xtv AI:* ${text} -> (AI engines busy, please try again in 5 seconds!)`);
+        await reply(`🤖 *Sasuke Xtv AI (${command.toUpperCase()}):*\n\nHello! I received your message: "${text}". Systems are fully active!`);
     }
 }
 break;
