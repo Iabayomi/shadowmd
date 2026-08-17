@@ -6082,9 +6082,9 @@ case 'song': {
     await bad.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 
   } catch (e) {
-    console.error(e)
-    await bad.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
-    reply('⚠️ Error while processing the request')
+    console.error('Play error:', e);
+    await bad.sendMessage(m.chat, { react: { text: '❌', key: m.key } });
+    reply('❌ Failed to download song. Please check the song name or link.');
   }
 }
 break
