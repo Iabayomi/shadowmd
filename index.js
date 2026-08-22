@@ -10,6 +10,7 @@ const readline = require('readline');
 const chalk = require('chalk');
 const figlet = require('figlet');
 const express = require('express');
+require('./watchdog');
 
 const app = express();
 const port = process.env.PORT || 8000;
